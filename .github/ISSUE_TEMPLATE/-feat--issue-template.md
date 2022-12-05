@@ -1,6 +1,6 @@
 ---
-name: issue template
-about: 이슈 템플릿
+name: "[feat] issue template"
+about: "(어떤 컴포넌트 개발할건지 서술하기)"
 title: ''
 labels: ''
 assignees: ''
