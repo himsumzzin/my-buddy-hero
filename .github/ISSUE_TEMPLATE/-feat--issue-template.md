@@ -1,6 +1,6 @@
 ---
 name: "[feat] issue template"
-about: "(어떤 컴포넌트 개발할건지 서술하기)"
+about: My-buddy-hero 구현
 title: ''
 labels: ''
 assignees: ''
