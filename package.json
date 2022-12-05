@@ -1,5 +1,6 @@
 {
   "name": "my-buddy-hero",
+  "description": "히어로 역할놀이를 통해 아이들의 자신감과 도덕심을 길러주는 교육 어플리케이션",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -18,5 +19,36 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.3"
-  }
+  },
+  "keywords": [
+    "hero",
+    "education",
+    "children",
+    "school",
+    "buddy",
+    "student",
+    "teacher"
+  ],
+  "contributors": [
+    {
+      "name": "Hyunjin Kim",
+      "email": "10rlatkdtn@naver.com",
+      "url": "https://github.com/who0803"
+    },
+    {
+      "name": "Jaeyeong Son",
+      "email": "perengdev0302@gmail.com",
+      "url": "https://github.com/pereng11"
+    },
+    {
+      "name": "Chaeryeon Lee",
+      "email": "sogogijjang@naver.com",
+      "url": "https://github.com/CHAERYEON-LEE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/himsumzzin/my-buddy-hero"
+  },
+  "license": "MIT"
 }
