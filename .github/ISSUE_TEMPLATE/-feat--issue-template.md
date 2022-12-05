@@ -3,7 +3,7 @@ name: "[feat] issue template"
 about: 이슈 템플릿
 title: ''
 labels: ''
-assignees: who0803, pereng11, CHAERYEON-LEE
+assignees: ''
 
 ---
 
