@@ -15,11 +15,14 @@
     "@types/node": "18.11.10",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "bcrypt": "^5.1.0",
     "cross-env": "^7.0.3",
-    "eslint": "8.28.0",
     "eslint-config-next": "13.0.6",
     "framer-motion": "^7.6.18",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.5",
     "next": "13.0.6",
+    "next-auth": "^4.18.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.2",
@@ -67,6 +70,15 @@
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.3.0"
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "babel-loader": "^8.3.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.0"
   }
 }
