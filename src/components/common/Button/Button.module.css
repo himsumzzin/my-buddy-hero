@@ -1,0 +1,29 @@
+.button{
+  font-family: 'Noto Sans KR', sans-serif;
+  width: 522px;
+  height: 69px;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--text-weight-bold);
+  font-size: var(--text-lg);
+  background: var(--mainColor-orange1);
+  box-shadow: var(--shadow-default);
+}
+
+.button:active{
+  background: var(--button-active);
+}
+
+.sm{
+  width: 105px;
+  height: 45px;
+}
+
+.md{
+  width: 180px;
+  height: 69px;
+}
+
+.lg{
+  width: 522px;
+  height: 69px;
+}
