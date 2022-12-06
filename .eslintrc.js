@@ -22,5 +22,6 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
+    'import/no-anonymous-default-export': 'off',
   },
 };
