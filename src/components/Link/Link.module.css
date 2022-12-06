@@ -1,0 +1,23 @@
+.Link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20rem;
+  height: 5rem;
+  font-style: normal;
+  font-weight: var(--text-weight-bold);
+  font-size: var(--text-title);
+  /* identical to box height */
+
+  text-shadow: var(--shadow-default);
+
+  color: var(--grayScale-snow);
+  background: var(--mainColor-orange3);
+  box-shadow: var(--shadow-default);
+  border-radius: var(--border-radius-sm);
+
+  &:active {
+    background: var(--mainColor-orange1);
+  }
+}

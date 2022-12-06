@@ -72,12 +72,19 @@ module.exports = {
           and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
         },
       },
-      // postcss loader
+      // postCSS 포함 css 로더
       {
         test: /\.(css|s[ac]ss)$/i,
         exclude: /\.module\.(css|s[ac]css)$/i,
         use: [
           'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -90,7 +97,7 @@ module.exports = {
                       autoprefixer: {
                         flexbox: 'no-2009',
                       },
-                      stage: 0,
+                      stage: 2,
                       features: {
                         'custom-properties': false,
                         'nesting-rules': true,
@@ -110,6 +117,16 @@ module.exports = {
         use: [
           'style-loader',
           {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[folder]_[local]__[hash:base64:5]',
+              },
+            },
+          },
+          {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
@@ -121,7 +138,7 @@ module.exports = {
                       autoprefixer: {
                         flexbox: 'no-2009',
                       },
-                      stage: 0,
+                      stage: 2,
                       features: {
                         'custom-properties': false,
                         'nesting-rules': true,
