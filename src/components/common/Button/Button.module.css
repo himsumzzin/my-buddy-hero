@@ -1,29 +1,31 @@
-.button{
+.button {
   font-family: 'Noto Sans KR', sans-serif;
   width: 522px;
   height: 69px;
   border-radius: var(--border-radius-lg);
   font-weight: var(--text-weight-bold);
   font-size: var(--text-lg);
+  color: var(--subColor-lightYello4);
   background: var(--mainColor-orange1);
   box-shadow: var(--shadow-default);
 }
 
-.button:active{
+.button:active {
   background: var(--button-active);
+  transition: all 0.5s;
 }
 
-.sm{
+.sm {
   width: 105px;
   height: 45px;
 }
 
-.md{
+.md {
   width: 180px;
   height: 69px;
 }
 
-.lg{
+.lg {
   width: 522px;
   height: 69px;
 }

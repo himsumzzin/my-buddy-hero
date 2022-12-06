@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@/../stories/Button';
+import { Button, ButtonProps } from '@/components/common';
 
 export default {
   title: 'Components/Button',
@@ -7,26 +7,31 @@ export default {
     docs: {
       description: {
         component: `
-                버튼 컴포넌트 입니다.
+                버튼의 크기를 세 가지 종류로 사용할 수 있는 컴포넌트 입니다.
             `,
       },
     },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args: ButtonProps) => {
+  return <Button size={args.size}>{args.children}</Button>;
+};
 
 export const SmallButton = Template.bind({});
 SmallButton.args = {
   size: 'sm',
+  children: '등록',
 };
 
 export const MediumButton = Template.bind({});
-SmallButton.args = {
+MediumButton.args = {
   size: 'md',
+  children: '임무 등록',
 };
 
 export const LargeButton = Template.bind({});
-SmallButton.args = {
+LargeButton.args = {
   size: 'lg',
+  children: '로그인',
 };
