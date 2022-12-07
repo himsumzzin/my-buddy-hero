@@ -10,33 +10,30 @@
   font-weight: var(--text-weight-bold);
   text-shadow: var(--shadow-default);
 
-  color: var(--grayScale-snow);
-  background-color: var(--mainColor-orange3);
+  color: var(--grayscale-snow);
+  background-color: var(--color-main-orange-500);
   box-shadow: var(--shadow-default);
   border-radius: var(--border-radius-sm);
+
+  &:active {
+    background-color: var(--color-main-active);
+  }
 }
 
 .sm {
   width: 314px;
   height: 69px;
-  font-size: var(--text-lg);
-  background-color: var(--mainColor-orange2);
-
-  &:active {
-    background-color: var(--mainColor-orange1);
-  }
+  font-size: var(--text-size-lg);
+  background-color: var(--color-main-orange-600);
 }
 
 .lg {
   width: 314px;
   height: 80px;
-  font-size: var(--text-title);
-  background-color: var(--mainColor-orange3);
+  font-size: var(--text-size-title);
+  background-color: var(--color-main-orange-500);
 
-  &:active {
-    background-color: var(--mainColor-orange2);
-  }
   &.selected {
-    background-color: var(--mainColor-orange1);
+    background-color: var(--color-main-orange-700);
   }
 }
