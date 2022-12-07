@@ -3,21 +3,40 @@
   justify-content: center;
   align-items: center;
 
-  width: 20rem;
-  height: 5rem;
+  width: 314px;
+  height: 69px;
+
   font-style: normal;
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-title);
-  /* identical to box height */
-
   text-shadow: var(--shadow-default);
 
   color: var(--grayScale-snow);
-  background: var(--mainColor-orange3);
+  background-color: var(--mainColor-orange3);
   box-shadow: var(--shadow-default);
   border-radius: var(--border-radius-sm);
+}
+
+.sm {
+  width: 314px;
+  height: 69px;
+  font-size: var(--text-lg);
+  background-color: var(--mainColor-orange2);
 
   &:active {
-    background: var(--mainColor-orange1);
+    background-color: var(--mainColor-orange1);
+  }
+}
+
+.lg {
+  width: 314px;
+  height: 80px;
+  font-size: var(--text-title);
+  background-color: var(--mainColor-orange3);
+
+  &:active {
+    background-color: var(--mainColor-orange2);
+  }
+  &.selected {
+    background-color: var(--mainColor-orange1);
   }
 }
