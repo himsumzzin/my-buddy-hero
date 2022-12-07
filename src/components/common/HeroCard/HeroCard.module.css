@@ -1,0 +1,66 @@
+/* 히어로카드 */
+.heroCardContainer {
+  position: relative;
+  width: 230px;
+  height: 536px;
+  box-shadow: var(--shadow-default);
+  background: linear-gradient(180deg, #ea8274 1.86%, #fff1a9 98.23%);
+  border-radius: var(--border-radius-sm);
+}
+
+.missionCount {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 1%;
+  bottom: 93%;
+  font-weight: var(--text-weight-bold);
+  font-size: var(--text-base);
+  line-height: 19px;
+  align-items: center;
+  color: var(--grayScale-dark);
+}
+
+.cartoonize {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 10%;
+  bottom: 24%;
+}
+
+.title {
+  position: absolute;
+  left: 8%;
+  right: 42%;
+  top: 74%;
+  bottom: 18%;
+  font-weight: var(--text-weight-bold);
+  font-size: 0.875rem;
+  line-height: 15px;
+  align-items: center;
+}
+
+.name {
+  position: absolute;
+  left: 7%;
+  right: 25%;
+  top: 76%;
+  bottom: 12%;
+  font-weight: var(--text-weight-bold);
+  font-size: var(--text-lg);
+  line-height: 24px;
+  align-items: center;
+}
+
+.description {
+  position: absolute;
+  left: 8%;
+  right: 22%;
+  top: 86%;
+  bottom: 2%;
+  font-weight: var(--text-weight-light);
+  font-size: var(--text-sm);
+  line-height: 17px;
+  align-items: center;
+}
