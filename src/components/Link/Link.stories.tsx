@@ -28,13 +28,13 @@ Default.args = {
   children: '링크 컴포넌트 기본 모양',
 };
 
-export const ActivedNavLink = Template.bind({});
-ActivedNavLink.args = {
+export const SelectedNavLink = Template.bind({});
+SelectedNavLink.args = {
   size: 'lg',
   children: '임무 목록',
   selected: true,
 };
-ActivedNavLink.parameters = {
+SelectedNavLink.parameters = {
   docs: {
     description: {
       story: '현재 페이지를 가리키는 링크',
@@ -42,13 +42,13 @@ ActivedNavLink.parameters = {
   },
 };
 
-export const InactivedNavLink = Template.bind({});
-InactivedNavLink.args = {
+export const DefaultNavLink = Template.bind({});
+DefaultNavLink.args = {
   size: 'lg',
   children: '히어로 명단',
   selected: false,
 };
-InactivedNavLink.parameters = {
+DefaultNavLink.parameters = {
   docs: {
     description: {
       story: '현재 페이지를 제외한 나머지 페이지를 가리키는 링크',
