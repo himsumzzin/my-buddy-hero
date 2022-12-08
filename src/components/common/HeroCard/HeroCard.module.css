@@ -15,10 +15,10 @@
   top: 1%;
   bottom: 93%;
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-base);
+  font-size: var(--text-size-base);
   line-height: 19px;
   align-items: center;
-  color: var(--grayScale-dark);
+  color: var(--grayscale-black);
 }
 
 .cartoonize {
@@ -48,7 +48,7 @@
   top: 76%;
   bottom: 12%;
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-lg);
+  font-size: var(--text-size-lg);
   line-height: 24px;
   align-items: center;
 }
@@ -60,7 +60,6 @@
   top: 86%;
   bottom: 2%;
   font-weight: var(--text-weight-light);
-  font-size: var(--text-sm);
-  line-height: 17px;
+  font-size: var(--text-size-sm);
   align-items: center;
 }
