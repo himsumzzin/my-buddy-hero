@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.Textarea {
+  resize: none;
+  width: 343px;
+  height: 292px;
+
+  padding: var(--spacing-sm) var(--spacing-base);
+
+  color: var(--grayscale-darkgray);
+
+  font-size: var(--text-size-base);
+  font-weight: 600;
+
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-default);
+}
+.label {
+  font-size: var(--text-size-base);
+  font-weight: 600;
+}
