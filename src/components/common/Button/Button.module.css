@@ -3,15 +3,15 @@
   height: 69px;
   border-radius: var(--border-radius-lg);
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-lg);
-  color: var(--subColor-lightYello4);
-  background: var(--mainColor-orange1);
+  font-size: var(--text-size-lg);
+  color: var(--grayscale-white);
+  background: var(--color-main-orange-700);
   box-shadow: var(--shadow-default);
 }
 
 .button:active {
-  background: var(--button-active);
-  transition: all 0.5s;
+  background: var(--color-main-active);
+  transition: var(--transition-fast);
 }
 
 .sm {
