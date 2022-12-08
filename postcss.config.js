@@ -10,7 +10,6 @@ module.exports = {
         stage: 2,
         features: {
           'custom-properties': false,
-          'nesting-rules': true,
         },
       },
     ],

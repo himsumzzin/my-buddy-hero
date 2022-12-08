@@ -1,4 +1,7 @@
-/* 여기에 디자인 시스템 + 추가적인 초기화 스타일 넣으면 될 것 같아요 */
+*:focus {
+  outline: 5px solid var(--color-green);
+}
+
 a {
   text-decoration: none;
 }
@@ -9,4 +12,33 @@ button {
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.srOnly {
+  overflow: hidden;
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+caption.srOnly {
+  position: static;
+}
+
+.focusable:focus {
+  overflow: initial;
+  clip: auto;
+  clip-path: unset;
+  width: initial;
+  height: initial;
+  margin: initial;
+  border: initial;
+  padding: initial;
+  white-space: initial;
 }
