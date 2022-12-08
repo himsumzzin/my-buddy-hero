@@ -14,6 +14,8 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': resolve('src'),
+      '@images': resolve('public/images'),
+      '@svgs': resolve('public/svgs'),
     };
 
     return config;

@@ -1,7 +1,8 @@
 {
   "path-intellisense.extensionOnImport": true,
   "path-intellisense.mappings": {
-    "@": "${workspaceRoot}/src"
+    "@": "${workspaceRoot}/src",
+    "@public": "${workspaceRoot}/public"
   },
   "postcss.validate": false,
   "files.associations": {
