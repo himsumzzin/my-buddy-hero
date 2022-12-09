@@ -1,6 +1,7 @@
 .container {
   position: relative;
   width: fit-content;
+  margin: 0 auto;
 }
 
 .lgInput {
@@ -20,7 +21,7 @@
 }
 
 .lgLabel {
-  color: var(--grayscale-darkgray);
+  color: var(--grayscale-gray);
   position: absolute;
   left: 32px;
   top: 15px;
@@ -28,11 +29,6 @@
   font-weight: var(--text-weight-bold);
   transition: var(--transition-fast) ease all;
 }
-
-/* .lgInput:focus {
-  outline: none;
-  box-shadow: 0 0 0 6px var(--color-main-orange-700);
-} */
 
 .lgInput:focus ~ .lgLabel,
 .lgInput:valid ~ .lgLabel {
@@ -102,4 +98,5 @@
   font-size: var(--text-size-md);
   margin-top: 5px;
   text-align: center;
+  height: 0;
 }

@@ -21,6 +21,18 @@ export type InputProps = {
    * 인풋의 유효성 검사 후 띄울 에러메세지를 입력해주세요.
    */
   validText: string;
+  /**
+   * 인풋 밸류 스테이트
+   */
+  inputVal: string;
+  /**
+   * 인풋 밸류 스테이트 핸들러
+   */
+  handler: (value: string) => void;
+  /**
+   * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
+   */
+  className?: string;
   restProps?: unknown[];
 };
 
@@ -29,9 +41,11 @@ export const Input = ({
   size,
   labelText,
   validText,
+  inputVal,
+  handler,
+  className,
   ...restProps
 }: InputProps) => {
-  const [inputVal, setInputVal] = useState('');
   const [valid, setValid] = useState(true);
 
   const inputId = useId();
@@ -49,13 +63,8 @@ export const Input = ({
     setValid(validationRegex[name].test(inputVal));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputVal(e.target.value);
-    validateInput(inputVal);
-  };
-
   return (
-    <div className={`${styles.container} ${styles[size]}`}>
+    <div className={`${styles.container} ${styles[size]} ${className}`}>
       <input
         id={inputId}
         name={name}
@@ -63,9 +72,13 @@ export const Input = ({
         className={`${styles.lgInput} ${styles[size]}`}
         required
         autoComplete="false"
-        onChange={handleChange}
+        onChange={(e) => {
+          handler(e.target.value);
+          validateInput(inputVal);
+        }}
         value={inputVal}
         maxLength={name === 'herocode' ? 4 : 40}
+        {...restProps}
       />
       <label
         htmlFor={inputId}

@@ -11,7 +11,14 @@ button {
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+#__next {
+  background-color: var(--color-main-orange-400);
+  margin-top: -25px;
 }
 
 .srOnly {
