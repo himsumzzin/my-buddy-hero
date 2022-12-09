@@ -7,11 +7,18 @@
   color: var(--grayscale-white);
   background: var(--color-main-orange-700);
   box-shadow: var(--shadow-default);
+  margin: 0 auto;
 }
 
 .button:active {
   background: var(--color-main-active);
   transition: var(--transition-fast);
+}
+
+.xs {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-lg);
 }
 
 .sm {
