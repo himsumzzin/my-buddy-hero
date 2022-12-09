@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from '@/components/common';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
   title: 'Components/Button',
@@ -12,9 +13,9 @@ export default {
       },
     },
   },
-};
+} as ComponentMeta<typeof Button>;
 
-const Template = (args: ButtonProps) => {
+const Template: ComponentStory<typeof Button> = (args: ButtonProps) => {
   return <Button size={args.size}>{args.children}</Button>;
 };
 

@@ -36,7 +36,7 @@ export const Input = ({
 
   const inputId = useId();
 
-  const validateInput = (inputVal) => {
+  const validateInput = (inputVal: string) => {
     const validationRegex = {
       id: /^[a-z]+[a-z0-9]{5,19}$/g,
       password:
@@ -49,7 +49,7 @@ export const Input = ({
     setValid(validationRegex[name].test(inputVal));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(e.target.value);
     validateInput(inputVal);
   };
@@ -59,13 +59,13 @@ export const Input = ({
       <input
         id={inputId}
         name={name}
-        type={name === ('password' | 'confirm') ? 'password' : 'text'}
+        type={name === 'password' || name === 'confirm' ? 'password' : 'text'}
         className={`${styles.lgInput} ${styles[size]}`}
         required
         autoComplete="false"
         onChange={handleChange}
         value={inputVal}
-        maxLength={name === 'herocode' ? '4' : '40'}
+        maxLength={name === 'herocode' ? 4 : 40}
       />
       <label
         htmlFor={inputId}
