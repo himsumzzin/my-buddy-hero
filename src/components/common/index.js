@@ -3,3 +3,4 @@ export * from './Link';
 export * from './Textarea';
 export * from './HeroCard';
 export * from './Dialog';
+export * from './Input';
