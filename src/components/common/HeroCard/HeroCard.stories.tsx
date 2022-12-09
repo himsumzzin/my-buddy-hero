@@ -1,4 +1,5 @@
 import { HeroCard, HeroCardProps } from '@/components/common';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
   title: 'Components/HeroCard',
@@ -12,11 +13,11 @@ export default {
       },
     },
   },
-};
+} as ComponentMeta<typeof HeroCard>;
 
-const Template = (args: HeroCardProps) => {
+const Template: ComponentStory<typeof HeroCard> = (args: HeroCardProps) => {
   return <HeroCard {...args} />;
 };
 
 export const DefaultHeroCard = Template.bind({});
-HeroCard.args = {};
+DefaultHeroCard.args = {};
