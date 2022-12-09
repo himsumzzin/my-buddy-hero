@@ -19,6 +19,12 @@ const Template: ComponentStory<typeof Button> = (args: ButtonProps) => {
   return <Button size={args.size}>{args.children}</Button>;
 };
 
+export const XSmallButton = Template.bind({});
+XSmallButton.args = {
+  size: 'xs',
+  children: 'X',
+};
+
 export const SmallButton = Template.bind({});
 SmallButton.args = {
   size: 'sm',
