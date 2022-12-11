@@ -2,9 +2,9 @@ import { inputValidationRegex } from '@/utils';
 import { useState } from 'react';
 
 const validateInput = (name: string, value: string) => {
-  return !inputValidationRegex[name]
-    ? true
-    : RegExp(inputValidationRegex[name]).test(value);
+  return inputValidationRegex[name]
+    ? RegExp(inputValidationRegex[name]).test(value)
+    : true;
 };
 
 export const useInput = (initialValue: any) => {

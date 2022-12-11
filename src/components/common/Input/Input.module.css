@@ -29,11 +29,6 @@
   transition: var(--transition-fast) ease all;
 }
 
-/* .lgInput:focus {
-  outline: none;
-  box-shadow: 0 0 0 6px var(--color-main-orange-700);
-} */
-
 .lgInput:focus ~ .lgLabel,
 .lgInput:valid ~ .lgLabel {
   position: absolute;
@@ -48,7 +43,6 @@
 .sm {
   height: 39px;
   width: 250px;
-  /* padding-left: 20px; */
   font-size: var(--text-size-md);
   border-radius: var(--border-radius-sm);
 }
@@ -63,7 +57,6 @@
 .md {
   height: 41px;
   width: 343px;
-  /* padding-left: 22px; */
   border-radius: var(--border-radius-sm);
 }
 

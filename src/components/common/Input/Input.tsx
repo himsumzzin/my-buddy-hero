@@ -24,7 +24,7 @@ export type InputProps = {
   /**
    * 인풋의 유효성 검사 후 띄울 에러메세지를 입력해주세요.
    */
-  validText: string;
+  validText?: string;
   /**
    * 인풋 밸류 스테이트 핸들러
    */
@@ -81,8 +81,4 @@ export const Input = ({
       ) : null}
     </div>
   );
-};
-
-Input.defaultProps = {
-  validText: '',
 };

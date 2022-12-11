@@ -2,19 +2,37 @@
   outline: 5px solid var(--color-green);
 }
 
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 a {
   text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
 }
 
 button {
   border-style: none;
 }
 
-body {
-  font-family: 'Noto Sans KR', sans-serif;
+#__next {
+  background-color: var(--color-main-orange-400);
+  margin-top: -25px;
 }
 
-.srOnly {
+.srOnly,
+legend {
   overflow: hidden;
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);
