@@ -48,19 +48,9 @@
 .sm {
   height: 39px;
   width: 250px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   font-size: var(--text-size-md);
   border-radius: var(--border-radius-sm);
-}
-
-.sm:focus ~ .smLabel,
-.sm:valid ~ .smLabel {
-  position: absolute;
-  left: 40px;
-  top: -26px;
-  font-size: var(--text-size-sm);
-  font-weight: var(--text-weight-bold);
-  transition: var(--transition-fast) ease all;
 }
 
 .smLabel {
@@ -73,16 +63,8 @@
 .md {
   height: 41px;
   width: 343px;
-  padding-left: 22px;
+  /* padding-left: 22px; */
   border-radius: var(--border-radius-sm);
-}
-
-.md:focus ~ .mdLabel,
-.md:valid ~ .mdLabel {
-  position: absolute;
-  left: 46px;
-  top: -26px;
-  font-size: var(--text-size-sm);
 }
 
 .mdLabel {
