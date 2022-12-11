@@ -1,5 +1,7 @@
 import styles from './Input.module.css';
 import { useId } from 'react';
+import { useInput } from '@/hooks/useInput';
+import { inputValidationRegex } from '@/utils';
 
 export type InputProps = {
   /**
@@ -22,20 +24,15 @@ export type InputProps = {
   /**
    * 인풋의 유효성 검사 후 띄울 에러메세지를 입력해주세요.
    */
-  validText: string;
+  validText?: string;
   /**
-   * 인풋 밸류 스테이트
+   * 초기값으로 사용될 value를 넣어주세요
    */
-  value: string;
-  /**
-   * 인풋 밸류 스테이트 핸들러
-   */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  initialValue: any;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
   className?: string;
-  isValid: boolean;
   restProps?: unknown[];
 };
 
@@ -44,43 +41,41 @@ export const Input = ({
   size,
   labelText,
   validText,
-  value,
-  onChange,
-  isValid,
+  initialValue,
   className,
   ...restProps
 }: InputProps) => {
   const inputId = useId();
+  const { state: {value, isValid}, onChange } = useInput(initialValue);
 
   return (
-    <div className={`${styles.container} ${styles[size]} ${className}`}>
+    <div className={`${styles.container} ${className}`}>
       <input
         id={inputId}
         name={name}
         type={name === 'password' || name === 'confirm' ? 'password' : 'text'}
-        className={`${styles.lgInput} ${styles[size]}`}
+        className={`${styles.lgInput} ${styles[size]} ${className}`}
         required
         autoComplete="false"
         onChange={onChange}
         value={value}
+        pattern={
+          inputValidationRegex[name] ? `${inputValidationRegex[name]}` : '.*'
+        }
         maxLength={name === 'herocode' ? 4 : 40}
         {...restProps}
       />
       <label
         htmlFor={inputId}
-        className={`${styles.lgLabel} ${
-          size === 'sm' ? styles.smLabel : size === 'md' ? styles.mdLabel : ''
-        }`}
+        className={`${styles.lgLabel} ${size !== 'lg' ? 'srOnly' : ''}`}
       >
         {labelText}
       </label>
-      <p className={`${isValid ? styles.noError : styles.error}`}>
-        {validText}
-      </p>
+      {validText ? (
+        <p className={`${isValid ? styles.noError : styles.error}`}>
+          {validText}
+        </p>
+      ) : null}
     </div>
   );
-};
-
-Input.defaultProps = {
-  validText: '',
 };

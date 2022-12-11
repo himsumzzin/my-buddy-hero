@@ -2,18 +2,30 @@
   outline: 5px solid var(--color-green);
 }
 
-a {
-  text-decoration: none;
-}
-
-button {
-  border-style: none;
-}
-
 body {
   width: 100vw;
   height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+button {
+  border-style: none;
 }
 
 #__next {
@@ -21,7 +33,8 @@ body {
   margin-top: -25px;
 }
 
-.srOnly {
+.srOnly,
+legend {
   overflow: hidden;
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);

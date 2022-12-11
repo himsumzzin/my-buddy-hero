@@ -44,15 +44,8 @@
 .sm {
   height: 39px;
   width: 250px;
-  padding-left: 20px;
   font-size: var(--text-size-md);
   border-radius: var(--border-radius-md);
-}
-
-.sm:focus ~ .smLabel,
-.sm:valid ~ .smLabel {
-  visibility: hidden;
-  transition: none;
 }
 
 .smLabel {
@@ -65,14 +58,7 @@
 .md {
   height: 41px;
   width: 343px;
-  padding-left: 22px;
   border-radius: var(--border-radius-sm);
-}
-
-.md:focus ~ .mdLabel,
-.md:valid ~ .mdLabel {
-  visibility: hidden;
-  transition: none;
 }
 
 .mdLabel {
