@@ -33,7 +33,8 @@
   --text-weight-regular: 400; /* 400 */
   --text-weight-bold: 700; /* 700 */
 
-  --border-radius-sm: 1rem; /* 16px */
+  --border-radius-sm: 0.5rem; /* 8px */
+  --border-radius-md: 1rem; /* 16px */
   --border-radius-lg: 6.25rem; /* 100px */
 
   --shadow-default: 1px 3px 4px rgba(0, 0, 0, 0.25);
