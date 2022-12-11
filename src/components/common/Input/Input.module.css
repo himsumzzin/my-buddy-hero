@@ -1,6 +1,7 @@
 .container {
   position: relative;
   width: fit-content;
+  margin: 0 auto;
 }
 
 .lgInput {
@@ -20,7 +21,7 @@
 }
 
 .lgLabel {
-  color: var(--grayscale-darkgray);
+  color: var(--grayscale-gray);
   position: absolute;
   left: 32px;
   top: 15px;
@@ -44,7 +45,7 @@
   height: 39px;
   width: 250px;
   font-size: var(--text-size-md);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
 }
 
 .smLabel {
@@ -77,4 +78,5 @@
   font-size: var(--text-size-md);
   margin-top: 5px;
   text-align: center;
+  height: 0;
 }

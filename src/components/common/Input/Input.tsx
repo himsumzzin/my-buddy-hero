@@ -26,9 +26,6 @@ export type InputProps = {
    */
   validText?: string;
   /**
-   * 인풋 밸류 스테이트 핸들러
-   */
-  /**
    * 초기값으로 사용될 value를 넣어주세요
    */
   initialValue: any;
@@ -49,7 +46,7 @@ export const Input = ({
   ...restProps
 }: InputProps) => {
   const inputId = useId();
-  const { state, onChange } = useInput(initialValue);
+  const { state: {value, isValid}, onChange } = useInput(initialValue);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -61,7 +58,7 @@ export const Input = ({
         required
         autoComplete="false"
         onChange={onChange}
-        value={state.value}
+        value={value}
         pattern={
           inputValidationRegex[name] ? `${inputValidationRegex[name]}` : '.*'
         }
@@ -75,7 +72,7 @@ export const Input = ({
         {labelText}
       </label>
       {validText ? (
-        <p className={`${state.isValid ? styles.noError : styles.error}`}>
+        <p className={`${isValid ? styles.noError : styles.error}`}>
           {validText}
         </p>
       ) : null}
