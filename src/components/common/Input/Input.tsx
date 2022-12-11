@@ -24,15 +24,16 @@ export type InputProps = {
   /**
    * 인풋 밸류 스테이트
    */
-  inputVal: string;
+  value: string;
   /**
    * 인풋 밸류 스테이트 핸들러
    */
-  handler: (value: string) => void;
+  onChange: (value: any) => void;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
   className?: string;
+  isValid: boolean;
   restProps?: unknown[];
 };
 
@@ -41,27 +42,13 @@ export const Input = ({
   size,
   labelText,
   validText,
-  inputVal,
-  handler,
+  value,
+  onChange,
+  isValid,
   className,
   ...restProps
 }: InputProps) => {
-  const [valid, setValid] = useState(true);
-
   const inputId = useId();
-
-  const validateInput = (inputVal: string) => {
-    const validationRegex = {
-      id: /^[a-z]+[a-z0-9]{5,19}$/g,
-      password:
-        /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
-      confirm: /.*/g,
-      mission: /.*/g,
-      herocode: /^[0-9]{3,4}$/g,
-      register: /.*/g,
-    };
-    setValid(validationRegex[name].test(inputVal));
-  };
 
   return (
     <div className={`${styles.container} ${styles[size]} ${className}`}>
@@ -72,11 +59,8 @@ export const Input = ({
         className={`${styles.lgInput} ${styles[size]}`}
         required
         autoComplete="false"
-        onChange={(e) => {
-          handler(e.target.value);
-          validateInput(inputVal);
-        }}
-        value={inputVal}
+        onChange={onChange}
+        value={value}
         maxLength={name === 'herocode' ? 4 : 40}
         {...restProps}
       />
@@ -88,7 +72,9 @@ export const Input = ({
       >
         {labelText}
       </label>
-      <p className={`${valid ? styles.noError : styles.error}`}>{validText}</p>
+      <p className={`${isValid ? styles.noError : styles.error}`}>
+        {validText}
+      </p>
     </div>
   );
 };
