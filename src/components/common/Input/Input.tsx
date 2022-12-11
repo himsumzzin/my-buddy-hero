@@ -1,12 +1,14 @@
 import styles from './Input.module.css';
-import { useState, useId } from 'react';
+import { useId } from 'react';
 
 export type InputProps = {
   /**
-   * 어떤 인풋으로 사용할건지 양식을 선택하세요.
-   *
+   * 어떤 인풋으로 사용할건지 양식을 선택하세요.<br>
+   * 'id', 'password', 'mission', 'herocode', 'confirm', 'register' 종류가 있습니다<br>
+   * 위의 종류에 해당하지 않는다면 name 에 주고싶은 값을 자유롭게 문자열로 입력하세요<br>
+   * 자유롭게 입력한 문자열은 자동으로 인풋의 타입이 'text'로 지정됩니다.
    */
-  name: 'id' | 'password' | 'mission' | 'herocode' | 'confirm' | 'register';
+  name: string;
   /**
    * 사용할 인풋의 크기를 선택해주세요 <br>
    * 기본 크기는 lg 사이즈이고 sm, md 사이즈 인풋을 선택할 수 있습니다.
@@ -24,15 +26,16 @@ export type InputProps = {
   /**
    * 인풋 밸류 스테이트
    */
-  inputVal: string;
+  value: string;
   /**
    * 인풋 밸류 스테이트 핸들러
    */
-  handler: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
   className?: string;
+  isValid: boolean;
   restProps?: unknown[];
 };
 
@@ -41,27 +44,13 @@ export const Input = ({
   size,
   labelText,
   validText,
-  inputVal,
-  handler,
+  value,
+  onChange,
+  isValid,
   className,
   ...restProps
 }: InputProps) => {
-  const [valid, setValid] = useState(true);
-
   const inputId = useId();
-
-  const validateInput = (inputVal: string) => {
-    const validationRegex = {
-      id: /^[a-z]+[a-z0-9]{5,19}$/g,
-      password:
-        /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
-      confirm: /.*/g,
-      mission: /.*/g,
-      herocode: /^[0-9]{3,4}$/g,
-      register: /.*/g,
-    };
-    setValid(validationRegex[name].test(inputVal));
-  };
 
   return (
     <div className={`${styles.container} ${styles[size]} ${className}`}>
@@ -72,11 +61,8 @@ export const Input = ({
         className={`${styles.lgInput} ${styles[size]}`}
         required
         autoComplete="false"
-        onChange={(e) => {
-          handler(e.target.value);
-          validateInput(inputVal);
-        }}
-        value={inputVal}
+        onChange={onChange}
+        value={value}
         maxLength={name === 'herocode' ? 4 : 40}
         {...restProps}
       />
@@ -88,7 +74,9 @@ export const Input = ({
       >
         {labelText}
       </label>
-      <p className={`${valid ? styles.noError : styles.error}`}>{validText}</p>
+      <p className={`${isValid ? styles.noError : styles.error}`}>
+        {validText}
+      </p>
     </div>
   );
 };
