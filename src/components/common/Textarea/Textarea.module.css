@@ -15,7 +15,7 @@
   font-weight: 600;
 
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-default);
 }
 .label {
