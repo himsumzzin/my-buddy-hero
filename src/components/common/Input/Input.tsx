@@ -3,10 +3,12 @@ import { useState, useId } from 'react';
 
 export type InputProps = {
   /**
-   * 어떤 인풋으로 사용할건지 양식을 선택하세요.
-   *
+   * 어떤 인풋으로 사용할건지 양식을 선택하세요.<br>
+   * 'id', 'password', 'mission', 'herocode', 'confirm', 'register' 종류가 있습니다<br>
+   * 위의 종류에 해당하지 않는다면 name 에 주고싶은 값을 자유롭게 문자열로 입력하세요<br>
+   * 자유롭게 입력한 문자열은 자동으로 인풋의 타입이 'text'로 지정됩니다.
    */
-  name: 'id' | 'password' | 'mission' | 'herocode' | 'confirm' | 'register';
+  name: '';
   /**
    * 사용할 인풋의 크기를 선택해주세요 <br>
    * 기본 크기는 lg 사이즈이고 sm, md 사이즈 인풋을 선택할 수 있습니다.
