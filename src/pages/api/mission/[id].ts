@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from '../../../utils/dbConnect';
-import Mission from '../../../models/Mission';
+import dbConnect from '@/utils/server/dbConnect';
+import Mission from '@/models/Mission';
 
 type Data = {
   statusCode: number;
