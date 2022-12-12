@@ -31,7 +31,7 @@
 }
 
 .lgInput:focus ~ .lgLabel,
-.lgInput:valid ~ .lgLabel {
+.top {
   position: absolute;
   left: 32px;
   top: 0;

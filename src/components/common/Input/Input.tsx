@@ -46,28 +46,45 @@ export const Input = ({
   ...restProps
 }: InputProps) => {
   const inputId = useId();
-  const { state: {value, isValid}, onChange } = useInput(initialValue);
+  const {
+    state: { value, isValid },
+    onChange,
+  } = useInput(initialValue);
+
+  const type = (name: string) => {
+    if (name === 'maxReceiver') {
+      return 'number';
+    } else if (name === 'password' || name === 'confirm') {
+      return 'password';
+    } else {
+      return 'text';
+    }
+  };
 
   return (
     <div className={`${styles.container} ${className}`}>
       <input
         id={inputId}
         name={name}
-        type={name === 'password' || name === 'confirm' ? 'password' : 'text'}
+        type={type(name)}
         className={`${styles.lgInput} ${styles[size]} ${className}`}
         required
         autoComplete="false"
         onChange={onChange}
         value={value}
         pattern={
-          inputValidationRegex[name] ? `${inputValidationRegex[name]}` : '.*'
+          inputValidationRegex[name]
+            ? `${inputValidationRegex[name]}`.replace(/\//g, '')
+            : '.*'
         }
         maxLength={name === 'herocode' ? 4 : 40}
         {...restProps}
       />
       <label
         htmlFor={inputId}
-        className={`${styles.lgLabel} ${size !== 'lg' ? 'srOnly' : ''}`}
+        className={`${styles.lgLabel} ${size !== 'lg' ? 'srOnly' : ''} ${
+          value ? styles.top : ''
+        }`}
       >
         {labelText}
       </label>
