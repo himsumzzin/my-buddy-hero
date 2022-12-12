@@ -6,6 +6,7 @@
   box-shadow: var(--shadow-default);
   background: linear-gradient(180deg, #ea8274 1.86%, #fff1a9 98.23%);
   border-radius: var(--border-radius-md);
+  margin: 0 auto;
 }
 
 .missionCount {
