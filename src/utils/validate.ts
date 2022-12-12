@@ -3,4 +3,7 @@ export const inputValidationRegex: { [key: string]: RegExp } = {
   password:
     /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
   herocode: /^[0-9]{3,4}$/,
+  herotitle: /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,20}$/, // 한글, 영어, 숫자 첫번째글자부터 한글자 이상
+  herodescription: /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{4,40}$/,
+  heroname: /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,}$/,
 };

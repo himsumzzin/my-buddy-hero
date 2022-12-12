@@ -15,6 +15,11 @@
   transition: var(--transition-fast);
 }
 
+.button:hover {
+  background-color: var(--color-main-hover);
+  transition: var(--transition-fast);
+}
+
 .xs {
   width: 44px;
   height: 44px;

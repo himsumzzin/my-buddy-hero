@@ -7,6 +7,7 @@ export type HeroCardProps = {
   code: string;
   name: string;
   description: string;
+  className?: string;
 };
 
 export const HeroCard = ({
@@ -15,10 +16,11 @@ export const HeroCard = ({
   code,
   name,
   description,
+  className,
 }: HeroCardProps) => {
   return (
     <>
-      <div className={`${styles.heroCardContainer}`}>
+      <div className={`${styles.heroCardContainer} ${className}`}>
         <p className={`${styles.missionCount}`}>임무완료 : {missionCount}회</p>
         <Image
           className={`${styles.cartoonize}`}
