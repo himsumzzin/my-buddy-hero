@@ -1,7 +1,7 @@
 import styles from './Input.module.css';
 import { useId } from 'react';
 import { useInput } from '@/hooks/useInput';
-import { inputValidationRegex } from '@/utils';
+import { inputValidationRegex } from '@/utils/client';
 
 export type InputProps = {
   /**
