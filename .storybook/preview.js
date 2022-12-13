@@ -1,5 +1,6 @@
 import * as NextImage from 'next/image';
 import '../src/styles/globals.css';
+import { globalDecorators } from './decorators';
 
 const OriginalNextImage = NextImage.default;
 
@@ -17,3 +18,5 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = globalDecorators;

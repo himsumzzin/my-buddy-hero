@@ -63,6 +63,7 @@
     "postcss-preset-env": "7.8.3",
     "prettier": "2.8.0",
     "storybook-addon-next": "1.7.1",
+    "storybook-addon-recoil-flow": "^1.4.0",
     "tsconfig-paths-webpack-plugin": "4.0.0"
   },
   "keywords": [
