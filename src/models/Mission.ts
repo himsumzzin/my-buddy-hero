@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const MissionSchema = new mongoose.Schema({
   groupId: String,
-  author: String,
+  authorId: String,
   maxReceiver: String,
-  receiver: {
+  receivers: {
     type: [String],
     default: [],
   },

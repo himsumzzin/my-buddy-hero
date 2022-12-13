@@ -1,4 +1,4 @@
-import { inputValidationRegex } from '@/utils';
+import { inputValidationRegex } from '@/utils/client';
 import { useState } from 'react';
 
 const validateInput = (name: string, value: string) => {
