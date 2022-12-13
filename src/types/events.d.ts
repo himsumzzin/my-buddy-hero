@@ -14,3 +14,7 @@ interface Element {
     options?: boolean | EventListenerOptions
   ): void;
 }
+
+interface EventTarget {
+  readonly closest: (selector: string) => HTMLElement | null;
+}
