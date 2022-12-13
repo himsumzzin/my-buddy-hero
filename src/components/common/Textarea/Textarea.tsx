@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState, useCallback } from 'react';
 import styles from './Textarea.module.css';
 
 export type TextareaProps = {
@@ -15,6 +15,7 @@ export type TextareaProps = {
    * label요소를 시각적으로 숨길지 결정합니다. 기본값은 false입니다.
    */
   hiddenLabel: boolean;
+  initialValue: string;
   restProps?: unknown[];
 };
 
@@ -23,9 +24,15 @@ export const Textarea = ({
   placeholder,
   labelValue,
   hiddenLabel,
+  initialValue,
   ...restProps
 }: TextareaProps) => {
   const textareaId = useId();
+  const [value, setValue] = useState(initialValue);
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -39,7 +46,9 @@ export const Textarea = ({
         className={styles.Textarea}
         name={name}
         id={textareaId}
+        value={value}
         placeholder={placeholder}
+        onChange={onChange}
         {...restProps}
       />
     </div>
@@ -48,4 +57,5 @@ export const Textarea = ({
 
 Textarea.defaultProps = {
   hiddenLabel: false,
+  initialValue: '',
 };

@@ -28,6 +28,10 @@ button {
   border-style: none;
 }
 
+p {
+  margin: 0;
+}
+
 #__next {
   background-color: var(--color-main-orange-400);
 }

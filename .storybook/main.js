@@ -2,11 +2,7 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  stories: [
-    '../src/**/*.stories.@(js|jsx|ts|tsx)',
-    '../stories/**/*.stories.mdx',
-    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -49,7 +45,6 @@ module.exports = {
         }
         return rule;
       });
-    console.log(config.module.rules.map((rule) => rule.use));
 
     // add SVGR instead
     config.module.rules.push(
@@ -153,8 +148,6 @@ module.exports = {
         ],
       }
     );
-
-    console.log(config.module.rules);
 
     return config;
   },
