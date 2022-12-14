@@ -1,0 +1,67 @@
+.container {
+  position: relative;
+  width: 400px;
+  min-height: 580px;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-base);
+  background-color: var(--color-main-orange-700);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-default);
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textBox {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: var(--spacing-lg);
+}
+
+.missionTitle,
+.description {
+  width: 336px;
+  height: 40px;
+  padding: 11px 24px;
+  color: var(--grayscale-gray);
+  background-color: var(--grayscale-white);
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 4px;
+  margin: 0;
+  box-shadow: var(--shadow-default);
+}
+.description {
+  margin-top: var(--spacing-sm);
+  min-height: 292px;
+}
+.maxReceiver {
+  color: var(--grayscale-snow);
+  font-size: var(--text-size-lg);
+  font-weight: var(--text-weight-bold);
+  text-align: right;
+  text-shadow: var(--shadow-default);
+  margin: var(--spacing-sm) 0 0;
+}
+
+.buttonBox {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-base);
+  margin-top: var(--spacing-lg);
+}
+.missionButton {
+  font-size: 1.2rem;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.8rem;
+  left: var(--spacing-sm);
+  transform: translate3d(0, -0.5rem, 0);
+}

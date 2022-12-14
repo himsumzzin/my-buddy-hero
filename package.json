@@ -20,6 +20,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "bcryptjs": "^2.4.3",
+    "axios": "^1.2.1",
     "cross-env": "7.0.3",
     "eslint-config-next": "13.0.6",
     "framer-motion": "7.6.18",
@@ -63,6 +64,7 @@
     "postcss-preset-env": "7.8.3",
     "prettier": "2.8.0",
     "storybook-addon-next": "1.7.1",
+    "storybook-addon-recoil-flow": "^1.4.0",
     "tsconfig-paths-webpack-plugin": "4.0.0"
   },
   "keywords": [

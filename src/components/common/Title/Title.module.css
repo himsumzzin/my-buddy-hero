@@ -1,0 +1,7 @@
+.Title {
+  margin: 0;
+  color: var(--grayscale-white);
+  font-size: var(--text-size-subTitle);
+  font-weight: var(--text-weight-bold);
+  text-shadow: var(--shadow-default);
+}
