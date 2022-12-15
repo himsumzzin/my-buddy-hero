@@ -22,9 +22,10 @@ export default async function handler(
     if (method === 'GET') {
       const result = await Hero.find({ groupId: req.query.id }).exec();
       const data = result.map((result) => ({
-        heroId: result._id,
+        id: result._id,
         name: result.name,
         title: result.title,
+        profileImage: result.profileImage,
         completeNumber: result.completeNumber,
       }));
       return res.status(200).json({

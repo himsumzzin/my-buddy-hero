@@ -2,7 +2,20 @@
   width: 100vh;
   height: 100vh;
   margin: 0 auto;
-  padding-top: 7%;
+  padding-top: 5%;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.cardContainer {
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .subTitle {

@@ -1,0 +1,16 @@
+.formContainer {
+  position: relative;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto ;
+}
+
+/**** Error message ****/
+.error {
+  color: red;
+  font-size: var(--text-size-md);
+  margin-top: 5px;
+  text-align: center;
+  height: 0;
+}

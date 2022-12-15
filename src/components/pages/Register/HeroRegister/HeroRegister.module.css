@@ -20,3 +20,11 @@
   flex-direction: column;
   gap: var(--spacing-lg);
 }
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
