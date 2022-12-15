@@ -10,7 +10,7 @@ import { HeroList } from './HeroList';
 import { Result } from './Result';
 
 export const defaultMission = {
-  _id: '',
+  id: '',
   groupId: '',
   authorId: '',
   maxReceiver: 1,
@@ -38,7 +38,7 @@ export interface MissionCardProps {
    * 임무 목록을 통해 렌더링했다면 해당 임무에 대한 정보를 넣어줍니다.
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
-  initialMission?: Mission;
+  initialMission?: IMission;
   onClose: () => void;
 }
 
@@ -46,15 +46,15 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
     initialMission ? 'MissionInfo' : 'MissionForm'
   );
-  const [missionInfo, setMissionInfo] = useState<Mission>(
+  const [missionInfo, setMissionInfo] = useState<IMission>(
     initialMission ?? defaultMission
   );
   const { addMission, updateMission } = useMissions();
 
-  const missionStatus = useRef<MissionStatus>(
+  const missionStatus = useRef<IMissionStatus>(
     initialMission ? 'update' : 'create'
   );
-  const heroInfo = useRef<Hero>(initialHero);
+  const heroInfo = useRef<IHero>(initialHero);
 
   const renderMissionForm = () => setCurrentComponent('MissionForm');
   const renderMissionInfo = () => setCurrentComponent('MissionInfo');
@@ -70,12 +70,12 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
     renderHeroList();
   };
 
-  const setMissionStatus = (newStatus: MissionStatus) => {
+  const setMissionStatus = (newStatus: IMissionStatus) => {
     missionStatus.current = newStatus;
     renderHeroList();
   };
 
-  const onHeroSelect = async (selectedHeroInfo: Hero) => {
+  const onHeroSelect = async (selectedHeroInfo: IHero) => {
     heroInfo.current = selectedHeroInfo;
 
     const status = missionStatus.current;
@@ -83,14 +83,14 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
       case 'create':
         setMissionInfo((prevInfo) => ({
           ...prevInfo,
-          authorId: selectedHeroInfo._id,
+          authorId: selectedHeroInfo.id,
         }));
-        addMission({ authorId: heroInfo.current._id, missionInfo });
+        addMission({ authorId: heroInfo.current.id, missionInfo });
         break;
       case 'update':
         setMissionInfo((prevInfo) => ({
           ...prevInfo,
-          receivers: [...prevInfo.receivers, selectedHeroInfo._id],
+          receivers: [...prevInfo.receivers, selectedHeroInfo.id],
         }));
         updateMission(missionInfo);
         break;

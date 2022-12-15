@@ -5,8 +5,12 @@ const HeroSchema = new mongoose.Schema({
   name: String,
   title: String,
   description: String,
-  heorPassword: String,
-  completeNumber: Number,
+  code: String,
+  profileImage: String,
+  completeNumber: {
+    type: Number,
+    default: 0,
+  },
 });
 
 export default mongoose.models.Heroes || mongoose.model('Heroes', HeroSchema);
