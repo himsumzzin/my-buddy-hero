@@ -8,7 +8,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
-    message?: string;
+    type?: string;
   };
 };
 
@@ -20,12 +20,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const existingUser = await User.findOne({ id: req.body.id }).exec();
     if (existingUser) {
-      console.log('existingUser : ', existingUser);
       return res.status(422).json({
         statusCode: 422,
         body: {
           success: false,
-          message: '이미 있는 아이디입니다.',
+          type: 'id-duplication',
         },
       });
     }
@@ -38,7 +37,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
       statusCode: 201,
       body: {
         success: true,
-        message: '회원가입 성공',
       },
     });
   } catch (err) {
@@ -47,7 +45,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
       err,
       body: {
         success: false,
-        message: '회원가입 실패',
+        type: 'signup-fail',
       },
     });
   }
