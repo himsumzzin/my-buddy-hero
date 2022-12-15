@@ -1,0 +1,40 @@
+.container {
+  width: 100vh;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 5%;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.cardContainer {
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.subTitle {
+  font-size: var(--text-size-lg);
+  font-weight: var(--text-weight-bold);
+  color: var(--grayscale-black);
+  text-align: center;
+}
+
+.linkContainer {
+  width: 650px;
+  height: 69px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: var(--spacing-lg);
+}
+
+.linkStyle {
+  font-size: var(--text-size-sm);
+}
