@@ -1,8 +1,11 @@
 .container {
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: fit-content;
 }
 
 .title {
@@ -10,26 +13,27 @@
   text-align: center;
   color: var(--color-main-orange-700);
   text-shadow: var(--shadow-default);
-  padding-top: 160px;
-  margin-bottom: 32px;
+  margin-bottom: var(--spacing-lg);
 }
 
-.input {
-  margin-bottom: 32px;
+.signinGap {
+  gap: var(--spacing-lg);
+}
+.signinNav {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  margin-top: var(--spacing-lg);
 }
 
-.button {
-  margin-top: 8px;
-}
-
-.signupGuide {
+.signinGuide {
   font-size: 20px;
   color: var(--grayscale-gray);
 }
 
-.signupLink {
+.signinLink {
   font-size: var(--text-size-lg);
   font-weight: var(--text-weight-bold);
   color: var(--color-main-orange-700);
-  text-shadow: var(--shadow-default);
+  text-decoration-line: underline;
 }
