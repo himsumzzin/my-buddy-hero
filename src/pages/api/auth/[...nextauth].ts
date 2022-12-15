@@ -18,9 +18,8 @@ export default NextAuth({
         if (!credentials) throw new Error('credentials is null!');
         await dbConnect();
         const user = await User.findOne({ id: credentials.id }).exec();
-        console.log(user);
         if (!user) {
-          throw new Error('해당하는 아이디가 없습니다.');
+          throw new Error('no-id');
         }
 
         const isValid = await verifyPassword(
@@ -29,7 +28,7 @@ export default NextAuth({
         );
 
         if (!isValid) {
-          throw new Error('비밀번호가 틀렸습니다.');
+          throw new Error('wrong-id');
         }
         return { id: user.id };
       },
