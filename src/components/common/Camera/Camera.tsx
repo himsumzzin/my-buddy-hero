@@ -4,12 +4,13 @@ import styles from './Camera.module.css';
 import { Button } from '@/components/common';
 import { useRef, useState } from 'react';
 
-export const Camera = () => {
+export const Camera = (props: any) => {
+  const { page, handlerRegisterPage, handlerCompletePage } = props;
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [isFirstClick, setIsFirstClick] = useState(false);
-  const [isCounting, setIsCounting] = useState(false);
   const [countdown, setCountdown] = useState(3);
 
   const setDevice = async () => {
@@ -27,7 +28,13 @@ export const Camera = () => {
     const canvas = canvasRef.current?.getContext('2d');
     canvas?.scale(-1, 1);
     canvas?.translate(-522, 0);
-    canvas?.drawImage(videoRef.current, 0, 0, 522, 430);
+    canvas?.drawImage(
+      videoRef.current,
+      0,
+      0,
+      videoRef.current?.videoWidth * 0.85,
+      videoRef.current?.videoHeight * 0.85
+    );
 
     canvas?.scale(-1, 1);
     canvas?.translate(-522, 0);
@@ -47,38 +54,40 @@ export const Camera = () => {
         return prev - 1;
       });
     }, 1000);
-    setTimeout(() => {
-      takePhoto();
-      setIsCounting(false);
-    }, 3000);
   };
 
-  const handlerPlayPicture = () => {
+  const takeAPictureOnlyOnceHandler = () => {
     setIsFirstClick(true);
     setDevice();
     countDownAndTakeAPicture();
   };
 
-  const handlerReplayPicture = () => {
+  const retakeThePictureHandler = () => {
     if (!isFirstClick) return;
-    setIsCounting(true);
     setCountdown(3);
     countDownAndTakeAPicture();
   };
 
-  const handlerSavePhoto = () => {
+  const savePhotoHandler = () => {
     if (!isFirstClick) return;
     savePhoto();
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        page === 'Camera' ? styles.show : styles.hidden
+      }`}
+    >
+      <Button size="xs" onClick={handlerRegisterPage} disabled={false}>
+        🔙
+      </Button>
       <div className={styles.view}>
         <div
           className={`${styles.cameraTextContainer} ${
             isFirstClick ? styles.hidden : ''
           }`}
-          onClick={handlerPlayPicture}
+          onClick={takeAPictureOnlyOnceHandler}
           aria-hidden="true"
         >
           <p className={styles.cameraTitle}>히어로 사진 찍기</p>
@@ -104,25 +113,28 @@ export const Camera = () => {
         ></video>
         <canvas
           className={`${styles.canvas} ${
-            isCounting ? styles.hidden : styles.show
+            countdown === 0 ? styles.show : styles.hidden
           }`}
           ref={canvasRef}
-          width="522"
-          height="430"
+          width={videoRef.current?.videoWidth}
+          height={videoRef.current?.videoHeight}
         ></canvas>
       </div>
       <div className={styles.buttonContainer}>
         <Button
           size="md"
-          onClick={handlerReplayPicture}
-          disabled={isCounting ? true : false}
+          onClick={retakeThePictureHandler}
+          disabled={countdown !== 0 ? true : false}
         >
           다시 찍기
         </Button>
         <Button
           size="md"
-          onClick={handlerSavePhoto}
-          disabled={isCounting ? true : false}
+          onClick={() => {
+            savePhotoHandler();
+            handlerCompletePage();
+          }}
+          disabled={countdown !== 0 ? true : false}
         >
           완료
         </Button>
