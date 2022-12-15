@@ -62,6 +62,7 @@ export const Register = () => {
           handlerRegisterPage={handlerLinkToRegisterPage}
           handlerCompletePage={handlerLinkToCompletePage}
           setHeroInfoPayload={getHeroInfoPayload}
+          heroPayload={heroInfo}
         ></Camera>
       ) : (
         <Complete heroInfo={heroInfo}></Complete>

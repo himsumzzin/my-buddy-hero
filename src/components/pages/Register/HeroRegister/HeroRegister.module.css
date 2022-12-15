@@ -28,3 +28,7 @@
 .show {
   display: block;
 }
+
+.button {
+  margin: 0 auto;
+}

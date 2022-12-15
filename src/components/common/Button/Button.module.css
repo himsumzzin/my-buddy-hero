@@ -7,7 +7,6 @@
   color: var(--grayscale-white);
   background: var(--color-main-orange-600);
   box-shadow: var(--shadow-default);
-  margin: 0 auto;
 }
 
 .button:active {
@@ -34,6 +33,14 @@
 .md {
   width: 180px;
   height: 69px;
+  background: var(--grayscale-gray);
+}
+.md:active {
+  background-color: var(--grayscale-darkgray);
+}
+
+.md:hover {
+  background-color: var(--grayscale-darkgray);
 }
 
 .lg {

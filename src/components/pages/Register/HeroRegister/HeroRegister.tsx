@@ -66,7 +66,7 @@ export const HeroRegister = (props: any) => {
           initialValue={code}
           className={styles.input}
         ></Input>
-        <Button size="lg" disabled={false}>
+        <Button size="lg" disabled={false} className={styles.button}>
           히어로로 변신하러 가기
         </Button>
       </form>

@@ -7,8 +7,12 @@ import axios from 'axios';
 import { getToonifyImage } from '@/apis/toonify';
 
 export const Camera = (props: any) => {
-  const { handlerRegisterPage, handlerCompletePage, setHeroInfoPayload } =
-    props;
+  const {
+    handlerRegisterPage,
+    handlerCompletePage,
+    setHeroInfoPayload,
+    heroPayload,
+  } = props;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -46,11 +50,19 @@ export const Camera = (props: any) => {
   };
 
   const savePhoto = async () => {
-    // try {
-    //   await axios.post('/api/hero', heroInfoPayload);
-    // } catch (err) {
-    //   console.error('히어로 정보가 제대로 전송되지 않았습니다.');
-    // }
+    try {
+      await axios
+        .post('/api/hero', heroPayload)
+        .then((res) => {
+          console.log(heroPayload);
+          console.log('서버에 저장을 성공해써요!');
+        })
+        .catch((error) => {
+          console.error('서버전송에 실패했습니다. 다시 히어로 등록을 해주세요');
+        });
+    } catch (err) {
+      console.error('히어로 정보가 제대로 전송되지 않았습니다.');
+    }
   };
 
   const getToonifyPhoto = () => {
@@ -65,7 +77,7 @@ export const Camera = (props: any) => {
         // 3. getToonifyImage api로 이미지 변환!
         const data: FormData = new FormData();
         data.append('image', blobData);
-        selectProfileImage = await getToonifyImage(data, 'emojify');
+        selectProfileImage = await getToonifyImage(data, 'toonifyplus');
 
         // 1. 캔버스에 뿌려주기 위한 이미지 객체 생성
         // 2. 이미지객체가 onload 된 시점(확실하게 만들어진 시점)에 캔버스에 그려준다
@@ -161,6 +173,7 @@ export const Camera = (props: any) => {
           size="md"
           onClick={retakeThePictureHandler}
           disabled={countdown !== 0 ? true : false}
+          className={styles.button}
         >
           다시 찍기
         </Button>
@@ -171,6 +184,7 @@ export const Camera = (props: any) => {
             handlerCompletePage();
           }}
           disabled={countdown !== 0 ? true : false}
+          className={styles.button}
         >
           완료
         </Button>
