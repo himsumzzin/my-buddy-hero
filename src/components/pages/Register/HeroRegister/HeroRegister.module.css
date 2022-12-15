@@ -1,0 +1,30 @@
+.container {
+  width: 100vh;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-size-title);
+  text-align: center;
+  color: var(--color-main-orange-700);
+  text-shadow: var(--shadow-default);
+  padding-top: 90px;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
