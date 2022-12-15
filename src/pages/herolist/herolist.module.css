@@ -1,0 +1,38 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.listContainer {
+  width: 95vw;
+  height: 72%;
+  margin: 0 auto;
+  display: flex;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--spacing-base);
+  padding-top: 2%;
+  background-color: var(--color-main-orange-500);
+}
+
+.listContainer::-webkit-scrollbar {
+  display: none; /* Chrome , Safari , Opera */
+}
+
+.linkContainer {
+  width: 95vw;
+  height: 184px;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-base);
+  padding-top: 2%;
+}
+
+.buttonBox {
+  margin-left: auto;
+}
