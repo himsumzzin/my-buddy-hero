@@ -19,7 +19,7 @@ export default async function handler(
 
   await dbConnect();
   try {
-    const hero = new Hero({ ...req.body, completeNumber: 0 });
+    const hero = new Hero(req.body);
     hero.save();
     return res.status(201).json({
       statusCode: 201,

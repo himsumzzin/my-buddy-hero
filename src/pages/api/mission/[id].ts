@@ -22,7 +22,7 @@ export default async function handler(
     if (method === 'GET') {
       const result = await Mission.find({ groupId: req.query.id }).exec();
       const data = result.map((result) => ({
-        missionId: result._id,
+        id: result._id,
         authorId: result.authorId,
         receivers: result.receivers,
         title: result.title,
