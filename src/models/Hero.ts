@@ -6,6 +6,7 @@ const HeroSchema = new mongoose.Schema({
   title: String,
   description: String,
   heorPassword: String,
+  profileImage: String,
   completeNumber: Number,
 });
 
