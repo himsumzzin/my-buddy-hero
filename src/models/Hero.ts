@@ -7,7 +7,10 @@ const HeroSchema = new mongoose.Schema({
   description: String,
   heorPassword: String,
   profileImage: String,
-  completeNumber: Number,
+  completeNumber: {
+    type: Number,
+    default: 0,
+  },
 });
 
 export default mongoose.models.Heroes || mongoose.model('Heroes', HeroSchema);
