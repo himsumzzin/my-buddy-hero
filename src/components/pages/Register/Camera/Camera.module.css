@@ -3,7 +3,6 @@
   height: 100vh;
   margin: 0 auto;
   padding-top: 10%;
-  margin-left: 15%;
 }
 
 .view {
@@ -100,4 +99,8 @@
   justify-content: space-between;
   margin: 0 auto;
   margin-top: var(--spacing-lg);
+}
+
+.button {
+  background-color: var(--color-main-orange-600);
 }
