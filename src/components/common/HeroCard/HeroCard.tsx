@@ -22,10 +22,6 @@ export type HeroCardProps = {
 
 export const HeroCard = ({
   missionCount,
-  profileImage,
-  code,
-  name,
-  description,
   className,
   heroInfo,
 }: HeroCardProps) => {
@@ -48,10 +44,14 @@ export const HeroCard = ({
   );
 };
 
-// HeroCard.defaultProps = {
-//   missionCount: '0',
-//   profileImage: '/images/hero2.png',
-//   code: '휴지맨',
-//   name: '김현진 히어로',
-//   description: '저는 휴지를 주워서 학교가 깨끗해지는걸 좋아해요!',
-// };
+HeroCard.defaultProps = {
+  missionCount: '0',
+  heroInfo: {
+    groupId: '1',
+    name: '김현진',
+    title: '휴지맨',
+    description: '저는 휴지를 주워서 학교가 깨끗해지는걸 좋아해요!',
+    code: '1234',
+    profileImage: '/images/hero2.png',
+  },
+};
