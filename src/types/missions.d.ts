@@ -1,7 +1,7 @@
-type MissionStatus = 'create' | 'update' | 'complete';
+type IMissionStatus = 'create' | 'update' | 'complete';
 
-interface Mission {
-  _id: string;
+interface IMission {
+  id: string;
   groupId: string;
   authorId: string;
   maxReceiver: number;
@@ -11,4 +11,4 @@ interface Mission {
   isComplete: boolean;
 }
 
-type MissionList = Mission[];
+type MissionList = IMission[];

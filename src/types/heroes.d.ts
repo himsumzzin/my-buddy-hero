@@ -1,12 +1,12 @@
-interface Hero {
-  _id: string;
+interface IHero {
+  id: string;
   groupId: string;
   name: string;
-  code: string;
-  password: string;
-  profileImage: string;
-  missionCount: number;
+  title: string;
   description: string;
+  code: string;
+  profileImage: string;
+  completeNumber: number;
 }
 
-type HeroList = hero[];
+type IHeroList = Ihero[];

@@ -19,7 +19,7 @@ export interface HeroListProps {
   /**
    * 미션을 추가하거나 업데이트하는 함수입니다. 선택한 히어로와 히어로 코드가 일치할 때 호출합니다.
    */
-  onSubmit: (heroInfo: Hero) => void;
+  onSubmit: (heroInfo: IHero) => void;
   /**
    * missionStatus에 따라 missionForm 또는 missionInfo로 돌아가는 버튼입니다.
    */
@@ -59,7 +59,7 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
     }
     const password = e.currentTarget.herocode.value;
     const matchedHero = heroList.find(
-      (hero) => hero._id === selectedHeroId && hero.password === password
+      (hero) => hero.id === selectedHeroId && hero.password === password
     );
 
     matchedHero ? onSubmit(matchedHero) : setIsValid(false);
@@ -72,16 +72,16 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
       </header>
       <div className={styles.heroesBox}>
         <ul className={styles.ul} onClick={selectHero}>
-          {heroList.map(({ _id, profileImage, code, name }) => {
+          {heroList.map(({ id, profileImage, code, name }) => {
             return (
               <HeroItem
-                key={_id}
-                id={_id}
+                key={id}
+                id={id}
                 profileImage={profileImage}
                 code={code}
                 name={name}
-                isReceiver={receivers.includes(_id)}
-                isSelected={_id === selectedHeroId}
+                isReceiver={receivers.includes(id)}
+                isSelected={id === selectedHeroId}
               />
             );
           })}

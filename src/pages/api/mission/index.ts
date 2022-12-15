@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from '@/utils/server/dbConnect';
+import { dbConnect } from '@/utils/server';
 import { Mission } from '@/models/index';
 
 type Data = {
