@@ -6,4 +6,3 @@ export * from './Dialog';
 export * from './Input';
 export * from './Title';
 export * from './Slide';
-export * from './Camera';
