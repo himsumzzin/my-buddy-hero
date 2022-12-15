@@ -17,8 +17,8 @@ export default {
   },
 } as ComponentMeta<typeof Camera>;
 
-const Template: ComponentStory<typeof Camera> = () => {
-  return <Camera></Camera>;
+const Template: ComponentStory<typeof Camera> = (args) => {
+  return <Camera page="Camera"></Camera>;
 };
 
 export const camera = Template.bind({});

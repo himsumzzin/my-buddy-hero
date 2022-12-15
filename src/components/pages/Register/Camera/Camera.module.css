@@ -3,6 +3,7 @@
   height: 100vh;
   margin: 0 auto;
   padding-top: 10%;
+  margin-left: 15%;
 }
 
 .view {
@@ -12,11 +13,11 @@
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .show {
-  visibility: visible;
+  display: inline-block;
 }
 
 .cameraTextContainer {
@@ -52,6 +53,7 @@
 
 .canvas {
   position: absolute;
+  padding: 10px 0;
   left: 0;
   /* border-radius: var(--border-radius-md); */
   margin: 0 auto;
@@ -74,6 +76,7 @@
 
 .countdownText {
   position: absolute;
+  top: 10%;
   left: 25%;
   font-size: var(--text-size-lg);
   font-weight: var(--text-weight-bold);
@@ -82,8 +85,8 @@
 
 .countdownNumber {
   position: absolute;
-  top: -10%;
-  left: 40%;
+  top: 25%;
+  left: 43%;
   font-size: 150px;
   font-weight: var(--text-weight-bold);
   color: var(--grayscale-white);

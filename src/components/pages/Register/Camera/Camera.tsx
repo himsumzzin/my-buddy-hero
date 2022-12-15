@@ -3,9 +3,12 @@
 import styles from './Camera.module.css';
 import { Button } from '@/components/common';
 import { useRef, useState } from 'react';
+import axios from 'axios';
+import { getToonifyImage } from '@/apis/toonify';
 
 export const Camera = (props: any) => {
-  const { page, handlerRegisterPage, handlerCompletePage } = props;
+  const { handlerRegisterPage, handlerCompletePage, setHeroInfoPayload } =
+    props;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,6 +28,7 @@ export const Camera = (props: any) => {
   };
 
   const takePhoto = () => {
+    if (!videoRef.current) return; //추가로 넣음
     const canvas = canvasRef.current?.getContext('2d');
     canvas?.scale(-1, 1);
     canvas?.translate(-522, 0);
@@ -38,10 +42,46 @@ export const Camera = (props: any) => {
 
     canvas?.scale(-1, 1);
     canvas?.translate(-522, 0);
+    getToonifyPhoto();
   };
 
-  const savePhoto = () => {
-    console.log(canvasRef.current?.toDataURL('image/webp', 0.8));
+  const savePhoto = async () => {
+    // try {
+    //   await axios.post('/api/hero', heroInfoPayload);
+    // } catch (err) {
+    //   console.error('히어로 정보가 제대로 전송되지 않았습니다.');
+    // }
+  };
+
+  const getToonifyPhoto = () => {
+    if (!canvasRef.current) return;
+    let selectProfileImage = '';
+
+    // 캔버스에 현재 이미지 blob으로 만들기
+    canvasRef.current.toBlob(
+      async (blobData) => {
+        // 1. formdata 객체 생성
+        // 2. formdata에 blob데이터 이미지 형식으로 붙여주기
+        // 3. getToonifyImage api로 이미지 변환!
+        const data: FormData = new FormData();
+        data.append('image', blobData);
+        selectProfileImage = await getToonifyImage(data, 'emojify');
+
+        // 1. 캔버스에 뿌려주기 위한 이미지 객체 생성
+        // 2. 이미지객체가 onload 된 시점(확실하게 만들어진 시점)에 캔버스에 그려준다
+        const transImage = new Image();
+        transImage.onload = () => {
+          const canvas = canvasRef.current?.getContext('2d');
+          canvas.drawImage(transImage, 0, 0, 500, 420);
+        };
+
+        // 이미지가 로드된 이후 img의 src에 url 넣어주기!
+        transImage.src = `data:image/webp;base64,${selectProfileImage}`;
+        setHeroInfoPayload(`data:image/webp;base64,${selectProfileImage}`);
+      },
+      'image/webp',
+      0.8
+    );
   };
 
   const countDownAndTakeAPicture = () => {
@@ -74,11 +114,7 @@ export const Camera = (props: any) => {
   };
 
   return (
-    <div
-      className={`${styles.container} ${
-        page === 'Camera' ? styles.show : styles.hidden
-      }`}
-    >
+    <div className={`${styles.container}`}>
       <Button size="xs" onClick={handlerRegisterPage} disabled={false}>
         🔙
       </Button>

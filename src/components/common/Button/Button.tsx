@@ -12,7 +12,7 @@ export type ButtonProps = {
   /**
    * 버튼의 onClick 이벤트를 줄 수 있습니다.
    */
-  onClick?: () => void;
+  onClick?: any;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
