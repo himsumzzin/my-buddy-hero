@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.backBtn {
+  margin-right: 50%;
+}
+
+.view {
+  width: 522px;
+  position: relative;
+  margin: 0 auto;
+}
+
 .title {
   font-size: var(--text-size-title);
   text-align: center;

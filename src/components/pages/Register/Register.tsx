@@ -1,7 +1,7 @@
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
-
+import axios from 'axios';
 import { useState } from 'react';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
@@ -30,15 +30,27 @@ export const Register = () => {
   const [heroInfo, setHeroInfo] = useState<HeroInfo>(initialHeroInfo);
 
   const getHeroInfo = (newHeroInfo: HeroInfo) => {
-    setHeroInfo(newHeroInfo);
-    console.log(newHeroInfo);
-
-    // 히어로 정보를 가지고 카메라 페이지로 이동
+    setHeroInfo({ ...heroInfo, ...newHeroInfo });
     setPage('Camera');
   };
 
-  const getHeroInfoPayload = (imgURL: string) => {
-    setHeroInfo({ ...heroInfo, profileImage: imgURL });
+  const saveHeroInfo = async (imgURL: string) => {
+    try {
+      setHeroInfo({ ...heroInfo, profileImage: imgURL });
+      const heroPayload = heroInfo;
+      await axios
+        .post('/api/hero', heroPayload)
+        .then((res) => {
+          console.log(heroPayload);
+          console.log('서버에 저장을 성공해써요!');
+          setPage('Complete');
+        })
+        .catch((error) => {
+          console.error('서버전송에 실패했습니다. 다시 히어로 등록을 해주세요');
+        });
+    } catch (err) {
+      console.error('히어로 정보가 제대로 전송되지 않았습니다.');
+    }
   };
 
   // link to page handler props
@@ -47,7 +59,6 @@ export const Register = () => {
   };
   const handlerLinkToCompletePage = () => {
     setPage('Complete');
-    console.log(heroInfo);
   };
 
   return (
@@ -61,8 +72,7 @@ export const Register = () => {
         <Camera
           handlerRegisterPage={handlerLinkToRegisterPage}
           handlerCompletePage={handlerLinkToCompletePage}
-          setHeroInfoPayload={getHeroInfoPayload}
-          heroPayload={heroInfo}
+          saveHeroInfo={saveHeroInfo}
         ></Camera>
       ) : (
         <Complete heroInfo={heroInfo}></Complete>
