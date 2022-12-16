@@ -2,8 +2,14 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
+import { useId, useRef } from 'react';
+import axios from 'axios';
+import { getToonifyImage } from '@/apis/toonify';
 
 export default function Home() {
+  const id = useId();
+  const imgRef = useRef<HTMLImageElement>(null);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,7 +22,48 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <form>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={async (e) => {
+              const blobToBase64 = (blob) => {
+                const reader = new FileReader();
 
+                reader.readAsDataURL(blob);
+                return new Promise<string>((resolve) => {
+                  reader.onloadend = () => {
+                    resolve(reader.result);
+                  };
+                });
+              };
+
+              const base64 = await blobToBase64(e.target.files[0]);
+              // console.log(base64);
+
+              const data = new FormData();
+              data.append('image', e.target.files[0]);
+
+              const toonify = await getToonifyImage(data);
+
+              imgRef.current.src = `data:image/jpeg;base64,${toonify}`;
+
+              const res = await axios.post('/api/hero', {
+                payload: {
+                  groupId: '1',
+                  name: 'gddsadsasg',
+                  title: 'sdgdssg',
+                  description: 'sdgsdgsdg',
+                  code: '1234',
+                  profileImage: `data:image/jpeg;base64,${toonify}`,
+                },
+              });
+              console.log(res.data);
+            }}
+          />
+          <button>전송</button>
+        </form>
+        <Image src="" ref={imgRef} alt="" />
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>

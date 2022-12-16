@@ -22,7 +22,7 @@ export default async function handler(
 
   await dbConnect();
   try {
-    const { payload } = req.body;
+    const payload = req.body;
 
     const [, imageContentType] = payload.profileImage.split(/;|:/g);
     const base64 = payload.profileImage.split(',')[1];
@@ -50,6 +50,7 @@ export default async function handler(
       const profileImage = format(
         `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
       );
+
       const hero = new Hero({ ...payload, profileImage });
       hero.save();
       const { _id, name, title, groupId, code, description, completeNumber } =

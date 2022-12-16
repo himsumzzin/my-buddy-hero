@@ -21,14 +21,20 @@ export interface DialogProps {
    */
   onClose: () => void;
   children: React.ReactNode;
-  restProps?: unknown[];
+  restprops?: unknown[];
 }
 
 const defaultProps = {
   modal: false,
 };
 
-export const Dialog = ({ modal, opener, onClose, children }: DialogProps) => {
+export const Dialog = ({
+  modal,
+  opener,
+  onClose,
+  children,
+  ...restprops
+}: DialogProps) => {
   const dialogRef = useRef<HTMLElement>(null);
 
   const portalContainer = document.getElementById(
@@ -80,6 +86,8 @@ export const Dialog = ({ modal, opener, onClose, children }: DialogProps) => {
         firstTabbable.focus();
       }
     });
+
+    firstTabbable.focus();
   };
 
   const handleClose = () => {
@@ -95,6 +103,7 @@ export const Dialog = ({ modal, opener, onClose, children }: DialogProps) => {
         aria-modal={modal}
         tabIndex={-1}
         className={styles.container}
+        {...restprops}
       >
         {children}
       </article>

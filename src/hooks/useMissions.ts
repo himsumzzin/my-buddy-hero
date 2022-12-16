@@ -1,6 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { missionsState, userState } from '@/states';
 import { createMission } from '@/apis';
+import axios from 'axios';
 
 export const useMissions = () => {
   const user = useRecoilValue(userState);
@@ -8,39 +9,54 @@ export const useMissions = () => {
 
   const setMissions = useSetRecoilState(missionsState);
 
-  const addMission = async ({
-    authorId,
-    missionInfo,
-  }: {
-    authorId: string;
-    missionInfo: Mission;
-  }) => {
-    const { maxReceiver, title, description } = missionInfo;
+  const getMissions = async () => {
     try {
-      const updatedMission = await createMission({
-        groupId,
-        authorId,
-        maxReceiver,
-        title,
-        description,
-      });
-      setMissions((prevMissions) => [...prevMissions, updatedMission]);
+      const { data } = await axios.get(`api/missions/${groupId}`);
+      setMissions(data.body.missions);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const updateMission = async (newMission: Mission) => {
-    // 서버에 저장 -> 성공하면 상태 최신화, 실패하면?
+  const addMission = async (mission: IMission) => {
     try {
-      setMissions((prevMissions) =>
-        prevMissions.map((mission) =>
-          mission._id === newMission._id ? newMission : mission
-        )
-      );
+      const { data } = await axios.post('api/missions', {
+        ...mission,
+        groupId,
+      });
+      const newMission = data.body.mission;
+
+      setMissions((prev) => [newMission, ...prev]);
     } catch (err) {
       console.error(err);
     }
   };
-  return { addMission, updateMission };
+
+  const updateMission = async (
+    id: string,
+    missionInfo: {
+      receiver?: string;
+      receivers?: string[];
+    }
+  ) => {
+    try {
+      const { data } = await axios.patch(
+        `api/missions/mission/${id}`,
+        missionInfo
+      );
+
+      if (data.body.success) {
+        setMissions((prevMissions) =>
+          prevMissions.map((prevMission) =>
+            prevMission.id === id
+              ? prevMission
+              : { ...prevMission, ...missionInfo }
+          )
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  return { getMissions, addMission, updateMission };
 };

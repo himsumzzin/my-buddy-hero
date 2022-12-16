@@ -1,0 +1,54 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: var(--spacing-lg);
+}
+
+.listContainer {
+  /* width: 95vw; */
+  height: 72%;
+  margin: 0 auto;
+  display: flex;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--spacing-base);
+  padding-top: 2%;
+  background-color: var(--color-main-orange-500);
+}
+
+.listContainer::-webkit-scrollbar {
+  display: none; /* Chrome , Safari , Opera */
+}
+
+.linkContainer {
+  width: 95vw;
+  height: 184px;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-base);
+  padding-top: 2%;
+}
+
+.missionContainer {
+  margin: 0 auto;
+  min-width: 984px;
+  min-height: 508px;
+  padding: var(--spacing-lg);
+  background-color: snow;
+  border-radius: var(--border-radius-md);
+}
+
+.missionList {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--spacing-base);
+}
+
+.buttonBox {
+  margin-left: auto;
+}
