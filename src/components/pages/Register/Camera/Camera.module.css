@@ -104,3 +104,20 @@
 .button {
   background-color: var(--color-main-orange-600);
 }
+
+.button:active,
+.button:focus,
+.button:hover {
+  background-color: var(--color-main-orange-700);
+}
+
+.loader {
+  position: absolute;
+  width: 522px;
+  height: 430px;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-main-orange-700);
+  text-align: center;
+  z-index: 99999;
+  padding-top: 35%;
+}

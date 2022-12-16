@@ -5,6 +5,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: var(--color-main-orange-400);
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -30,10 +31,6 @@ button {
 
 p {
   margin: 0;
-}
-
-#__next {
-  background-color: var(--color-main-orange-400);
 }
 
 .srOnly,
