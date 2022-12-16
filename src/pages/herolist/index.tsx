@@ -8,7 +8,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from '@/states';
 import { heroesState } from '@/states/heroes';
 
-export default function herolist() {
+export default function Herolist() {
   const router = useRouter();
   const setHeroes = useSetRecoilState(heroesState);
   const user = useRecoilValue(userState);

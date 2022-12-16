@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { hashPassword } from '@/utils/server/auth';
-import dbConnect from '@/utils/server/dbConnect';
+import { dbConnect } from '@/utils/server/dbConnect';
 import { User } from '@/models/index';
 
 type Data = {

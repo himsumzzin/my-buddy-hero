@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import dbConnect from '@/utils/server/dbConnect';
+import { dbConnect } from '@/utils/server/dbConnect';
 import { verifyPassword } from '@/utils/server/auth';
 import { User } from '@/models/index';
 
