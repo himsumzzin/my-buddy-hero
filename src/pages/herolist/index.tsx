@@ -3,7 +3,7 @@ import { Link, Button, HeroCard } from '@/components/common';
 import { heroInfos } from './mockup';
 import { useRouter } from 'next/router';
 
-export default function herolist() {
+export default function Herolist() {
   const router = useRouter();
   // const getHeroList = async () => {
   //   await axios.get('/api/hero/{groupId}');

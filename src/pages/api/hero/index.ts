@@ -22,15 +22,17 @@ export default async function handler(
 
   await dbConnect();
   try {
-    const { payload } = req.body;
-
-    const [, imageContentType] = payload.profileImage.split(/;|:/g);
-    const base64 = payload.profileImage.split(',')[1];
+    const heroPayload = req.body;
+    console.log(heroPayload);
+    const [, imageContentType] = heroPayload.profileImage.split(/;|:/g);
+    const base64 = heroPayload.profileImage.split(',')[1];
     const imageBuffer = Buffer.from(base64, 'base64');
 
     // 이름과 옵션을 받아 스토리지에 빈 파일 객체를 생성한다
     const blob = cloudBucket.file(
-      `${crypto.randomUUID().slice(0, 8)}_${payload.groupId}_${payload.name}`
+      `${crypto.randomUUID().slice(0, 8)}_${heroPayload.groupId}_${
+        heroPayload.name
+      }`
     );
 
     // createWriteStream함수로 스토리지에 있는 파일 객체에 데이터를 덮어쓴다.
@@ -50,7 +52,7 @@ export default async function handler(
       const profileImage = format(
         `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
       );
-      const hero = new Hero({ ...payload, profileImage });
+      const hero = new Hero({ ...heroPayload, profileImage });
       hero.save();
       const { _id, name, title, groupId, code, description, completeNumber } =
         hero._doc;
