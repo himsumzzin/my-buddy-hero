@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { MissionCard, MissionCardProps, defaultMission } from './MissionCard';
+import { MissionCard, IMissionCardProps, defaultMission } from './MissionCard';
 
 export default {
-  title: 'Components/MissionCard/MissionCard',
+  title: 'Pages/Missions/MissionCard',
   component: MissionCard,
   args: {
     onClose: () => alert('닫는다!'),
@@ -18,7 +18,7 @@ export default {
 } as ComponentMeta<typeof MissionCard>;
 
 const Template: ComponentStory<typeof MissionCard> = (
-  args: MissionCardProps
+  args: IMissionCardProps
 ) => <MissionCard {...args} />;
 
 export const Create = Template.bind({});
@@ -26,7 +26,7 @@ export const Create = Template.bind({});
 export const Update = Template.bind({});
 Update.args = {
   initialMission: {
-    _id: '',
+    id: '',
     groupId: '',
     authorId: '',
     maxReceiver: 3,

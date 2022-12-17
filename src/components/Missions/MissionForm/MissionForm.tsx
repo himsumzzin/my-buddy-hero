@@ -17,7 +17,7 @@ export interface MissionFormProps {
   /**
    * mission 상태 중 렌더링에 필요한 title, maxReceiver, description값만 사용하는 객체입니다.
    */
-  summary: Summary;
+  mission: IMission;
   /**
    * summary 정보를 MissionCard 컴포넌트에 전달합니다.
    */
@@ -30,11 +30,11 @@ export interface MissionFormProps {
 }
 
 export const MissionForm = ({
-  summary,
+  mission,
   onSubmit,
   onClose,
 }: MissionFormProps) => {
-  const { title, maxReceiver, description } = summary;
+  const { title, maxReceiver, description } = mission;
 
   const handleSubmit = (e: React.FormEvent<SummaryForm>) => {
     e.preventDefault();
@@ -80,7 +80,7 @@ export const MissionForm = ({
         </fieldset>
       </form>
       <Button size="xs" className={styles.closeButton} onClick={onClose}>
-        <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" />
+        {/* <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" /> */}
       </Button>
     </Slide>
   );

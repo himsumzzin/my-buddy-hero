@@ -23,23 +23,24 @@ export default async function handler(
   await dbConnect();
   try {
     const heroPayload = req.body;
-    console.log(heroPayload);
-    const [, imageContentType] = heroPayload.profileImage.split(/;|:/g);
-    const base64 = heroPayload.profileImage.split(',')[1];
-    const imageBuffer = Buffer.from(base64, 'base64');
+    // console.log(heroPayload);
+    // const [, imageContentType] = heroPayload.profileImage.split(/;|:/g);
+    // const base64 = heroPayload.profileImage.split(',')[1];
+    // console.log(heroPayload.profileImage);
+    const imageBuffer = Buffer.from(heroPayload.profileImage, 'base64');
 
     // 이름과 옵션을 받아 스토리지에 빈 파일 객체를 생성한다
-    const blob = cloudBucket.file(
-      `${crypto.randomUUID().slice(0, 8)}_${heroPayload.groupId}_${
-        heroPayload.name
-      }`
-    );
+    const fileName = `${crypto.randomUUID().slice(0, 8)}_${
+      heroPayload.groupId
+    }_${heroPayload.name}`;
+
+    const blob = cloudBucket.file(fileName);
 
     // createWriteStream함수로 스토리지에 있는 파일 객체에 데이터를 덮어쓴다.
     // bucket.file.createWriteStream의 반환값은 이벤트를 발생시킬 수 있는 객체다
     const blobStream = blob.createWriteStream({
       metadata: {
-        contentType: imageContentType,
+        contentType: 'image/webp',
       },
     });
 
@@ -52,6 +53,8 @@ export default async function handler(
       const profileImage = format(
         `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
       );
+      console.log(req.body);
+
       const hero = new Hero({ ...heroPayload, profileImage });
       hero.save();
       const { _id, name, title, groupId, code, description, completeNumber } =
@@ -78,6 +81,8 @@ export default async function handler(
     // buffer처럼 쪼개서 보낼 수 있는 녀석들을 넣어준다
     blobStream.end(imageBuffer);
   } catch (err) {
+    console.log(err);
+
     return res.status(500).json({
       statusCode: 500,
       err,

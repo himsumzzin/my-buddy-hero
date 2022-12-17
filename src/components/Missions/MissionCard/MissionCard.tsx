@@ -4,10 +4,10 @@ import { AnimatePresence } from 'framer-motion';
 import { initialHero } from '@/states';
 import { useMissions } from '@/hooks/useMissions';
 
-import { MissionForm } from './MissionForm';
-import { MissionInfo } from './MissionInfo';
-import { HeroList } from './HeroList';
-import { Result } from './Result';
+import { MissionForm } from '../MissionForm';
+import { MissionInfo } from '../MissionInfo';
+import { HeroList } from '../HeroList';
+import { Result } from '../Result';
 
 export const defaultMission = {
   id: '',
@@ -32,17 +32,17 @@ export type MissionComponent =
   | 'HeroList'
   | 'Result';
 
-export interface MissionCardProps {
+export interface IMissionCardProps {
   /**
    * mission 상태에 대한 초기값입니다.
    * 임무 목록을 통해 렌더링했다면 해당 임무에 대한 정보를 넣어줍니다.
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
-  initialMission?: IMission;
+  initialMission: IMission | null;
   onClose: () => void;
 }
 
-export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
+export const MissionCard = ({ initialMission, onClose }: IMissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
     initialMission ? 'MissionInfo' : 'MissionForm'
   );
@@ -85,21 +85,23 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
           ...prevInfo,
           authorId: selectedHeroInfo.id,
         }));
-        addMission({ authorId: heroInfo.current.id, missionInfo });
+        await addMission({ ...missionInfo, authorId: heroInfo.current.id });
         break;
       case 'update':
         setMissionInfo((prevInfo) => ({
           ...prevInfo,
           receivers: [...prevInfo.receivers, selectedHeroInfo.id],
         }));
-        updateMission(missionInfo);
+        await updateMission(missionInfo.id, { receiver: selectedHeroInfo.id });
         break;
       case 'complete':
         setMissionInfo((prevInfo) => ({
           ...prevInfo,
           isComplete: status === 'complete',
         }));
-        updateMission(missionInfo);
+        await updateMission(missionInfo.id, {
+          receivers: missionInfo.receivers,
+        });
         break;
     }
 
@@ -107,17 +109,17 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
   };
 
   return (
-    <>
+    <div>
       <AnimatePresence>
         {currentComponent === 'MissionForm' ? (
           <MissionForm
-            summary={missionInfo}
+            mission={missionInfo}
             onSubmit={updateMissionInfo}
             onClose={onClose}
           />
         ) : currentComponent === 'MissionInfo' ? (
           <MissionInfo
-            summary={missionInfo}
+            mission={missionInfo}
             onSelect={setMissionStatus}
             onClose={onClose}
           />
@@ -139,6 +141,6 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };

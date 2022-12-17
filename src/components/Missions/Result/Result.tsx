@@ -19,7 +19,7 @@ export interface ResultProps {
 }
 
 export const Result = ({ missionStatus, heroInfo, onClose }: ResultProps) => {
-  const { profileImage, code, name } = heroInfo;
+  const { profileImage, title, name } = heroInfo;
   const message = {
     create: '등록',
     update: '수락',
@@ -28,8 +28,8 @@ export const Result = ({ missionStatus, heroInfo, onClose }: ResultProps) => {
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3} className="srOnly">
-          {`임무 ${message[missionStatus]}`}
+        <Title lv={2} className="srOnly">
+          {`임무 목록`}
         </Title>
       </header>
       <div className={styles.imageBox}>
@@ -42,7 +42,7 @@ export const Result = ({ missionStatus, heroInfo, onClose }: ResultProps) => {
         />
       </div>
       <p className={`${styles.message} ${styles.heroName}`}>
-        {code} {name}님
+        {title} {name}님
       </p>
       <p className={styles.message}>
         임무가 {message[missionStatus]}되었습니다!

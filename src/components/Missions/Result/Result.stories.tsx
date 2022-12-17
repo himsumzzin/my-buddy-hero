@@ -2,17 +2,17 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Result, ResultProps } from './Result';
 
 export default {
-  title: 'Components/missionCard/Result',
+  title: 'Pages/Missions/Result',
   component: Result,
   args: {
     heroInfo: {
-      _id: '123',
+      id: '123',
       groupId: '1',
+      title: '타이틀',
       name: '김현진',
       code: '휴지맨',
-      password: '1234',
       profileImage: '/images/hero2.png',
-      missionCount: 5,
+      completeNumber: 5,
       description: '저는 휴지를 정말 잘 주워요!',
     },
     onClose: () => alert('닫는다!'),

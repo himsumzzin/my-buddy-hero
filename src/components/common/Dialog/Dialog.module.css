@@ -10,7 +10,8 @@
   background: var(--grayscale-snow);
   color: var(--grayscale-black);
   translate: -50% -50%;
-  box-shadow: var(--shadow-default);
+  background: transparent;
+  /* box-shadow: var(--shadow-default); */
 }
 
 .header * {

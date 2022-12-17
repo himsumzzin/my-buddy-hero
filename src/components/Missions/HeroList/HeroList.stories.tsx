@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { HeroList, HeroListProps } from './HeroList';
 
 export default {
-  title: 'Components/missionCard/HeroList',
+  title: 'Pages/Missions/HeroList',
   component: HeroList,
   args: {
     receivers: [],

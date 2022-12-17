@@ -7,7 +7,6 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
-    data?: unknown[];
   };
 };
 
@@ -19,38 +18,22 @@ export default async function handler(
   await dbConnect();
 
   try {
-    if (method === 'GET') {
-      const result = await Mission.find({ groupId: req.query.id }).exec();
-      const data = result.map((result) => ({
-        id: result._id,
-        authorId: result.authorId,
-        receivers: result.receivers,
-        title: result.title,
-        description: result.description,
-        maxReceiver: result.maxReceiver,
-        isComplete: result.isComplete,
-      }));
-      console.log(data);
-      return res.status(200).json({
-        statusCode: 200,
-        body: {
-          success: true,
-          data,
-        },
-      });
-    } else if (method === 'PATCH') {
+    if (method === 'PATCH') {
+      const { receiver, receivers } = req.body;
+      console.log(req.query.id);
+
       const result = await Mission.findById(req.query.id).exec();
       // 임무 수락
-      if (req.body.receiver) {
+      if (receiver) {
         Mission.update(
           { _id: result._id },
-          { $push: { receivers: req.body.receiver } }
+          { $push: { receivers: receiver } }
         ).exec();
       }
       // 임무 완료
-      else if (req.body.receivers) {
+      else if (receivers) {
         Mission.update({ _id: result._id }, { isComplete: true }).exec();
-        req.body.receivers.map(async (receiverId: string) => {
+        receivers.map(async (receiverId: string) => {
           const result = await Hero.findById(receiverId).exec();
           Hero.update(
             { _id: result._id },

@@ -7,6 +7,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
+    mission?: IMission;
   };
 };
 
@@ -21,10 +22,30 @@ export default async function handler(
   try {
     const mission = new Mission(req.body);
     mission.save();
+    const {
+      _id,
+      groupId,
+      authorId,
+      maxReceiver,
+      receivers,
+      title,
+      description,
+      isComplete,
+    } = mission._doc;
     return res.status(201).json({
       statusCode: 201,
       body: {
         success: true,
+        mission: {
+          id: _id,
+          groupId,
+          authorId,
+          maxReceiver,
+          receivers,
+          title,
+          description,
+          isComplete,
+        },
       },
     });
   } catch (err) {

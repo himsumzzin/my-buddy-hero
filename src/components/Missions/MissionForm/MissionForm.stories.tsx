@@ -3,7 +3,7 @@ import { MissionForm, MissionFormProps } from './MissionForm';
 import { Summary } from '../MissionCard';
 
 export default {
-  title: 'Components/missionCard/MissionForm',
+  title: 'Pages/Missions/MissionForm',
   component: MissionForm,
   args: {
     summary: {

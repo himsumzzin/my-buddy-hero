@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MissionInfo, MissionInfoProps } from './MissionInfo';
 
 export default {
-  title: 'Components/missionCard/MissionInfo',
+  title: 'Pages/Missions/MissionInfo',
   component: MissionInfo,
   args: {
     summary: {

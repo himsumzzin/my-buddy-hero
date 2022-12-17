@@ -2,10 +2,7 @@ import Image from 'next/image';
 import styles from './HeroItem.module.css';
 
 export interface HeroItemProps {
-  id: string;
-  profileImage: string;
-  name: string;
-  code: string;
+  hero: IHero;
   /**
    * 현재 선택된 히어로인지 나타내는 값입니다
    */
@@ -16,14 +13,8 @@ export interface HeroItemProps {
   isReceiver: boolean;
 }
 
-export const HeroItem = ({
-  id,
-  profileImage,
-  name,
-  code,
-  isSelected,
-  isReceiver,
-}: HeroItemProps) => {
+export const HeroItem = ({ hero, isSelected, isReceiver }: HeroItemProps) => {
+  const { id, profileImage, title, name } = hero;
   return (
     <li
       key={id}
@@ -40,7 +31,7 @@ export const HeroItem = ({
           width={190}
           height={350}
         />
-        <span className={styles.heroName}>{`${code}`}</span>
+        <span className={styles.heroName}>{`${title}`}</span>
       </button>
     </li>
   );

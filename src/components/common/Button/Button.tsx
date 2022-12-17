@@ -20,12 +20,12 @@ export type ButtonProps = {
   /**
    * 문자열로 disabled를 주면 버튼이 비활성화 됩니다.
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * 나머지 버튼의 기본 속성 name, type, disabled 등이 올 수 있고,
    * onTouch 이벤트가 올 수 있습니다.
    */
-  restProps?: unknown[];
+  restprops?: unknown[];
 };
 
 export const Button = ({
@@ -34,14 +34,14 @@ export const Button = ({
   onClick,
   className,
   disabled,
-  ...restProps
+  ...restprops
 }: ButtonProps): JSX.Element => {
   return (
     <button
       className={`${styles.button} ${styles[size]} ${className}`}
       onClick={onClick}
       disabled={disabled}
-      {...restProps}
+      {...restprops}
     >
       {children}
     </button>
