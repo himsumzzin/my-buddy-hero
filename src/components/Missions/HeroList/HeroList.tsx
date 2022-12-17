@@ -58,9 +58,9 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
       setIsValid(false);
       return;
     }
-    const code = e.currentTarget.herocode.value;
+    const submittedCode = e.currentTarget.herocode.value;
     const matchedHero = heroList.find(
-      (hero) => hero.id === selectedHeroId && hero.code === code
+      (hero) => hero.id === selectedHeroId && hero.code === submittedCode
     );
 
     matchedHero ? onSubmit(matchedHero) : setIsValid(false);
@@ -73,14 +73,12 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
       </header>
       <div className={styles.heroesBox}>
         <ul className={styles.ul} onClick={selectHero}>
-          {heroList.map(({ id, profileImage, code, name }) => {
+          {heroList.map((hero) => {
+            const { id } = hero;
             return (
               <HeroItem
                 key={id}
-                id={id}
-                profileImage={profileImage}
-                code={code}
-                name={name}
+                hero={hero}
                 isReceiver={receivers.includes(id)}
                 isSelected={id === selectedHeroId}
               />

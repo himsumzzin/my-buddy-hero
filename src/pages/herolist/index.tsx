@@ -4,13 +4,13 @@ import { heroInfos } from './mockup';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from '@/states';
 import { heroesState } from '@/states/heroes';
 
 export default function Herolist() {
   const router = useRouter();
-  const setHeroes = useSetRecoilState(heroesState);
+  const [heroes, setHeroes] = useRecoilState<IHeroList>(heroesState);
   const user = useRecoilValue(userState);
   const groupId = user.groupId as string;
 
@@ -44,7 +44,7 @@ export default function Herolist() {
         </Button>
       </div>
       <ul className={styles.listContainer}>
-        {heroInfos.map((heroInfo, index) => (
+        {heroes.map((heroInfo, index) => (
           <li key={index}>
             <HeroCard heroInfo={heroInfo}></HeroCard>
           </li>

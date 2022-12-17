@@ -3,6 +3,8 @@ import { Camera } from './Camera';
 import { Complete } from './Complete';
 import axios from 'axios';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { heroesState } from '@/states/heroes';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
 
@@ -28,6 +30,7 @@ export const Register = () => {
   // 현재 렌더링 된 페이지 상태로 관리
   const [page, setPage] = useState<Stage>('HeroRegister');
   const [heroInfo, setHeroInfo] = useState<HeroInfo>(initialHeroInfo);
+  const setHeroesInfo = useSetRecoilState(heroesState);
 
   const getHeroInfo = (newHeroInfo: HeroInfo) => {
     setHeroInfo({ ...heroInfo, ...newHeroInfo });
@@ -36,20 +39,20 @@ export const Register = () => {
 
   const saveHeroInfo = async (imgURL: string) => {
     try {
-      setHeroInfo({ ...heroInfo, profileImage: imgURL });
-      const heroPayload = heroInfo;
-      await axios
-        .post('/api/hero', heroPayload)
-        .then((res) => {
-          console.log(heroPayload);
-          console.log('서버에 저장을 성공해써요!');
-          setPage('Complete');
-        })
-        .catch((error) => {
-          console.error('서버전송에 실패했습니다. 다시 히어로 등록을 해주세요');
-        });
+      const { data } = await axios.post('/api/hero', {
+        ...heroInfo,
+        profileImage: imgURL,
+      });
+      console.log('서버에 저장을 성공해써요!');
+
+      setHeroesInfo(data.body.hero);
+      setHeroInfo((prev) => ({
+        ...prev,
+        profileImage: `data:image/webp;base64,${imgURL}`,
+      }));
+      setPage('Complete');
     } catch (err) {
-      console.error('히어로 정보가 제대로 전송되지 않았습니다.');
+      console.error('히어로 정보가 제대로 전송되지 않았습니다.', err);
     }
   };
 
@@ -59,6 +62,11 @@ export const Register = () => {
   };
   const handlerLinkToCompletePage = () => {
     setPage('Complete');
+  };
+
+  const reset = () => {
+    setHeroInfo(initialHeroInfo);
+    setPage('HeroRegister');
   };
 
   return (
@@ -75,7 +83,7 @@ export const Register = () => {
           saveHeroInfo={saveHeroInfo}
         ></Camera>
       ) : (
-        <Complete heroInfo={heroInfo}></Complete>
+        <Complete heroInfo={heroInfo} goBack={reset}></Complete>
       )}
     </>
   );

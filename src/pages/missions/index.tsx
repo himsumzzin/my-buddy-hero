@@ -23,7 +23,6 @@ export default function Missions() {
     setOpenDialog(true);
   };
   const openMissionInfo = () => {
-    setSelectedMission(null);
     setOpenDialog(true);
   };
   const closeMissionCard = () => {

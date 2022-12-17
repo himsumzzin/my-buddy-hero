@@ -28,7 +28,11 @@ export default async function handler(
         title: result.title,
         profileImage: result.profileImage,
         completeNumber: result.completeNumber,
+        groupId: result.groupId,
+        description: result.description,
+        code: result.code,
       }));
+
       return res.status(200).json({
         statusCode: 200,
         body: {
