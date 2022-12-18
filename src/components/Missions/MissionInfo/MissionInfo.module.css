@@ -61,7 +61,7 @@
 
 .closeButton {
   position: absolute;
-  top: 1.8rem;
+  top: 2.5rem;
   left: var(--spacing-sm);
   transform: translate3d(0, -0.5rem, 0);
 }

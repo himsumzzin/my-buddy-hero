@@ -37,14 +37,9 @@ module.exports = {
     ];
 
     // disable whatever is already set to load SVGs
-    config.module.rules = config.module.rules
-      .filter((rule) => rule.test && !rule.test.test('.css'))
-      .map((rule) => {
-        if (rule.test.test('.svg')) {
-          rule.exclude = /\.svg$/i;
-        }
-        return rule;
-      });
+    config.module.rules = config.module.rules.filter(
+      (rule) => rule.test && !rule.test.test('.css') && !rule.test.test('.svg')
+    );
 
     // add SVGR instead
     config.module.rules.push(

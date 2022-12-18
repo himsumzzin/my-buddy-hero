@@ -1,5 +1,5 @@
 import { Button, Title, Slide } from '@/components/common';
-// import { ReactComponent as CloseIcon } from '@svgs/close.svg';
+import CloseIcon from '@svgs/close.svg';
 import styles from './MissionInfo.module.css';
 
 export interface IMissionInfoProps {
@@ -52,7 +52,7 @@ export const MissionInfo = ({
         </Button>
       </div>
       <Button size="xs" className={styles.closeButton} onClick={onClose}>
-        {/* <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" /> */}
+        <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" />
       </Button>
     </Slide>
   );
