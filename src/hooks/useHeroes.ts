@@ -19,5 +19,15 @@ export const useHeroes = () => {
     }
   };
 
-  return { createHero };
+  const updateCompleteNumber = (heroIds: string[]) => {
+    setHeroes((prev) =>
+      prev.map((hero) =>
+        heroIds.includes(hero.id)
+          ? { ...hero, completeNumber: hero.completeNumber + 1 }
+          : hero
+      )
+    );
+  };
+
+  return { createHero, updateCompleteNumber };
 };

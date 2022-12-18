@@ -1,28 +1,26 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { missionsState, userState } from '@/states';
-import { createMission } from '@/apis';
+import { selector, useRecoilValue, useSetRecoilState, atom } from 'recoil';
+import { missionListState, userState } from '@/states';
 import axios from 'axios';
+import { useHeroes } from '@/hooks';
 
 export const useMissions = () => {
   const user = useRecoilValue(userState);
   const groupId = user.groupId as string;
 
-  const setMissions = useSetRecoilState(missionsState);
+  const { updateCompleteNumber } = useHeroes();
 
-  const getMissions = async () => {
+  const setMissions = useSetRecoilState(missionListState);
+
+  const initMissions = async () => {
     try {
       const { data } = await axios.get(`api/missions/${groupId}`);
-      setMissions(
-        data.body.missions.sort((a: IMission, b: IMission) =>
-          a.isComplete ? 1 : -1
-        )
-      );
+      setMissions(data.body.missions);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const addMission = async (mission: IMission) => {
+  const addMission = async (mission: Mission) => {
     try {
       const { data } = await axios.post('api/missions', {
         ...mission,
@@ -37,30 +35,42 @@ export const useMissions = () => {
   };
 
   const updateMission = async (
-    id: string,
+    missionId: string,
     missionInfo: {
       receiver?: string;
       receivers?: string[];
     }
   ) => {
     try {
-      const { data } = await axios.patch(
-        `api/missions/mission/${id}`,
-        missionInfo
-      );
+      await axios.patch(`api/missions/mission/${missionId}`, missionInfo);
 
-      if (data.body.success) {
+      const { receiver, receivers } = missionInfo;
+
+      if (receiver) {
         setMissions((prevMissions) =>
           prevMissions.map((prevMission) =>
-            prevMission.id === id
-              ? prevMission
-              : { ...prevMission, ...missionInfo }
+            prevMission.id === missionId
+              ? {
+                  ...prevMission,
+                  receivers: [...prevMission.receivers, receiver],
+                }
+              : prevMission
           )
         );
+      }
+      if (receivers) {
+        setMissions((prevMissions) =>
+          prevMissions.map((prevMission) =>
+            prevMission.id === missionId
+              ? { ...prevMission, isComplete: true }
+              : prevMission
+          )
+        );
+        updateCompleteNumber(receivers);
       }
     } catch (err) {
       console.error(err);
     }
   };
-  return { getMissions, addMission, updateMission };
+  return { initMissions, addMission, updateMission };
 };

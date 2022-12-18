@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { MissionCard, IMissionCardProps, defaultMission } from './MissionCard';
+import { MissionCard, MissionCardProps } from './MissionCard';
 
 export default {
   title: 'Pages/Missions/MissionCard',
@@ -18,7 +18,7 @@ export default {
 } as ComponentMeta<typeof MissionCard>;
 
 const Template: ComponentStory<typeof MissionCard> = (
-  args: IMissionCardProps
+  args: MissionCardProps
 ) => <MissionCard {...args} />;
 
 export const Create = Template.bind({});

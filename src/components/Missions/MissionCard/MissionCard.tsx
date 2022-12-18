@@ -21,29 +21,29 @@ export type MissionComponent =
   | 'HeroList'
   | 'Result';
 
-export interface IMissionCardProps {
+export interface MissionCardProps {
   /**
    * mission 상태에 대한 초기값입니다.
    * 임무 목록을 통해 렌더링했다면 해당 임무에 대한 정보를 넣어줍니다.
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
-  initialMission: IMission | null;
+  initialMission: Mission | null;
   onClose: () => void;
 }
 
-export const MissionCard = ({ initialMission, onClose }: IMissionCardProps) => {
+export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
     initialMission ? 'MissionInfo' : 'MissionForm'
   );
-  const [missionInfo, setMissionInfo] = useState<IMission>(
+  const [mission, setMission] = useState<Mission>(
     initialMission ?? defaultMission
   );
   const { addMission, updateMission } = useMissions();
 
-  const missionStatus = useRef<IMissionStatus>(
+  const missionStatus = useRef<MissionStatus>(
     initialMission ? 'update' : 'create'
   );
-  const heroInfo = useRef<IHero>(initialHero);
+  const heroInfo = useRef<Hero>(initialHero);
 
   const renderMissionForm = () => setCurrentComponent('MissionForm');
   const renderMissionInfo = () => setCurrentComponent('MissionInfo');
@@ -51,7 +51,7 @@ export const MissionCard = ({ initialMission, onClose }: IMissionCardProps) => {
   const renderResult = () => setCurrentComponent('Result');
 
   const updateMissionInfo = (newMissionInfo: Summary) => {
-    setMissionInfo((prevMissionInfo) => ({
+    setMission((prevMissionInfo) => ({
       ...prevMissionInfo,
       ...newMissionInfo,
     }));
@@ -59,37 +59,25 @@ export const MissionCard = ({ initialMission, onClose }: IMissionCardProps) => {
     renderHeroList();
   };
 
-  const setMissionStatus = (newStatus: IMissionStatus) => {
+  const setMissionStatus = (newStatus: MissionStatus) => {
     missionStatus.current = newStatus;
     renderHeroList();
   };
 
-  const onHeroSelect = async (selectedHeroInfo: IHero) => {
+  const onHeroSelect = async (selectedHeroInfo: Hero) => {
     heroInfo.current = selectedHeroInfo;
 
     const status = missionStatus.current;
     switch (status) {
       case 'create':
-        setMissionInfo((prevInfo) => ({
-          ...prevInfo,
-          authorId: selectedHeroInfo.id,
-        }));
-        await addMission({ ...missionInfo, authorId: heroInfo.current.id });
+        await addMission({ ...mission, authorId: heroInfo.current.id });
         break;
       case 'update':
-        setMissionInfo((prevInfo) => ({
-          ...prevInfo,
-          receivers: [...prevInfo.receivers, selectedHeroInfo.id],
-        }));
-        await updateMission(missionInfo.id, { receiver: selectedHeroInfo.id });
+        await updateMission(mission.id, { receiver: selectedHeroInfo.id });
         break;
       case 'complete':
-        setMissionInfo((prevInfo) => ({
-          ...prevInfo,
-          isComplete: status === 'complete',
-        }));
-        await updateMission(missionInfo.id, {
-          receivers: missionInfo.receivers,
+        await updateMission(mission.id, {
+          receivers: mission.receivers,
         });
         break;
     }
@@ -102,19 +90,20 @@ export const MissionCard = ({ initialMission, onClose }: IMissionCardProps) => {
       <AnimatePresence>
         {currentComponent === 'MissionForm' ? (
           <MissionForm
-            mission={missionInfo}
+            mission={mission}
             onSubmit={updateMissionInfo}
             onClose={onClose}
           />
         ) : currentComponent === 'MissionInfo' ? (
           <MissionInfo
-            mission={missionInfo}
+            mission={mission}
             onSelect={setMissionStatus}
             onClose={onClose}
           />
         ) : currentComponent === 'HeroList' ? (
           <HeroList
-            receivers={missionInfo.receivers}
+            mission={mission}
+            missionStatus={missionStatus.current}
             onSubmit={onHeroSelect}
             onGoBack={
               missionStatus.current === 'create'

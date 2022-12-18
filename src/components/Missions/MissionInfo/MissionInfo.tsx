@@ -6,11 +6,11 @@ export interface IMissionInfoProps {
   /**
    * mission 상태 중 렌더링에 필요한 title, maxReceiver, description값만 사용하는 객체입니다.
    */
-  mission: IMission;
+  mission: Mission;
   /**
    * 사용자의 입력에 따라 미션 선택 | 미션 완료 중 하나의 값을 MissionCard 컴포넌트에 전달합니다.
    */
-  onSelect: (status: IMissionStatus) => void;
+  onSelect: (status: MissionStatus) => void;
   /**
    * MissionCard 컴포넌트를 언마운트하는 로직을 담은 함수입니다.
    * MissionCard를 감싸고 있는 Dialog 컴포넌트를 닫는 함수를 사용할 예정입니다.

@@ -1,4 +1,4 @@
-type IMissionStatus = 'create' | 'update' | 'complete';
+type MissionStatus = 'create' | 'update' | 'complete';
 
 interface Mission {
   id: string;

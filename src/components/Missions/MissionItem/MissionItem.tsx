@@ -3,8 +3,8 @@ import styles from './MissionItem.module.css';
 import ArrowLeftIcon from '@svgs/arrow-left.svg';
 
 export interface IMissionItemProps {
-  mission: IMission;
-  onClick: (mission: IMission) => void;
+  mission: Mission;
+  onClick: (mission: Mission) => void;
 }
 
 export const MissionItem = ({ mission, onClick }: IMissionItemProps) => {

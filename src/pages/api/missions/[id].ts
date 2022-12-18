@@ -7,7 +7,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
-    data?: IMission[];
+    missions?: MissionList;
   };
 };
 

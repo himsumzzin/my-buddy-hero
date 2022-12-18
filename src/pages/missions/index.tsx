@@ -3,25 +3,29 @@ import { useEffect, useState } from 'react';
 import styles from './Missions.module.css';
 import { Link, Button, Dialog } from '@/components/common';
 import { useRecoilValue } from 'recoil';
-import { missionsState } from '@/states';
+import { missionListState } from '@/states';
 import { MissionCard, MissionItem } from '@/components/Missions';
 import { useMissions } from '@/hooks/useMissions';
 
 export default function Missions() {
-  const missions = useRecoilValue(missionsState);
-  const { getMissions } = useMissions();
+  const missions = useRecoilValue(missionListState);
+  const { initMissions } = useMissions();
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedMission, setSelectedMission] = useState<IMission | null>(null);
+  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
-    getMissions();
+    initMissions();
   }, []);
 
-  const openMissionForm = (mission: IMission) => {
+  useEffect(() => {
+    console.log(missions);
+  }, [missions]);
+
+  const openMissionInfo = (mission: Mission) => {
     setSelectedMission(mission);
     setOpenDialog(true);
   };
-  const openMissionInfo = () => {
+  const openMissionForm = () => {
     setOpenDialog(true);
   };
   const closeMissionCard = () => {
@@ -42,7 +46,7 @@ export default function Missions() {
           size="md"
           disabled={false}
           className={styles.buttonBox}
-          onClick={openMissionInfo}
+          onClick={openMissionForm}
         >
           미션 등록
         </Button>
@@ -54,7 +58,7 @@ export default function Missions() {
               <MissionItem
                 key={mission.id}
                 mission={mission}
-                onClick={openMissionForm}
+                onClick={openMissionInfo}
               />
             );
           })}
