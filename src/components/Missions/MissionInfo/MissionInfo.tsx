@@ -23,7 +23,8 @@ export const MissionInfo = ({
   onSelect,
   onClose,
 }: IMissionInfoProps) => {
-  const { title, description, maxReceiver } = mission;
+  const { title, description, maxReceiver, receivers } = mission;
+  const isFull = receivers.length >= maxReceiver;
 
   return (
     <Slide direction="left" className={styles.container}>
@@ -39,6 +40,7 @@ export const MissionInfo = ({
         <Button
           size="sm"
           className={styles.missionButton}
+          disabled={isFull}
           onClick={() => onSelect('update')}
         >
           저 할래요!

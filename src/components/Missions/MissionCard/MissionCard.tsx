@@ -1,24 +1,13 @@
 import { useState, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { initialHero } from '@/states';
+import { defaultMission, initialHero } from '@/states';
 import { useMissions } from '@/hooks/useMissions';
 
 import { MissionForm } from '../MissionForm';
 import { MissionInfo } from '../MissionInfo';
 import { HeroList } from '../HeroList';
 import { Result } from '../Result';
-
-export const defaultMission = {
-  id: '',
-  groupId: '',
-  authorId: '',
-  maxReceiver: 1,
-  receivers: [],
-  title: '',
-  description: '',
-  isComplete: false,
-};
 
 export interface Summary {
   title: string;

@@ -12,7 +12,11 @@ export const useMissions = () => {
   const getMissions = async () => {
     try {
       const { data } = await axios.get(`api/missions/${groupId}`);
-      setMissions(data.body.missions);
+      setMissions(
+        data.body.missions.sort((a: IMission, b: IMission) =>
+          a.isComplete ? 1 : -1
+        )
+      );
     } catch (err) {
       console.error(err);
     }

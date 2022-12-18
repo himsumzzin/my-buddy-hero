@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import styles from './Missions.module.css';
-import router from 'next/router';
 import { Link, Button, Dialog } from '@/components/common';
 import { useRecoilValue } from 'recoil';
 import { missionsState } from '@/states';
