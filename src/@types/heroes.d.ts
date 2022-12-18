@@ -1,12 +1,15 @@
-interface IHero {
-  id: string;
+interface HeroInfo {
   groupId: string;
   name: string;
   title: string;
   description: string;
   code: string;
   profileImage: string;
+}
+
+interface Hero extends HeroInfo {
+  id: string;
   completeNumber: number;
 }
 
-type IHeroList = Ihero[];
+type HeroList = Hero[];

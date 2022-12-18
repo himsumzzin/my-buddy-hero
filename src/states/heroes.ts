@@ -11,7 +11,7 @@ export const initialHero = {
   description: '',
 };
 
-export const heroesState = atom<IHeroList>({
+export const heroesState = atom<HeroList>({
   key: 'heroesState',
   default: [],
 });

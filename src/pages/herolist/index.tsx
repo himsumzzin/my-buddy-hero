@@ -10,7 +10,7 @@ import { heroesState } from '@/states/heroes';
 
 export default function Herolist() {
   const router = useRouter();
-  const [heroes, setHeroes] = useRecoilState<IHeroList>(heroesState);
+  const [heroes, setHeroes] = useRecoilState<HeroList>(heroesState);
   const user = useRecoilValue(userState);
   const groupId = user.groupId as string;
 
