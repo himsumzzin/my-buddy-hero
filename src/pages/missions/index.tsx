@@ -1,25 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import styles from './Missions.module.css';
 import { Link, Button, Dialog } from '@/components/common';
-import { useRecoilValue } from 'recoil';
-import { missionListState } from '@/states';
 import { MissionCard, MissionItem } from '@/components/Missions';
-import { useMissions } from '@/hooks/useMissions';
+import { useHeroes, useMissions } from '@/hooks';
+import styles from './Missions.module.css';
 
 export default function Missions() {
-  const missions = useRecoilValue(missionListState);
-  const { initMissions } = useMissions();
+  const { initHeroeList } = useHeroes();
+  const { missionList, initMissionList } = useMissions();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
-    initMissions();
+    initHeroeList();
+    initMissionList();
   }, []);
-
-  useEffect(() => {
-    console.log(missions);
-  }, [missions]);
 
   const openMissionInfo = (mission: Mission) => {
     setSelectedMission(mission);
@@ -53,7 +48,7 @@ export default function Missions() {
       </div>
       <div className={styles.missionContainer}>
         <ul className={styles.missionList}>
-          {missions.map((mission) => {
+          {missionList.map((mission) => {
             return (
               <MissionItem
                 key={mission.id}

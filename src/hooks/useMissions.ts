@@ -1,4 +1,4 @@
-import { selector, useRecoilValue, useSetRecoilState, atom } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { missionListState, userState } from '@/states';
 import axios from 'axios';
 import { useHeroes } from '@/hooks';
@@ -9,12 +9,12 @@ export const useMissions = () => {
 
   const { updateCompleteNumber } = useHeroes();
 
-  const setMissions = useSetRecoilState(missionListState);
+  const [missionList, setMissionList] = useRecoilState(missionListState);
 
-  const initMissions = async () => {
+  const initMissionList = async () => {
     try {
       const { data } = await axios.get(`api/missions/${groupId}`);
-      setMissions(data.body.missions);
+      setMissionList(data.body.missions);
     } catch (err) {
       console.error(err);
     }
@@ -28,7 +28,7 @@ export const useMissions = () => {
       });
       const newMission = data.body.mission;
 
-      setMissions((prev) => [newMission, ...prev]);
+      setMissionList((prev) => [newMission, ...prev]);
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +47,7 @@ export const useMissions = () => {
       const { receiver, receivers } = missionInfo;
 
       if (receiver) {
-        setMissions((prevMissions) =>
+        setMissionList((prevMissions) =>
           prevMissions.map((prevMission) =>
             prevMission.id === missionId
               ? {
@@ -59,7 +59,7 @@ export const useMissions = () => {
         );
       }
       if (receivers) {
-        setMissions((prevMissions) =>
+        setMissionList((prevMissions) =>
           prevMissions.map((prevMission) =>
             prevMission.id === missionId
               ? { ...prevMission, isComplete: true }
@@ -72,5 +72,5 @@ export const useMissions = () => {
       console.error(err);
     }
   };
-  return { initMissions, addMission, updateMission };
+  return { missionList, initMissionList, addMission, updateMission };
 };

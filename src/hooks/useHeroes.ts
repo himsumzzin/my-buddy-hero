@@ -1,9 +1,21 @@
-import { heroesState } from '@/states';
+import { heroesState, userState } from '@/states';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export const useHeroes = () => {
-  const [heroes, setHeroes] = useRecoilState(heroesState);
+  const user = useRecoilValue(userState);
+  const groupId = user.groupId as string;
+
+  const [heroList, setHeroList] = useRecoilState(heroesState);
+
+  const initHeroeList = async () => {
+    try {
+      const { data } = await axios.get(`api/hero/${groupId}`);
+      setHeroList(data.body.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const createHero = async (heroInfo: HeroInfo) => {
     try {
@@ -11,7 +23,7 @@ export const useHeroes = () => {
       console.log('서버에 저장을 성공해써요!');
 
       const newHero = data.body.hero;
-      setHeroes(newHero);
+      setHeroList(newHero);
 
       return newHero;
     } catch (err) {
@@ -20,7 +32,7 @@ export const useHeroes = () => {
   };
 
   const updateCompleteNumber = (heroIds: string[]) => {
-    setHeroes((prev) =>
+    setHeroList((prev) =>
       prev.map((hero) =>
         heroIds.includes(hero.id)
           ? { ...hero, completeNumber: hero.completeNumber + 1 }
@@ -29,5 +41,5 @@ export const useHeroes = () => {
     );
   };
 
-  return { createHero, updateCompleteNumber };
+  return { heroList, initHeroeList, createHero, updateCompleteNumber };
 };
