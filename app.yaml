@@ -1,0 +1,15 @@
+runtime: nodejs16 # or another supported version
+
+instance_class: F1
+
+env_variables:
+  BUCKET_NAME: 'my-buddy-hero-23f442ea-c632-4e73-9459-1b0d73f7f704'
+
+handlers:
+  - url: /stylesheets
+    static_dir: stylesheets
+
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
