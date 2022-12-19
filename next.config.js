@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
 });
 
 module.exports = withPWA({
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ['storage.googleapis.com'],
     minimumCacheTTL: 1500000,
