@@ -165,7 +165,7 @@ export const AuthForm = ({
           </AuthInput>
         </Fragment>
       ))}
-      <Button size="lg" type="submit" disabled={!isAllValid()}>
+      <Button size="lg" disabled={!isAllValid()}>
         가입
       </Button>
     </form>

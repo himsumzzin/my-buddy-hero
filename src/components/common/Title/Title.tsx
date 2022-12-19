@@ -7,7 +7,7 @@ export interface TitleProps {
 }
 
 export const Title = ({ lv, className, children }: TitleProps) => {
-  const ComponentName = `h${lv}`;
+  const ComponentName = `h${lv}` as React.ElementType;
 
   return (
     <ComponentName className={`${styles.Title} ${className ?? ''}`}>

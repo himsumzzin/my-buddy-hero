@@ -2,7 +2,7 @@ import { Button, Title, Slide } from '@/components/common';
 import CloseIcon from '@svgs/close.svg';
 import styles from './MissionInfo.module.css';
 
-export interface IMissionInfoProps {
+export interface MissionInfoProps {
   /**
    * mission 상태 중 렌더링에 필요한 title, maxReceiver, description값만 사용하는 객체입니다.
    */
@@ -22,7 +22,7 @@ export const MissionInfo = ({
   mission,
   onSelect,
   onClose,
-}: IMissionInfoProps) => {
+}: MissionInfoProps) => {
   const { title, description, maxReceiver, receivers } = mission;
   const isFull = receivers.length >= maxReceiver;
 

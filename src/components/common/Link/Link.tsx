@@ -1,4 +1,5 @@
 import NextLink from 'next/link';
+import React from 'react';
 import styles from './Link.module.css';
 
 export type LinkProps = {
@@ -11,6 +12,7 @@ export type LinkProps = {
    */
   size: 'sm' | 'lg';
   selected: boolean;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => any;
   children: React.ReactNode;
   restProps?: unknown[];
 };
@@ -20,8 +22,13 @@ export const Link = ({
   size,
   selected,
   children,
+  onClick,
   ...restProps
 }: LinkProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    onClick && onClick(e);
+  };
   return (
     <NextLink
       href={href}
@@ -29,6 +36,7 @@ export const Link = ({
       ${styles.Link}
       ${styles[size]}
       ${selected ? styles.selected : ''}`}
+      onClick={onClick ? handleClick : undefined}
       {...restProps}
     >
       {children}

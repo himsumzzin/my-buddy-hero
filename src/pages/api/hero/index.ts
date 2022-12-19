@@ -41,7 +41,7 @@ export default async function handler(
       blobStream.end();
     });
 
-    blobStream.on('error', (err) => {
+    blobStream.on('error', (err: any) => {
       throw new Error(err);
     });
 

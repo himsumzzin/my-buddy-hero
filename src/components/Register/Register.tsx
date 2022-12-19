@@ -1,10 +1,7 @@
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
-import axios from 'axios';
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { heroesState } from '@/states/heroes';
 import { useHeroes } from '@/hooks';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
