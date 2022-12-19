@@ -1,7 +1,11 @@
 const { resolve } = require('path');
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require('next-pwa')({
+  dest: 'public',
+});
+
+module.exports = withPWA({
   reactStrictMode: true,
   images: {
     domains: ['storage.googleapis.com'],
@@ -27,6 +31,4 @@ const nextConfig = {
 
     return config;
   },
-};
-
-module.exports = nextConfig;
+});
