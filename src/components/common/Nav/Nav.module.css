@@ -1,0 +1,16 @@
+.linkContainer {
+  width: 95vw;
+  height: 184px;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-base);
+  padding-top: 2%;
+}
+.buttonBox {
+  margin-left: auto;
+}
+.logout {
+  background: red;
+}
