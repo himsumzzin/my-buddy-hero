@@ -60,7 +60,12 @@ export const Camera = (props: any) => {
           // 2. formdata에 blob데이터 이미지 형식으로 붙여주기
           // 3. getToonifyImage api로 이미지 변환!
           // 4. imgURL 상태 새로추가
-          const data: FormData = new FormData();
+          const data: any = new FormData();
+
+          if (!blobData) {
+            throw new Error('blobData가 null입니다');
+          }
+
           data.append('image', blobData);
           selectProfileImage = await getToonifyImage(data, 'toonifyplus');
 
@@ -68,7 +73,9 @@ export const Camera = (props: any) => {
           // 2. 이미지객체가 onload 된 시점(확실하게 만들어진 시점)에 캔버스에 그려준다
           const transImage = new Image();
           transImage.onload = () => {
-            const canvas = canvasRef.current?.getContext('2d');
+            const canvas = canvasRef.current?.getContext(
+              '2d'
+            ) as CanvasRenderingContext2D;
             canvas.drawImage(transImage, 0, 0, 500, 420);
             setLoading(false);
           };

@@ -1,4 +1,4 @@
-import { Register } from '@/components/pages/Register';
+import { Register } from '@/components/Register';
 
 export default function HeroRegister() {
   return <Register></Register>;

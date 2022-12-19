@@ -33,6 +33,7 @@ export type InputProps = {
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
   className?: string;
+  placeholder?: string;
   restProps?: unknown[];
 };
 
@@ -43,6 +44,7 @@ export const Input = ({
   validText,
   initialValue,
   className,
+  placeholder,
   ...restProps
 }: InputProps) => {
   const inputId = useId();
@@ -77,6 +79,7 @@ export const Input = ({
             ? `${inputValidationRegex[name]}`.replace(/\//g, '')
             : '.*'
         }
+        placeholder={placeholder ?? ''}
         maxLength={name === 'herocode' ? 4 : 40}
         {...restProps}
       />

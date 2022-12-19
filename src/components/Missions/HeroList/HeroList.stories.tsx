@@ -1,11 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { HeroList, HeroListProps } from './HeroList';
+import { defaultMission } from '@/states';
 
 export default {
   title: 'Pages/Missions/HeroList',
   component: HeroList,
   args: {
-    receivers: [],
+    mission: defaultMission,
+    missionStatus: 'create',
     onSubmit: (heroInfo: Hero) => {
       console.log(heroInfo);
       alert('히어로 선택!');
@@ -39,7 +41,10 @@ Default.parameters = {
 
 export const WithReceivers = Template.bind({});
 WithReceivers.args = {
-  receivers: ['1', '3', '5'],
+  mission: {
+    ...defaultMission,
+    receivers: ['1', '3', '5'],
+  },
 };
 WithReceivers.parameters = {
   docs: {

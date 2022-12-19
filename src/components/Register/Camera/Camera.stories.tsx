@@ -1,4 +1,4 @@
-import { Camera } from '@/components/common';
+import { Camera } from '@/components/Register/Camera';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {

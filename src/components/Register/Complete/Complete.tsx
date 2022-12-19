@@ -1,7 +1,7 @@
 import { HeroCard, Link } from '@/components/common';
 import styles from './Complete.module.css';
 
-export const Complete = (props: { heroInfo: any }) => {
+export const Complete = (props: { heroInfo: any; goBack: () => void }) => {
   const { heroInfo, goBack } = props;
 
   return (
