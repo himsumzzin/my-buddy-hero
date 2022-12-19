@@ -1,6 +1,6 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 
-export const initialHero = {
+export const initialHero: Hero = {
   id: '',
   groupId: '',
   name: '',
