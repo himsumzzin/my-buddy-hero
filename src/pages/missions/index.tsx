@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import { Link, Button, Dialog } from '@/components/common';
+import { Dialog, Nav } from '@/components/common';
 import { MissionCard, MissionItem } from '@/components/Missions';
 import { useHeroes, useMissions } from '@/hooks';
+import { useRouter } from 'next/router';
 import styles from './Missions.module.css';
 
 export default function Missions() {
+  const router = useRouter();
   const { initHeroeList } = useHeroes();
   const { missionList, initMissionList } = useMissions();
   const [openDialog, setOpenDialog] = useState(false);
@@ -30,22 +32,11 @@ export default function Missions() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.linkContainer}>
-        <Link href={'/missions'} size={'lg'} selected>
-          임무목록
-        </Link>
-        <Link href={'/herolist'} size={'lg'}>
-          히어로 명단
-        </Link>
-        <Button
-          size="md"
-          disabled={false}
-          className={styles.buttonBox}
-          onClick={openMissionForm}
-        >
-          미션 등록
-        </Button>
-      </div>
+      <Nav
+        buttonName="임무 등록"
+        onButtonClick={openMissionForm}
+        currentPage={router?.asPath}
+      />
       <div className={styles.missionContainer}>
         <ul className={styles.missionList}>
           {missionList.map((mission) => {
