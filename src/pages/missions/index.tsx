@@ -1,28 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import styles from './Missions.module.css';
-import router from 'next/router';
 import { Link, Button, Dialog } from '@/components/common';
-import { useRecoilValue } from 'recoil';
-import { missionsState } from '@/states';
 import { MissionCard, MissionItem } from '@/components/Missions';
-import { useMissions } from '@/hooks/useMissions';
+import { useHeroes, useMissions } from '@/hooks';
+import styles from './Missions.module.css';
 
 export default function Missions() {
-  const missions = useRecoilValue(missionsState);
-  const { getMissions } = useMissions();
+  const { initHeroeList } = useHeroes();
+  const { missionList, initMissionList } = useMissions();
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedMission, setSelectedMission] = useState<IMission | null>(null);
+  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
-    getMissions();
+    initHeroeList();
+    initMissionList();
   }, []);
 
-  const openMissionForm = (mission: IMission) => {
+  const openMissionInfo = (mission: Mission) => {
     setSelectedMission(mission);
     setOpenDialog(true);
   };
-  const openMissionInfo = () => {
+  const openMissionForm = () => {
     setOpenDialog(true);
   };
   const closeMissionCard = () => {
@@ -43,19 +41,19 @@ export default function Missions() {
           size="md"
           disabled={false}
           className={styles.buttonBox}
-          onClick={openMissionInfo}
+          onClick={openMissionForm}
         >
           미션 등록
         </Button>
       </div>
       <div className={styles.missionContainer}>
         <ul className={styles.missionList}>
-          {missions.map((mission) => {
+          {missionList.map((mission) => {
             return (
               <MissionItem
                 key={mission.id}
                 mission={mission}
-                onClick={openMissionForm}
+                onClick={openMissionInfo}
               />
             );
           })}

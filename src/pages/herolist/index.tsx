@@ -1,26 +1,18 @@
-import styles from './herolist.module.css';
-import { Link, Button, HeroCard } from '@/components/common';
-import { heroInfos } from './mockup';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { userState } from '@/states';
-import { heroesState } from '@/states/heroes';
+import { useRouter } from 'next/router';
+import { Link, Button, HeroCard } from '@/components/common';
+import { useHeroes, useMissions } from '@/hooks';
+import styles from './herolist.module.css';
 
 export default function Herolist() {
   const router = useRouter();
-  const [heroes, setHeroes] = useRecoilState<IHeroList>(heroesState);
-  const user = useRecoilValue(userState);
-  const groupId = user.groupId as string;
+
+  const { heroList, initHeroeList } = useHeroes();
+  const { initMissionList } = useMissions();
 
   useEffect(() => {
-    const getHeroesOnServer = async () => {
-      const { data } = await axios.get(`api/hero/${groupId}`);
-
-      setHeroes(data.body.data);
-    };
-    getHeroesOnServer();
+    initHeroeList();
+    initMissionList();
   }, []);
 
   return (
@@ -44,7 +36,7 @@ export default function Herolist() {
         </Button>
       </div>
       <ul className={styles.listContainer}>
-        {heroes.map((heroInfo, index) => (
+        {heroList.map((heroInfo, index) => (
           <li key={index}>
             <HeroCard heroInfo={heroInfo}></HeroCard>
           </li>

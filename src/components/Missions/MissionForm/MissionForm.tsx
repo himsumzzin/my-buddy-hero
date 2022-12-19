@@ -1,5 +1,5 @@
 import { Input, Textarea, Button, Title, Slide } from '@/components/common';
-import { ReactComponent as CloseIcon } from '@svgs/close.svg';
+import CloseIcon from '@svgs/close.svg';
 import { Summary } from '../MissionCard';
 import styles from './MissionForm.module.css';
 
@@ -15,9 +15,9 @@ interface SummaryForm extends HTMLFormElement {
 
 export interface MissionFormProps {
   /**
-   * mission 상태 중 렌더링에 필요한 title, maxReceiver, description값만 사용하는 객체입니다.
+   * mission에 대한 전체 상태입니다. 렌더링에 필요한 title, maxReceiver, description값만 사용합니다.
    */
-  mission: IMission;
+  mission: Mission;
   /**
    * summary 정보를 MissionCard 컴포넌트에 전달합니다.
    */
@@ -80,7 +80,7 @@ export const MissionForm = ({
         </fieldset>
       </form>
       <Button size="xs" className={styles.closeButton} onClick={onClose}>
-        {/* <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" /> */}
+        <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" />
       </Button>
     </Slide>
   );

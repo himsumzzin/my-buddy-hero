@@ -14,9 +14,12 @@
   transition: var(--transition-fast);
 }
 
-.button:hover {
+.button:not(:disabled):hover {
   background-color: var(--color-main-hover);
   transition: var(--transition-fast);
+}
+.button:disabled {
+  filter: grayscale(50%);
 }
 
 .xs {

@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const initialHero = {
   id: '',
@@ -11,7 +11,7 @@ export const initialHero = {
   description: '',
 };
 
-export const heroesState = atom<IHeroList>({
+export const heroesState = atom<HeroList>({
   key: 'heroesState',
   default: [],
 });

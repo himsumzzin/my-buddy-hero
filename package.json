@@ -48,7 +48,7 @@
     "@storybook/manager-webpack5": "6.5.14",
     "@storybook/react": "6.5.14",
     "@storybook/testing-library": "0.0.13",
-    "@svgr/webpack": "6.5.1",
+    "@svgr/webpack": "5.5.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/formidable": "^2.0.5",
     "@types/multer": "^1.4.7",

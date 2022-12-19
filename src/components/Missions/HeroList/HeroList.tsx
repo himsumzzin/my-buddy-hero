@@ -6,20 +6,24 @@ import { heroesState } from '@/states/heroes';
 
 import { Input, Button, Title } from '@/components/common';
 import { HeroItem } from './HeroItem';
-import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
+import ArrowLeftIcon from '@svgs/arrow-left.svg';
 
 import styles from './HeroList.module.css';
 import { Slide } from '@/components/common';
 
 export interface HeroListProps {
   /**
-   * 임무를 수행중인 히어로들의 id를 담은 배열입니다.
+   * 현재 선택된 임무에 관한 정보입니다
    */
-  receivers: string[];
+  mission: Mission;
+  /**
+   * 미션의 상태입니다. 'create' | 'update' : 'complete' 세 가지가 존재합니다
+   */
+  missionStatus: MissionStatus;
   /**
    * 미션을 추가하거나 업데이트하는 함수입니다. 선택한 히어로와 히어로 코드가 일치할 때 호출합니다.
    */
-  onSubmit: (heroInfo: IHero) => void;
+  onSubmit: (heroInfo: Hero) => void;
   /**
    * missionStatus에 따라 missionForm 또는 missionInfo로 돌아가는 버튼입니다.
    */
@@ -34,11 +38,17 @@ export interface HeroListForm extends HTMLFormElement {
   readonly elements: CustomElements;
 }
 
-export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
+export const HeroList = ({
+  mission,
+  missionStatus,
+  onSubmit,
+  onGoBack,
+}: HeroListProps) => {
   const heroList = useRecoilValue(heroesState);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(true);
-  console.log(heroList);
+
+  const { receivers, authorId } = mission;
 
   const selectHero = useCallback(
     (e: React.MouseEvent<HTMLUListElement>) => {
@@ -58,12 +68,27 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
       setIsValid(false);
       return;
     }
+
     const submittedCode = e.currentTarget.herocode.value;
     const matchedHero = heroList.find(
       (hero) => hero.id === selectedHeroId && hero.code === submittedCode
     );
 
-    matchedHero ? onSubmit(matchedHero) : setIsValid(false);
+    switch (missionStatus) {
+      case 'create':
+        matchedHero ? onSubmit(matchedHero) : setIsValid(false);
+        break;
+      case 'update':
+        matchedHero && matchedHero.id !== authorId
+          ? onSubmit(matchedHero)
+          : setIsValid(false);
+        break;
+      case 'complete':
+        matchedHero && matchedHero.id === authorId
+          ? onSubmit(matchedHero)
+          : setIsValid(false);
+        break;
+    }
   };
 
   return (
@@ -105,7 +130,7 @@ export const HeroList = ({ receivers, onSubmit, onGoBack }: HeroListProps) => {
         <Button size="sm">완료</Button>
       </form>
       <Button size="xs" className={styles.goBackButton} onClick={onGoBack}>
-        {/* <ArrowLeftIcon width="32px" height="32px" viewBox="0 0 24 24" /> */}
+        <ArrowLeftIcon width="32px" height="32px" viewBox="0 0 24 24" />
       </Button>
     </Slide>
   );

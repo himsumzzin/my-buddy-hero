@@ -5,17 +5,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { heroesState } from '@/states/heroes';
+import { useHeroes } from '@/hooks';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
-
-interface HeroInfo {
-  groupId: string;
-  name: string;
-  title: string;
-  description: string;
-  code: string;
-  profileImage: string;
-}
 
 const initialHeroInfo = {
   groupId: '1',
@@ -30,7 +22,7 @@ export const Register = () => {
   // 현재 렌더링 된 페이지 상태로 관리
   const [page, setPage] = useState<Stage>('HeroRegister');
   const [heroInfo, setHeroInfo] = useState<HeroInfo>(initialHeroInfo);
-  const setHeroesInfo = useSetRecoilState(heroesState);
+  const { createHero } = useHeroes();
 
   const getHeroInfo = (newHeroInfo: HeroInfo) => {
     setHeroInfo({ ...heroInfo, ...newHeroInfo });
@@ -39,16 +31,12 @@ export const Register = () => {
 
   const saveHeroInfo = async (imgURL: string) => {
     try {
-      const { data } = await axios.post('/api/hero', {
-        ...heroInfo,
-        profileImage: imgURL,
-      });
-      console.log('서버에 저장을 성공해써요!');
+      const newHeroInfo = { ...heroInfo, profileImage: imgURL };
+      const newHero = await createHero(newHeroInfo);
 
-      setHeroesInfo(data.body.hero);
       setHeroInfo((prev) => ({
         ...prev,
-        profileImage: `data:image/webp;base64,${imgURL}`,
+        profileImage: newHero.profileImage,
       }));
       setPage('Complete');
     } catch (err) {

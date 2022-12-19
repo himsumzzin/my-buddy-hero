@@ -1,16 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MissionForm, MissionFormProps } from './MissionForm';
 import { Summary } from '../MissionCard';
+import { defaultMission } from '@/states';
 
 export default {
   title: 'Pages/Missions/MissionForm',
   component: MissionForm,
   args: {
-    summary: {
-      title: '',
-      maxReceiver: 1,
-      description: '',
-    },
+    mission: defaultMission,
     onSubmit: (newMissionInfo: Summary) => {
       console.log(newMissionInfo);
     },

@@ -9,9 +9,12 @@ const nextConfig = {
   },
   swcMinify: true,
   webpack(config) {
+    config.module.rules = config.module.rules.filter((rule) =>
+      rule.test && !rule.test.test('.svg') ? false : true
+    );
+
     config.module.rules.push({
       test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     });
 

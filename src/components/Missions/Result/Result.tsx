@@ -6,11 +6,11 @@ export interface ResultProps {
   /**
    * 미션의 상태입니다. 'create' | 'update' : 'complete' 세 가지가 존재합니다
    */
-  missionStatus: IMissionStatus;
+  missionStatus: MissionStatus;
   /**
    * 히어로 정볼를 나타냅니ㅏㄷ
    */
-  heroInfo: IHero;
+  heroInfo: Hero;
   /**
    * MissionCard 컴포넌트를 언마운트하는 로직을 담은 함수입니다.
    * MissionCard를 감싸고 있는 Dialog 컴포넌트를 닫는 함수를 사용할 예정입니다.

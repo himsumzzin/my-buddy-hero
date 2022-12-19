@@ -38,7 +38,6 @@ export interface SlideProps {
    */
   className?: string;
   children: React.ReactNode;
-  restprops?: unknown[];
 }
 
 export const Slide = ({
@@ -46,7 +45,6 @@ export const Slide = ({
   variant,
   className,
   children,
-  ...restprops
 }: SlideProps) => {
   return (
     <motion.div
@@ -56,7 +54,6 @@ export const Slide = ({
       animate="animate"
       exit="exit"
       custom={direction}
-      {...restprops}
     >
       {children}
     </motion.div>

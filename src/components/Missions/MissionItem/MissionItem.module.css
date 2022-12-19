@@ -1,11 +1,31 @@
-.li {
+.container {
   position: relative;
   width: 188px;
   height: 188px;
 }
 
+.container.full {
+  filter: grayscale(50%);
+}
+
+.container.disabled {
+  cursor: not-allowed;
+}
+.container.disabled::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6em;
+  height: 6em;
+  border: 10px solid var(--color-green);
+  border-radius: 100%;
+  transform: translate3d(-3em, -3em, 0);
+}
+
 .heroButton {
   cursor: pointer;
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
@@ -22,12 +42,15 @@
   transition: all var(--transition-fast);
 }
 
-.heroButton:hover,
-.heroButton:active {
+.heroButton:not(:disabled):hover,
+.heroButton:not(:disabled):active {
   background-color: var(--color-main-active);
 }
+.container.disabled .heroButton {
+  filter: grayscale(100%);
+}
 
-.description {
+.title {
   max-width: 100%;
   font-size: var(--text-size-base);
   text-overflow: ellipsis;
@@ -42,4 +65,10 @@
 
 .checkMission {
   font-size: var(--text-size-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrowIcon {
+  transform: rotate(180deg);
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './HeroItem.module.css';
 
 export interface HeroItemProps {
-  hero: IHero;
+  hero: Hero;
   /**
    * 현재 선택된 히어로인지 나타내는 값입니다
    */

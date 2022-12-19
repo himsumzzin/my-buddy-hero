@@ -9,7 +9,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
-    hero?: IHero;
+    hero?: Hero;
   };
 };
 
@@ -22,17 +22,10 @@ export default async function handler(
 
   await dbConnect();
   try {
-    const heroPayload = req.body;
-    // console.log(heroPayload);
-    // const [, imageContentType] = heroPayload.profileImage.split(/;|:/g);
-    // const base64 = heroPayload.profileImage.split(',')[1];
-    // console.log(heroPayload.profileImage);
-    const imageBuffer = Buffer.from(heroPayload.profileImage, 'base64');
+    const { name, groupId, profileImage: base64Image } = req.body;
+    const imageBuffer = Buffer.from(base64Image, 'base64');
 
-    // 이름과 옵션을 받아 스토리지에 빈 파일 객체를 생성한다
-    const fileName = `${crypto.randomUUID().slice(0, 8)}_${
-      heroPayload.groupId
-    }_${heroPayload.name}`;
+    const fileName = `${crypto.randomUUID().slice(0, 8)}_${groupId}_${name}`;
 
     const blob = cloudBucket.file(fileName);
 
@@ -44,18 +37,20 @@ export default async function handler(
       },
     });
 
-    // 파일 전송중 에러가 발생하면 트리거된다
+    blobStream.write(imageBuffer, () => {
+      blobStream.end();
+    });
+
     blobStream.on('error', (err) => {
       throw new Error(err);
     });
-    // 파일 전송이 끝나면 트리거된다
+
     blobStream.on('finish', () => {
       const profileImage = format(
         `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
       );
-      console.log(req.body);
 
-      const hero = new Hero({ ...heroPayload, profileImage });
+      const hero = new Hero({ ...req.body, profileImage });
       hero.save();
       const { _id, name, title, groupId, code, description, completeNumber } =
         hero._doc;
@@ -77,9 +72,6 @@ export default async function handler(
         },
       });
     });
-    // 전송할 파일의 chunk를 넣어준다
-    // buffer처럼 쪼개서 보낼 수 있는 녀석들을 넣어준다
-    blobStream.end(imageBuffer);
   } catch (err) {
     console.log(err);
 
