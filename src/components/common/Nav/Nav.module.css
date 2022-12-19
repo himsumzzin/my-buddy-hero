@@ -12,13 +12,5 @@
   margin-left: auto;
 }
 .logout {
-  width: 180px;
-  height: 69px;
-  background: var(--grayscale-gray);
-  border-radius: var(--border-radius-lg);
-  font-weight: var(--text-weight-bold);
-  font-size: var(--text-size-lg);
-  color: var(--grayscale-white);
   background: red;
-  box-shadow: var(--shadow-default);
 }

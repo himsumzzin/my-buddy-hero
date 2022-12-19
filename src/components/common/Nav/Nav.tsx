@@ -46,9 +46,14 @@ export const Nav = ({ onButtonClick, currentPage, buttonName }: NavProps) => {
       >
         {buttonName}
       </Button>
-      <button className={styles.logout} onClick={logoutHandler}>
+      <Button
+        size="md"
+        disabled={false}
+        className={styles.logout}
+        onClick={logoutHandler}
+      >
         로그아웃
-      </button>
+      </Button>
     </div>
   );
 };
