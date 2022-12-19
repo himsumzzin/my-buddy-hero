@@ -12,7 +12,6 @@ export default function Herolist() {
   useEffect(() => {
     initHeroeList();
     initMissionList();
-    console.log(router.asPath);
   }, []);
 
   return (
@@ -25,9 +24,9 @@ export default function Herolist() {
         currentPage={router?.asPath}
       />
       <ul className={styles.listContainer}>
-        {heroList.map((heroInfo, index) => (
-          <li key={index}>
-            <HeroCard heroInfo={heroInfo}></HeroCard>
+        {heroList.map((hero) => (
+          <li key={hero.id}>
+            <HeroCard hero={hero}></HeroCard>
           </li>
         ))}
       </ul>
