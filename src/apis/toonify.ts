@@ -1,5 +1,5 @@
 import FormData from 'form-data';
-import axios from 'axios';
+import { AxiosWithRetry } from '@/apis';
 
 type IModel = 'toonify' | 'toonifyplus' | 'emojify';
 
@@ -16,7 +16,7 @@ export const getToonifyImage = async (data: FormData, model: IModel) => {
   };
 
   try {
-    const { data } = await axios.request(options);
+    const { data } = await AxiosWithRetry.request(options);
     return data.b64_encoded_output;
   } catch (err) {
     console.error(err);

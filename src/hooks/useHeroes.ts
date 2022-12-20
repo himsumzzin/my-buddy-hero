@@ -1,6 +1,6 @@
 import { heroesState, userState } from '@/states';
-import axios from 'axios';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { AxiosWithRetry } from '@/apis';
 
 export const useHeroes = () => {
   const user = useRecoilValue(userState);
@@ -10,7 +10,7 @@ export const useHeroes = () => {
 
   const initHeroeList = async () => {
     try {
-      const { data } = await axios.get(`api/groups/${groupId}/heroes`);
+      const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/heroes`);
       setHeroList(data.body.data);
     } catch (err) {
       console.error(err);
@@ -19,7 +19,7 @@ export const useHeroes = () => {
 
   const createHero = async (heroInfo: Hero) => {
     try {
-      const { data } = await axios.post(
+      const { data } = await AxiosWithRetry.post(
         `/api/groups/${groupId}/heroes`,
         heroInfo
       );
