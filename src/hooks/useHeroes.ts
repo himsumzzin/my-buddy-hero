@@ -10,7 +10,7 @@ export const useHeroes = () => {
 
   const initHeroeList = async () => {
     try {
-      const { data } = await axios.get(`api/hero/${groupId}`);
+      const { data } = await axios.get(`api/groups/${groupId}/heroes`);
       setHeroList(data.body.data);
     } catch (err) {
       console.error(err);
@@ -19,7 +19,10 @@ export const useHeroes = () => {
 
   const createHero = async (heroInfo: HeroInfo) => {
     try {
-      const { data } = await axios.post('/api/hero', heroInfo);
+      const { data } = await axios.post(
+        `/api/groups/${groupId}/heroes`,
+        heroInfo
+      );
       console.log('서버에 저장을 성공해써요!');
 
       const newHero = data.body.hero;
