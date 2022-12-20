@@ -20,9 +20,8 @@ export default async function handler(
   try {
     if (method === 'PATCH') {
       const { receiver, receivers } = req.body;
-      console.log(req.query.id);
 
-      const result = await Mission.findById(req.query.id).exec();
+      const result = await Mission.findById(req.query.missionId).exec();
       // 임무 수락
       if (receiver) {
         Mission.update(

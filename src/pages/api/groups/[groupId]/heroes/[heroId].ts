@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbConnect } from '@/utils/server';
-import { Mission } from '@/models/index';
+import { Hero } from '@/models/index';
 
 type Data = {
   statusCode: number;
   err?: unknown;
   body: {
     success: boolean;
-    missions?: MissionList;
   };
 };
 
@@ -19,23 +18,12 @@ export default async function handler(
   await dbConnect();
 
   try {
-    if (method === 'GET') {
-      const result = await Mission.find({ groupId: req.query.id }).exec();
-      const missions = result.map((result) => ({
-        id: result._id,
-        authorId: result.authorId,
-        receivers: result.receivers,
-        title: result.title,
-        description: result.description,
-        maxReceiver: result.maxReceiver,
-        isComplete: result.isComplete,
-        groupId: result.groupId,
-      }));
+    if (method === 'DELETE') {
+      Hero.findOneAndDelete({ _id: req.query.heroId }).exec();
       return res.status(200).json({
         statusCode: 200,
         body: {
           success: true,
-          missions,
         },
       });
     }

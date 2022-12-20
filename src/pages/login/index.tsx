@@ -5,7 +5,8 @@ import { Title } from '@/components/common';
 import styles from './login.module.css';
 import Link from 'next/link';
 import router from 'next/router';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
@@ -41,7 +42,7 @@ export default function Signup() {
     });
 
     if (!response?.error) {
-      router.replace('/register');
+      router.replace('/herolist');
     } else {
       console.log(response);
       switch (response.error) {
@@ -98,3 +99,18 @@ export default function Signup() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/herolist',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { session } };
+};

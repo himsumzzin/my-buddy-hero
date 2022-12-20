@@ -13,7 +13,7 @@ export const useMissions = () => {
 
   const initMissionList = async () => {
     try {
-      const { data } = await axios.get(`api/missions/${groupId}`);
+      const { data } = await axios.get(`api/groups/${groupId}/missions`);
       setMissionList(data.body.missions);
     } catch (err) {
       console.error(err);
@@ -22,10 +22,10 @@ export const useMissions = () => {
 
   const addMission = async (mission: Mission) => {
     try {
-      const { data } = await axios.post('api/missions', {
-        ...mission,
-        groupId,
-      });
+      const { data } = await axios.post(
+        `api/groups/${groupId}/missions`,
+        mission
+      );
       const newMission = data.body.mission;
 
       setMissionList((prev) => [newMission, ...prev]);
@@ -42,7 +42,10 @@ export const useMissions = () => {
     }
   ) => {
     try {
-      await axios.patch(`api/missions/mission/${missionId}`, missionInfo);
+      await axios.patch(
+        `api/groups/${groupId}/missions/${missionId}`,
+        missionInfo
+      );
 
       const { receiver, receivers } = missionInfo;
 

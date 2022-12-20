@@ -7,6 +7,8 @@ import { MissionCard, MissionItem } from '@/components/Missions';
 import { filteredMissionListState } from '@/states';
 import { useHeroes, useMissions } from '@/hooks';
 import styles from './Missions.module.css';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 
 export default function Missions() {
   const router = useRouter();
@@ -64,3 +66,20 @@ export default function Missions() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+};
