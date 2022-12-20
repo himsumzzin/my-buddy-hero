@@ -123,10 +123,11 @@ Dialog.Header = function DialogHeader({ children }: HeaderProps) {
 };
 
 interface BodyProps {
+  className: string;
   children: React.ReactNode;
 }
-Dialog.Body = function DialogBody({ children }: BodyProps) {
-  return <div className={styles.body}>{children}</div>;
+Dialog.Body = function DialogBody({ className, children }: BodyProps) {
+  return <div className={`${styles.body} ${className}`}>{children}</div>;
 };
 
 interface FooterProps {
