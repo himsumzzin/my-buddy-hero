@@ -44,13 +44,10 @@ export default function Signup() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/auth/signup',
-        {
-          id: inputValue.id.value,
-          password: inputValue.password.value,
-        }
-      );
+      const response = await axios.post('api/auth/signup', {
+        id: inputValue.id.value,
+        password: inputValue.password.value,
+      });
       if (response.data.body.success) router.replace('/login');
       console.log(response);
     } catch (error: any) {
