@@ -1,4 +1,5 @@
 .linkContainer {
+  font-family: var(--font-family-content);
   width: 95vw;
   height: 184px;
   align-items: center;

@@ -3,6 +3,7 @@
   position: relative;
   width: 230px;
   height: 536px;
+  font-family: var(--font-family-content);
   box-shadow: var(--shadow-default);
   background: linear-gradient(180deg, #ea8274 1.86%, #fff1a9 98.23%);
   border-radius: var(--border-radius-md);
@@ -18,13 +19,21 @@
   color: var(--grayscale-black);
 }
 
+.cartoonizeContainer {
+  position: relative;
+  width: 240px;
+  height: 380px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
 .cartoonize {
   position: absolute;
   left: 8%;
   right: 8%;
-  top: 10%;
+  top: 5%;
   bottom: 24%;
-  /* overflow: hidden; */
+  object-fit: none;
 }
 
 .title {

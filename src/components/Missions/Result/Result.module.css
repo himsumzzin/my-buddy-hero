@@ -9,6 +9,7 @@
   background-color: var(--color-main-orange-700);
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-default);
+  font-family: var(--font-family-content);
 }
 
 .imageBox {
