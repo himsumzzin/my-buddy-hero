@@ -1,7 +1,8 @@
 import { Link, Button } from '@/components/common';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import styles from './Nav.module.css';
+import { useRouter } from 'next/router';
 
 export type NavProps = {
   /**
@@ -19,15 +20,24 @@ export type NavProps = {
 };
 
 export const Nav = ({ onButtonClick, currentPage, buttonName }: NavProps) => {
-  function logoutHandler() {
-    signOut({ redirect: false });
+  const router = useRouter();
+  const { status } = useSession(); // 세션 유무 파악 가능
+
+  async function logoutHandler() {
+    await signOut({ redirect: false });
+    console.log(status);
+    if (status === 'authenticated') router.replace('/login');
   }
+  const onClick = () => {
+    console.log('click');
+  };
   return (
     <div className={styles.linkContainer}>
       <Link
         href={'/missions'}
         size={'lg'}
         selected={currentPage === '/missions'}
+        // onClick={onClick}
       >
         임무목록
       </Link>
