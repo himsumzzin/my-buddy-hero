@@ -28,6 +28,9 @@ export interface MissionCardProps {
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
   initialMission: Mission | null;
+  /**
+   * MissionCard를 담은 Dialog를 닫는 함수입니다
+   */
   onClose: () => void;
 }
 
