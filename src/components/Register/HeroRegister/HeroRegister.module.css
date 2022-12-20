@@ -3,16 +3,21 @@
   height: 100vh;
   margin: 0 auto;
   text-align: center;
+  position: relative;
 }
 
 .backBtn {
+  position: absolute;
+  top: 20%;
+  left: 10%;
   margin-right: 50%;
 }
 
 .view {
   width: 522px;
-  position: relative;
-  margin: 0 auto;
+  position: absolute;
+  top: 5%;
+  left: 20%;
 }
 
 .title {

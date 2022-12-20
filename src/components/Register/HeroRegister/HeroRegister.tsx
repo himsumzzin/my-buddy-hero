@@ -1,6 +1,7 @@
 import { Input, Button } from '@/components/common';
 import styles from './HeroRegister.module.css';
 import { useRouter } from 'next/router';
+import ArrowLeft from '@svgs/arrow-left.svg';
 
 export const HeroRegister = (props: any) => {
   const router = useRouter();
@@ -41,7 +42,7 @@ export const HeroRegister = (props: any) => {
         disabled={false}
         className={styles.backBtn}
       >
-        🔙
+        <ArrowLeft width="32px" height="32px" viewBox="0 0 24 24"></ArrowLeft>
       </Button>
       <div className={`${styles.view}`}>
         <h1 className={styles.title}>히어로 등록</h1>
