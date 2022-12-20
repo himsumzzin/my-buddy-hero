@@ -14,13 +14,15 @@ export const HeroCard = ({ hero, className }: HeroCardProps) => {
         <p className={`${styles.completeNumber}`}>
           임무완료 : {completeNumber}회
         </p>
-        <Image
-          className={`${styles.cartoonize}`}
-          src={profileImage}
-          alt={`${name} 히어로`}
-          width={190}
-          height={350}
-        ></Image>
+        <div className={styles.cartoonizeContainer}>
+          <Image
+            className={`${styles.cartoonize}`}
+            src={profileImage}
+            alt={`${name} 히어로`}
+            width={190}
+            height={350}
+          ></Image>
+        </div>
         <p className={`${styles.title}`}>{title}</p>
         <p className={`${styles.name}`}>{name}</p>
         <p className={`${styles.description}`}>{description}</p>
