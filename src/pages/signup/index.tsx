@@ -6,6 +6,8 @@ import styles from './signup.module.css';
 import Link from 'next/link';
 import axios from 'axios';
 import router from 'next/router';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
@@ -106,3 +108,18 @@ export default function Signup() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/herolist',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { session } };
+};
