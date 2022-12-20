@@ -17,7 +17,7 @@ export const useHeroes = () => {
     }
   };
 
-  const createHero = async (heroInfo: HeroInfo) => {
+  const createHero = async (heroInfo: Hero) => {
     try {
       const { data } = await axios.post(
         `/api/groups/${groupId}/heroes`,
@@ -26,7 +26,7 @@ export const useHeroes = () => {
       console.log('서버에 저장을 성공해써요!');
 
       const newHero = data.body.hero;
-      setHeroList(newHero);
+      setHeroList((prev) => [...prev, newHero]);
 
       return newHero;
     } catch (err) {

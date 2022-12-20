@@ -26,11 +26,12 @@ export default function Herolist() {
         currentPage={router?.asPath}
       />
       <ul className={styles.listContainer}>
-        {heroList.map((hero) => (
-          <li key={hero.id}>
-            <HeroCard hero={hero}></HeroCard>
-          </li>
-        ))}
+        {heroList &&
+          heroList.map((hero) => (
+            <li key={hero.id}>
+              <HeroCard hero={hero}></HeroCard>
+            </li>
+          ))}
       </ul>
     </div>
   );
