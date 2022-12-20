@@ -4,7 +4,7 @@
   height: 188px;
 }
 
-.container.full {
+.container:not(.disabled).full {
   filter: grayscale(50%);
 }
 

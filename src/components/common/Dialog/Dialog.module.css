@@ -3,19 +3,20 @@
   z-index: 1000;
   top: 50%;
   left: 50%;
-  min-width: 400px;
-  min-height: 140px;
-  border-radius: var(--border-radius-sm);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  background: var(--grayscale-snow);
-  color: var(--grayscale-black);
   translate: -50% -50%;
   background: transparent;
-  /* box-shadow: var(--shadow-default); */
 }
 
 .header * {
   margin: 0;
+}
+
+.body {
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--grayscale-snow);
+  color: var(--grayscale-black);
+  box-shadow: var(--shadow-default);
 }
 
 .closeButton {

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Dialog.module.css';
 import { getTabbableChildren } from '@/utils/client';
-import { ReactComponent as CancelIcon } from '@svgs/close-svgrepo-com.svg';
+import CancelIcon from '@svgs/close-svgrepo-com.svg';
 
 export interface DialogProps {
   /**

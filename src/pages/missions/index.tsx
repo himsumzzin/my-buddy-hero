@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
 import { Dialog, Nav } from '@/components/common';
 import { MissionCard, MissionItem } from '@/components/Missions';
+import { filteredMissionListState } from '@/states';
 import { useHeroes, useMissions } from '@/hooks';
-import { useRouter } from 'next/router';
 import styles from './Missions.module.css';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
@@ -11,7 +13,8 @@ import { getSession } from 'next-auth/react';
 export default function Missions() {
   const router = useRouter();
   const { initHeroeList } = useHeroes();
-  const { missionList, initMissionList } = useMissions();
+  const { initMissionList } = useMissions();
+  const filteredMissionList = useRecoilValue(filteredMissionListState);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
@@ -41,7 +44,7 @@ export default function Missions() {
       />
       <div className={styles.missionContainer}>
         <ul className={styles.missionList}>
-          {missionList.map((mission) => {
+          {filteredMissionList.map((mission) => {
             return (
               <MissionItem
                 key={mission.id}

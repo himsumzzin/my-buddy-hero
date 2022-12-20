@@ -1,52 +1,36 @@
 .container {
   width: 100vw;
   height: 100vh;
-  padding: var(--spacing-lg);
-}
-
-.listContainer {
-  /* width: 95vw; */
-  height: 72%;
-  margin: 0 auto;
-  display: flex;
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  flex-direction: row;
-  justify-content: center;
-  gap: var(--spacing-base);
-  padding-top: 2%;
-  background-color: var(--color-main-orange-500);
-}
-
-.listContainer::-webkit-scrollbar {
-  display: none; /* Chrome , Safari , Opera */
-}
-
-.linkContainer {
-  width: 95vw;
-  height: 184px;
-  align-items: center;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-base);
-  padding-top: 2%;
 }
 
 .missionContainer {
   margin: 0 auto;
   min-width: 984px;
-  min-height: 508px;
+  max-width: 95vw;
+  min-height: 72vh;
+  max-height: 72vh;
   padding: var(--spacing-lg);
   background-color: snow;
   border-radius: var(--border-radius-md);
+  overflow-y: scroll;
+}
+
+.missionContainer::-webkit-scrollbar {
+  margin-right: 0;
+  width: var(--text-size-base);
+  background-color: var(--grayscale-white);
+  border-radius: 8px;
+}
+.missionContainer::-webkit-scrollbar-thumb {
+  background-color: var(--grayscale-gray);
+  border: 4px solid var(--grayscale-white);
+  border-radius: 8px;
 }
 
 .missionList {
   display: flex;
   flex-flow: row wrap;
-  gap: var(--spacing-base);
+  gap: var(--spacing-xl);
 }
 
 .buttonBox {

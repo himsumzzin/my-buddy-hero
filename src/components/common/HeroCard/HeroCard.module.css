@@ -8,7 +8,7 @@
   border-radius: var(--border-radius-md);
 }
 
-.missionCount {
+.completeNumber {
   text-align: center;
   padding-top: 20px;
   font-weight: var(--text-weight-bold);
@@ -24,6 +24,7 @@
   right: 8%;
   top: 10%;
   bottom: 24%;
+  /* overflow: hidden; */
 }
 
 .title {

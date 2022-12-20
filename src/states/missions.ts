@@ -35,7 +35,17 @@ export const filteredMissionListState = selector({
       case 'Uncompleted':
         return list.filter((item: Mission) => !item.isComplete);
       default:
-        return [...list].sort((a, b) => (a.isComplete ? 1 : -1));
+        return [...list].sort((a, b) => {
+          if (a.isComplete !== b.isComplete) {
+            return a.isComplete ? 1 : -1;
+          }
+          const isSelectableA = a.maxReceiver > a.receivers.length;
+          const isSelectableB = b.maxReceiver > b.receivers.length;
+          if (isSelectableA !== isSelectableB) {
+            return isSelectableA ? -1 : 1;
+          }
+          return 0;
+        });
     }
   },
 });

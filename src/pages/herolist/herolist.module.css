@@ -5,7 +5,7 @@
 
 .listContainer {
   width: 95vw;
-  height: 72%;
+  height: 72vh;
   margin: 0 auto;
   display: flex;
   overflow-y: scroll;
@@ -16,6 +16,7 @@
   gap: var(--spacing-base);
   padding-top: 2%;
   background-color: var(--color-main-orange-500);
+  border-radius: 8px;
 }
 
 .listContainer::-webkit-scrollbar {

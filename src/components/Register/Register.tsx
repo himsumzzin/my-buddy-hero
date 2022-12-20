@@ -1,27 +1,19 @@
+import { useState } from 'react';
+import { useHeroes } from '@/hooks';
+import { initialHero } from '@/states';
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
-import { useState } from 'react';
-import { useHeroes } from '@/hooks';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
-
-const initialHeroInfo = {
-  groupId: '1',
-  name: '',
-  title: '',
-  description: '',
-  code: '',
-  profileImage: '',
-};
 
 export const Register = () => {
   // 현재 렌더링 된 페이지 상태로 관리
   const [page, setPage] = useState<Stage>('HeroRegister');
-  const [heroInfo, setHeroInfo] = useState<HeroInfo>(initialHeroInfo);
+  const [heroInfo, setHeroInfo] = useState<Hero>(initialHero);
   const { createHero } = useHeroes();
 
-  const getHeroInfo = (newHeroInfo: HeroInfo) => {
+  const getHeroInfo = (newHeroInfo: Hero) => {
     setHeroInfo({ ...heroInfo, ...newHeroInfo });
     setPage('Camera');
   };
@@ -49,8 +41,8 @@ export const Register = () => {
     setPage('Complete');
   };
 
-  const reset = () => {
-    setHeroInfo(initialHeroInfo);
+  const resetPage = () => {
+    setHeroInfo(initialHero);
     setPage('HeroRegister');
   };
 
@@ -68,7 +60,7 @@ export const Register = () => {
           saveHeroInfo={saveHeroInfo}
         ></Camera>
       ) : (
-        <Complete heroInfo={heroInfo} goBack={reset}></Complete>
+        <Complete hero={heroInfo} reset={resetPage}></Complete>
       )}
     </>
   );

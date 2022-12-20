@@ -5,6 +5,7 @@ import { Button } from '@/components/common';
 import { CSSProperties, useRef, useState } from 'react';
 import { getToonifyImage } from '@/apis/toonify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
+import ArrowLeft from '@svgs/arrow-left.svg';
 
 export const Camera = (props: any) => {
   const { handlerRegisterPage, saveHeroInfo } = props;
@@ -12,8 +13,8 @@ export const Camera = (props: any) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [isFirstClick, setIsFirstClick] = useState(false);
-  const [countdown, setCountdown] = useState(3);
+  const [isFirstClick, setIsFirstClick] = useState(true);
+  const [countdown, setCountdown] = useState(5);
   const [imgURL, setImgURL] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -67,7 +68,7 @@ export const Camera = (props: any) => {
           }
 
           data.append('image', blobData);
-          selectProfileImage = await getToonifyImage(data, 'toonifyplus');
+          selectProfileImage = await getToonifyImage(data, 'emojify');
 
           // 1. 캔버스에 뿌려주기 위한 이미지 객체 생성
           // 2. 이미지객체가 onload 된 시점(확실하게 만들어진 시점)에 캔버스에 그려준다
@@ -76,7 +77,7 @@ export const Camera = (props: any) => {
             const canvas = canvasRef.current?.getContext(
               '2d'
             ) as CanvasRenderingContext2D;
-            canvas.drawImage(transImage, 0, 0, 500, 420);
+            canvas.drawImage(transImage, 0, 0, 530, 450);
             setLoading(false);
           };
 
@@ -105,47 +106,60 @@ export const Camera = (props: any) => {
   };
 
   const takeAPictureOnlyOnceHandler = () => {
-    setIsFirstClick(true);
+    setIsFirstClick(false);
     setDevice();
     countDownAndTakeAPicture();
   };
 
   const retakeThePictureHandler = () => {
     if (!isFirstClick) return;
-    setCountdown(3);
+    setCountdown(5);
     countDownAndTakeAPicture();
   };
 
   const override: CSSProperties = {
     display: 'block',
-    // margin: '0 auto',
     marginLeft: '30%',
     borderColor: 'green',
   };
 
+  const buttonActive = () => {
+    if (countdown === 5 && isFirstClick) {
+      return true;
+    } else if (loading) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className={`${styles.container}`}>
-      <Button size="xs" onClick={handlerRegisterPage} disabled={false}>
-        🔙
+      <Button
+        size="xs"
+        onClick={handlerRegisterPage}
+        disabled={loading}
+        className={styles.backBtn}
+      >
+        <ArrowLeft width="32px" height="32px" viewBox="0 0 24 24"></ArrowLeft>
       </Button>
       <div className={styles.view}>
         <div
-          className={`${styles.cameraTextContainer} ${
-            isFirstClick ? styles.hidden : ''
+          className={`${styles.blindBoard} ${
+            isFirstClick ? '' : styles.hidden
           }`}
           onClick={takeAPictureOnlyOnceHandler}
           aria-hidden="true"
         >
-          <p className={styles.cameraTitle}>히어로 사진 찍기</p>
-          <p className={styles.plusText}>+</p>
+          <p className={styles.blindBoardTitle}>히어로 사진 찍기</p>
+          <p className={styles.blindBoardIcon}>+</p>
         </div>
         <div
-          className={`${styles.countdownContainer} ${
+          className={`${styles.countdownBoard} ${
             countdown === 0 ? styles.hidden : styles.show
           }`}
         >
-          <div className={styles.innerBorder}>
-            <p className={styles.countdownText}>화면에 얼굴을 맞춰주세요</p>
+          <div className={styles.countdownInnerContainer}>
+            <p className={styles.countdownTitle}>화면에 얼굴을 맞춰주세요</p>
             <p className={styles.countdownNumber}>{countdown}</p>
           </div>
         </div>
@@ -167,20 +181,22 @@ export const Camera = (props: any) => {
           width="522"
           height="430"
         ></video>
-        <canvas
-          className={`${styles.canvas} ${
-            countdown === 0 ? styles.show : styles.hidden
-          }`}
-          ref={canvasRef}
-          width={videoRef.current?.videoWidth}
-          height={videoRef.current?.videoHeight}
-        ></canvas>
+        <div className={styles.canvasContainer}>
+          <canvas
+            className={`${styles.canvas} ${
+              countdown === 0 ? styles.show : styles.hidden
+            }`}
+            ref={canvasRef}
+            width={530}
+            height={450}
+          ></canvas>
+        </div>
       </div>
       <div className={styles.buttonContainer}>
         <Button
           size="md"
           onClick={retakeThePictureHandler}
-          disabled={countdown !== 0 ? true : false}
+          disabled={buttonActive()}
           className={styles.button}
         >
           다시 찍기
@@ -190,7 +206,7 @@ export const Camera = (props: any) => {
           onClick={() => {
             saveHeroInfo(imgURL);
           }}
-          disabled={countdown !== 0 ? true : false}
+          disabled={buttonActive()}
           className={styles.button}
         >
           완료

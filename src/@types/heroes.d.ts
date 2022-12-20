@@ -1,14 +1,11 @@
-interface HeroInfo {
+interface Hero {
+  id: string;
   groupId: string;
   name: string;
   title: string;
   description: string;
   code: string;
   profileImage: string;
-}
-
-interface Hero extends HeroInfo {
-  id: string;
   completeNumber: number;
 }
 

@@ -1,79 +1,69 @@
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
 .container {
+  position: relative;
   width: 100vh;
   height: 100vh;
   margin: 0 auto;
   padding-top: 10%;
 }
 
-.view {
-  width: 522px;
-  position: relative;
-  margin: 0 auto;
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: inline-block;
-}
-
-.cameraTextContainer {
+.backBtn {
   position: absolute;
+  top: 20%;
+  left: 10%;
+  margin-right: 50%;
+}
+
+.view {
+  position: relative;
+  width: 522px;
+  margin-top: 30px;
+  margin-left: 170px;
+}
+
+.blindBoard {
   z-index: 999;
+  position: absolute;
   width: 522px;
   height: 430px;
+  border-radius: var(--border-radius-md);
   text-align: center;
   font-size: var(--text-size-title);
   font-weight: var(--text-weight-bold);
   color: var(--grayscale-white);
   background: #d6d2c6;
-  border-radius: var(--border-radius-md);
 }
 
-.cameraTitle {
-  margin: 0;
+.blindBoardTitle {
   padding-top: 80px;
 }
 
-.plusText {
+.blindBoardIcon {
   font-size: 150px;
-  margin: 0;
 }
 
-.video {
-  background: #d6d2c6;
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-default);
-  margin: 0 auto;
-  transform: scaleX(-1);
-}
-
-.canvas {
+.countdownBoard {
+  z-index: 99;
   position: absolute;
-  padding: 10px 0;
-  left: 0;
-  /* border-radius: var(--border-radius-md); */
-  margin: 0 auto;
 }
 
-.countdownContainer {
-  position: absolute;
-  top: 0;
-  z-index: 9;
-}
-
-.innerBorder {
+.countdownInnerContainer {
   width: 480px;
   height: 400px;
-  margin-left: 20px;
-  margin-top: 15px;
   border: 8px solid var(--color-green);
   border-radius: var(--border-radius-md);
+  margin-left: 20px;
+  margin-top: 15px;
 }
 
-.countdownText {
+.countdownTitle {
   position: absolute;
   top: 10%;
   left: 25%;
@@ -91,14 +81,44 @@
   color: var(--grayscale-white);
 }
 
-.buttonContainer {
+.loader {
+  z-index: 9;
+  position: absolute;
   width: 522px;
-  height: 69px;
+  height: 430px;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-main-orange-700);
+  text-align: center;
+  padding-top: 35%;
+}
+
+.video {
+  border-radius: var(--border-radius-md);
+  background: #d6d2c6;
+  box-shadow: var(--shadow-default);
+  margin: 0 auto;
+  transform: scaleX(-1);
+}
+
+.canvasContainer {
+  position: absolute;
+  top: 0;
+  border-radius: var(--border-radius-md);
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+}
+
+.buttonContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
-  margin-top: var(--spacing-lg);
+  width: 522px;
+  height: 69px;
+  margin-top: 30px;
+  margin-left: 170px;
 }
 
 .button {
@@ -109,15 +129,4 @@
 .button:focus,
 .button:hover {
   background-color: var(--color-main-orange-700);
-}
-
-.loader {
-  position: absolute;
-  width: 522px;
-  height: 430px;
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-main-orange-700);
-  text-align: center;
-  z-index: 99999;
-  padding-top: 35%;
 }
