@@ -1,51 +1,36 @@
 import styles from './HeroCard.module.css';
 import Image from 'next/image';
 
-interface HeroInfo {
-  groupId: string;
-  name: string;
-  title: string;
-  description: string;
-  code: string;
-  profileImage: string;
+export interface HeroCardProps {
+  hero: Hero;
+  className?: string;
 }
 
-export type HeroCardProps = {
-  missionCount?: string;
-  profileImage?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  className?: string;
-  heroInfo: HeroInfo;
-};
-
-export const HeroCard = ({
-  missionCount,
-  className,
-  heroInfo,
-}: HeroCardProps) => {
+export const HeroCard = ({ hero, className }: HeroCardProps) => {
+  const { name, title, description, profileImage, completeNumber } = hero;
   return (
     <>
-      <div className={`${styles.heroCardContainer} ${className}`}>
-        <p className={`${styles.missionCount}`}>임무완료 : {missionCount}회</p>
+      <div className={`${styles.heroCardContainer} ${className ?? ''}`}>
+        <p className={`${styles.completeNumber}`}>
+          임무완료 : {completeNumber}회
+        </p>
         <Image
           className={`${styles.cartoonize}`}
-          src={heroInfo.profileImage}
-          alt={`${heroInfo.name} 히어로`}
+          src={profileImage}
+          alt={`${name} 히어로`}
           width={190}
           height={350}
         ></Image>
-        <p className={`${styles.title}`}>{heroInfo.title}</p>
-        <p className={`${styles.name}`}>{heroInfo.name}</p>
-        <p className={`${styles.description}`}>{heroInfo.description}</p>
+        <p className={`${styles.title}`}>{title}</p>
+        <p className={`${styles.name}`}>{name}</p>
+        <p className={`${styles.description}`}>{description}</p>
       </div>
     </>
   );
 };
 
 HeroCard.defaultProps = {
-  missionCount: '0',
+  completeNumber: 0,
   heroInfo: {
     groupId: '1',
     name: '김현진',

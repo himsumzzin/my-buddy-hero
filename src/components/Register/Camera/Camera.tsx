@@ -67,7 +67,7 @@ export const Camera = (props: any) => {
           }
 
           data.append('image', blobData);
-          selectProfileImage = await getToonifyImage(data, 'toonifyplus');
+          selectProfileImage = await getToonifyImage(data, 'emojify');
 
           // 1. 캔버스에 뿌려주기 위한 이미지 객체 생성
           // 2. 이미지객체가 onload 된 시점(확실하게 만들어진 시점)에 캔버스에 그려준다
