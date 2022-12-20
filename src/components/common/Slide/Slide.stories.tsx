@@ -1,12 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Slide, SlideProps } from './Slide';
 import { HeroCard } from '@/components/common';
+import { initialHero } from '@/states';
 
 export default {
   title: 'Components/Slide',
   component: Slide,
   args: {
-    children: <HeroCard />,
+    children: <HeroCard hero={initialHero} />,
   },
   parameters: {
     docs: {
