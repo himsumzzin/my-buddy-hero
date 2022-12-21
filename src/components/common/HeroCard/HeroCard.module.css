@@ -1,8 +1,9 @@
 /* 히어로카드 */
 .heroCardContainer {
   position: relative;
-  width: 230px;
-  height: 536px;
+  width: 260px;
+  height: 500px;
+  margin-top: 20px;
   font-family: var(--font-family-content);
   box-shadow: var(--shadow-default);
   background: linear-gradient(180deg, #ea8274 1.86%, #fff1a9 98.23%);
@@ -11,62 +12,53 @@
 
 .completeNumber {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-size-base);
+  font-size: var(--text-size-lg);
   line-height: 19px;
   align-items: center;
   color: var(--grayscale-black);
 }
 
+.numberColor {
+  color: var(--color-green);
+}
+
 .cartoonizeContainer {
   position: relative;
-  width: 240px;
-  height: 380px;
+  width: 260px;
+  height: 260px;
   overflow: hidden;
   background-color: transparent;
+  border-radius: 10px solid #fff;
 }
 
 .cartoonize {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 5%;
-  bottom: 24%;
+  margin-left: 20px;
   object-fit: none;
+  border-radius: 16px;
 }
 
 .title {
-  position: absolute;
-  left: 8%;
-  right: 42%;
-  top: 78%;
-  bottom: 18%;
+  font-family: var(--font-family-title);
   font-weight: var(--text-weight-bold);
-  font-size: 0.875rem;
-  line-height: 15px;
-  align-items: center;
+  font-size: var(--text-size-lg);
+  text-align: center;
+  padding-top: 10px;
 }
 
 .name {
-  position: absolute;
-  left: 7%;
-  right: 25%;
-  top: 82%;
-  bottom: 12%;
   font-weight: var(--text-weight-bold);
-  font-size: var(--text-size-lg);
-  line-height: 24px;
-  align-items: center;
+  font-size: var(--text-size-title);
+  text-align: center;
 }
 
 .description {
-  position: absolute;
-  left: 8%;
-  right: 22%;
-  top: 88%;
-  bottom: 2%;
   font-weight: var(--text-weight-light);
-  font-size: var(--text-size-sm);
-  align-items: center;
+  font-size: var(--text-size-md);
+  color: var(--grayscale-darkgray);
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }

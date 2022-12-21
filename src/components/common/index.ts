@@ -9,3 +9,4 @@ export * from './Slide';
 export * from './Nav';
 export * from './ErrorPage';
 export * from './ErrorBoundary';
+export * from './PWAInstallButton';
