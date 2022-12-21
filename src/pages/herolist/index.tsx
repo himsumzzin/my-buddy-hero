@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nav, HeroCard } from '@/components/common';
+import { Nav, HeroCard, Slide } from '@/components/common';
 import { useHeroes, useMissions } from '@/hooks';
 import styles from './herolist.module.css';
 import { GetServerSideProps } from 'next';
@@ -25,14 +25,16 @@ export default function Herolist() {
         }}
         currentPage={router?.asPath}
       />
-      <ul className={styles.listContainer}>
-        {heroList &&
-          heroList.map((hero) => (
-            <li key={hero.id}>
-              <HeroCard hero={hero}></HeroCard>
-            </li>
-          ))}
-      </ul>
+      <Slide direction="right">
+        <ul className={styles.listContainer}>
+          {heroList &&
+            heroList.map((hero) => (
+              <li key={hero.id}>
+                <HeroCard hero={hero}></HeroCard>
+              </li>
+            ))}
+        </ul>
+      </Slide>
     </div>
   );
 }

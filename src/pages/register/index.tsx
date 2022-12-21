@@ -1,9 +1,16 @@
-import { Register } from '@/components/Register';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { AnimatePresence } from 'framer-motion';
+import { Register } from '@/components/Register';
 
 export default function HeroRegister() {
-  return <Register></Register>;
+  return (
+    <>
+      <AnimatePresence>
+        <Register />
+      </AnimatePresence>
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

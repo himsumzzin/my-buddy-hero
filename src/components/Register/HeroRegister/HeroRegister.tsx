@@ -1,4 +1,4 @@
-import { Input, Button } from '@/components/common';
+import { Input, Button, Slide } from '@/components/common';
 import styles from './HeroRegister.module.css';
 import { useRouter } from 'next/router';
 import ArrowLeft from '@svgs/arrow-left.svg';
@@ -33,7 +33,7 @@ export const HeroRegister = (props: any) => {
   const { title, description, code, name } = props.initialValue;
 
   return (
-    <div className={`${styles.container}`}>
+    <Slide direction="left" className={`${styles.container}`}>
       <Button
         size="xs"
         onClick={() => {
@@ -84,6 +84,6 @@ export const HeroRegister = (props: any) => {
           </Button>
         </form>
       </div>
-    </div>
+    </Slide>
   );
 };

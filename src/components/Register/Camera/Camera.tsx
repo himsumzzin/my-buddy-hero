@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import styles from './Camera.module.css';
-import { Button, ErrorDialog } from '@/components/common';
+import { Button, ErrorDialog, Slide } from '@/components/common';
 import { CSSProperties, useRef, useState } from 'react';
 import { getToonifyImage } from '@/apis/toonify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
@@ -143,7 +143,7 @@ export const Camera = (props: any) => {
   };
 
   return (
-    <div className={`${styles.container}`}>
+    <Slide direction="left" className={`${styles.container}`}>
       {errorDialog.isOpen ? (
         <ErrorDialog
           title={
@@ -239,6 +239,6 @@ export const Camera = (props: any) => {
           완료
         </Button>
       </div>
-    </div>
+    </Slide>
   );
 };

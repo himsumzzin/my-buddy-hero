@@ -9,6 +9,7 @@ import { useDialog, useHeroes, useMissions } from '@/hooks';
 import styles from './Missions.module.css';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { Slide } from '@/components/common';
 
 export default function Missions() {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function Missions() {
         onButtonClick={openMissionForm}
         currentPage={router?.asPath}
       />
-      <div className={styles.missionContainer}>
+      <Slide direction="left" className={styles.missionContainer}>
         <ul className={styles.missionList}>
           {filteredMissionList.map((mission) => {
             return (
@@ -54,7 +55,7 @@ export default function Missions() {
             );
           })}
         </ul>
-      </div>
+      </Slide>
       {missionDialog.isOpen ? (
         <Dialog modal onClose={closeMissionCard}>
           <MissionCard
