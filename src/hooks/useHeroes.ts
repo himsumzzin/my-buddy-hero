@@ -1,16 +1,20 @@
-import { heroesState, userState } from '@/states';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { heroesState } from '@/states';
+import { useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil';
 import { AxiosWithRetry } from '@/apis';
 
 export const useHeroes = () => {
-  const user = useRecoilValue(userState);
-  const groupId = user.groupId as string;
-
+  const { data: session } = useSession();
+  const groupId = session?.user?.name;
   const [heroList, setHeroList] = useRecoilState(heroesState);
 
   const initHeroeList = async () => {
     const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/heroes`);
     setHeroList(data.body.data);
+  };
+
+  const resetHeroList = () => {
+    setHeroList([]);
   };
 
   const createHero = async (heroInfo: Hero) => {
@@ -41,5 +45,11 @@ export const useHeroes = () => {
     );
   };
 
-  return { heroList, initHeroeList, createHero, updateCompleteNumber };
+  return {
+    heroList,
+    initHeroeList,
+    resetHeroList,
+    createHero,
+    updateCompleteNumber,
+  };
 };
