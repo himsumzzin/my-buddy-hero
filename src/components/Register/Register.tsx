@@ -31,7 +31,7 @@ export const Register = () => {
       }));
       setPage('Complete');
     } catch (err) {
-      console.error('히어로 정보가 제대로 전송되지 않았습니다.', err);
+      // console.error('히어로 정보가 제대로 전송되지 않았습니다.', err);
       errorDialog.open();
     }
   };

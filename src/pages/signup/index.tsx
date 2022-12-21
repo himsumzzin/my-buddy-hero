@@ -49,7 +49,6 @@ export default function Signup() {
         password: inputValue.password.value,
       });
       if (response.data.body.success) router.replace('/login');
-      console.log(response);
     } catch (error: any) {
       switch (error.response.data.body.type) {
         case 'id-duplication':

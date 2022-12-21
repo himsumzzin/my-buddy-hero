@@ -22,8 +22,10 @@ export const getToonifyImage = async (data: FormData, model: IModel) => {
   } catch (err) {
     if (isAxiosError(err) && err.response) {
       if (err.response.status === 400) {
-        throw new Error('얼굴인식이 안됩니다');
+        throw new Error('face recognition error');
       }
+    } else {
+      throw new Error('network error');
     }
   }
 };

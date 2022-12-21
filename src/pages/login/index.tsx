@@ -44,7 +44,6 @@ export default function Signup() {
     if (!response?.error) {
       router.replace('/herolist');
     } else {
-      console.log(response);
       switch (response.error) {
         case 'no-id':
           setServerError(() => ({
