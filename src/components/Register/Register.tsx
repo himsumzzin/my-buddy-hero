@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useDialog, useHeroes } from '@/hooks';
 import { initialHero } from '@/states';
+import { ErrorDialog } from '../common';
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
-import { ErrorDialog } from '../common';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
 
@@ -51,21 +52,25 @@ export const Register = () => {
 
   return (
     <>
-      {page === 'HeroRegister' ? (
-        <HeroRegister
-          initialValue={heroInfo}
-          onSubmit={getHeroInfo}
-        ></HeroRegister>
-      ) : page === 'Camera' ? (
-        <Camera
-          handlerRegisterPage={handlerLinkToRegisterPage}
-          handlerCompletePage={handlerLinkToCompletePage}
-          saveHeroInfo={saveHeroInfo}
-        ></Camera>
-      ) : (
-        <Complete hero={heroInfo} reset={resetPage}></Complete>
-      )}
-      {errorDialog.isOpen ? <ErrorDialog onClose={errorDialog.close} /> : null}
+      <AnimatePresence>
+        {page === 'HeroRegister' ? (
+          <HeroRegister
+            initialValue={heroInfo}
+            onSubmit={getHeroInfo}
+          ></HeroRegister>
+        ) : page === 'Camera' ? (
+          <Camera
+            handlerRegisterPage={handlerLinkToRegisterPage}
+            handlerCompletePage={handlerLinkToCompletePage}
+            saveHeroInfo={saveHeroInfo}
+          ></Camera>
+        ) : (
+          <Complete hero={heroInfo} reset={resetPage}></Complete>
+        )}
+        {errorDialog.isOpen ? (
+          <ErrorDialog onClose={errorDialog.close} />
+        ) : null}
+      </AnimatePresence>
     </>
   );
 };

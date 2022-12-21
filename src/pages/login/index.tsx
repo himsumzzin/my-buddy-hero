@@ -7,6 +7,7 @@ import Link from 'next/link';
 import router from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
+import { Slide } from '@/components/common';
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
 }
@@ -77,7 +78,7 @@ export default function Signin() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <Slide direction="left" className={styles.container}>
       <Title className={styles.title}>로그인</Title>
       <AuthForm
         inputValue={inputValue}
@@ -95,7 +96,7 @@ export default function Signin() {
           <a className={styles.signinLink}>{'회원가입'}</a>
         </Link>
       </p>
-    </div>
+    </Slide>
   );
 }
 

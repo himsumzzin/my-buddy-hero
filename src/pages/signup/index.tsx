@@ -8,6 +8,7 @@ import axios from 'axios';
 import router from 'next/router';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { Slide } from '@/components/common';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
@@ -85,7 +86,7 @@ export default function Signup() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <Slide direction="left" className={styles.container}>
       <Title className={styles.title}>회원가입</Title>
       <AuthForm
         inputValue={inputValue}
@@ -102,7 +103,7 @@ export default function Signup() {
           <a className={styles.signupLink}>{'로그인'}</a>
         </Link>
       </p>
-    </div>
+    </Slide>
   );
 }
 

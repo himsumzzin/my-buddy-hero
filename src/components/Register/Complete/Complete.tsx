@@ -1,4 +1,4 @@
-import { HeroCard, Link } from '@/components/common';
+import { HeroCard, Link, Slide } from '@/components/common';
 import styles from './Complete.module.css';
 
 interface CompleteProps {
@@ -8,7 +8,7 @@ interface CompleteProps {
 
 export const Complete = ({ hero, reset }: CompleteProps) => {
   return (
-    <div className={`${styles.container}`}>
+    <Slide direction="left" className={`${styles.container}`}>
       <HeroCard hero={hero} className={styles.cardContainer}></HeroCard>
       <p className={styles.subTitle}>
         {hero.name}히어로가 된 걸 축하해! 멋진 임수를 완수하길 바랄게!
@@ -21,6 +21,6 @@ export const Complete = ({ hero, reset }: CompleteProps) => {
           추가 히어로 등록
         </Link>
       </div>
-    </div>
+    </Slide>
   );
 };
