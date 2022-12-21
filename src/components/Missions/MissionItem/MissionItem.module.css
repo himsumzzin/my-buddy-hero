@@ -52,6 +52,7 @@
 
 .title {
   max-width: 100%;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-base);
   text-overflow: ellipsis;
   overflow: hidden;
@@ -59,11 +60,13 @@
 }
 
 .maxReceivers {
+  font-family: var(--font-family-content);
   padding: var(--spacing-xs) 0;
   font-size: var(--text-size-sm);
 }
 
 .checkMission {
+  font-family: var(--font-family-content);
   font-size: var(--text-size-lg);
   display: flex;
   justify-content: space-between;

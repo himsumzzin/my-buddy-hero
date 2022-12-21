@@ -19,7 +19,9 @@ export const getToonifyImage = async (data: FormData, model: IModel) => {
     const { data } = await axios.request(options);
     return data.b64_encoded_output;
   } catch (err) {
-    console.error(err);
+    if (err.response.status === 400) {
+      throw new Error('얼굴인식이 안됩니다');
+    }
   }
 };
 

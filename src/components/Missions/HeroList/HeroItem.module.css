@@ -47,6 +47,7 @@
 
 .heroName {
   color: var(--grayscale-black);
+  font-family: var(--font-family-content);
   font-weight: var(--text-weight-bold);
   text-shadow: var(--shadow-default);
 }

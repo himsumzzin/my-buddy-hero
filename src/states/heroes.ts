@@ -4,7 +4,7 @@ export const initialHero: Hero = {
   id: '',
   groupId: '',
   name: '',
-  code: '1234',
+  code: '',
   title: '',
   profileImage: '',
   completeNumber: 0,

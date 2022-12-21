@@ -53,6 +53,7 @@
 }
 
 .heroCode {
+  font-family: var(--font-family-content);
   font-size: var(--text-size-lg);
   text-align: center;
 }

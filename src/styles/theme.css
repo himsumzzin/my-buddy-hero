@@ -44,4 +44,7 @@
   --transition-slow: 1s;
   --transition-default: 0.5s;
   --transition-fast: 0.2s;
+
+  --font-family-title: 'MaplestoryOTFBold';
+  --font-family-content: 'MaplestoryOTFLight';
 }

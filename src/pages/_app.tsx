@@ -1,3 +1,4 @@
+import '../../public/fonts/style.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
