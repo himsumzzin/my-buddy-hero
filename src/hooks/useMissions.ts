@@ -1,11 +1,12 @@
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { missionListState, userState } from '@/states';
+import { useRecoilState } from 'recoil';
+import { missionListState } from '@/states';
 import { useHeroes } from '@/hooks';
 import { AxiosWithRetry } from '@/apis';
+import { useSession } from 'next-auth/react';
 
 export const useMissions = () => {
-  const user = useRecoilValue(userState);
-  const groupId = user.groupId as string;
+  const { data: session } = useSession();
+  const groupId = session?.user?.name;
 
   const { updateCompleteNumber } = useHeroes();
 
@@ -14,6 +15,10 @@ export const useMissions = () => {
   const initMissionList = async () => {
     const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/missions`);
     setMissionList(data.body.missions);
+  };
+
+  const resetMissionList = () => {
+    setMissionList([]);
   };
 
   const addMission = async (mission: Mission) => {
@@ -72,5 +77,11 @@ export const useMissions = () => {
       throw new Error('mission update error');
     }
   };
-  return { missionList, initMissionList, addMission, updateMission };
+  return {
+    missionList,
+    initMissionList,
+    resetMissionList,
+    addMission,
+    updateMission,
+  };
 };
