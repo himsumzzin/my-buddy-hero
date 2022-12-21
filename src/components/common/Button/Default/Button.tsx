@@ -25,7 +25,7 @@ export type ButtonProps = {
    * 나머지 버튼의 기본 속성 name, type, disabled 등이 올 수 있고,
    * onTouch 이벤트가 올 수 있습니다.
    */
-  restprops?: unknown[];
+  [key: string]: unknown;
 };
 
 export const Button = ({

@@ -1,6 +1,6 @@
 import { heroesState, userState } from '@/states';
-import axios from 'axios';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { AxiosWithRetry } from '@/apis';
 
 export const useHeroes = () => {
   const user = useRecoilValue(userState);
@@ -9,17 +9,13 @@ export const useHeroes = () => {
   const [heroList, setHeroList] = useRecoilState(heroesState);
 
   const initHeroeList = async () => {
-    try {
-      const { data } = await axios.get(`api/groups/${groupId}/heroes`);
-      setHeroList(data.body.data);
-    } catch (err) {
-      console.error(err);
-    }
+    const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/heroes`);
+    setHeroList(data.body.data);
   };
 
   const createHero = async (heroInfo: Hero) => {
     try {
-      const { data } = await axios.post(
+      const { data } = await AxiosWithRetry.post(
         `/api/groups/${groupId}/heroes`,
         heroInfo
       );
@@ -30,7 +26,8 @@ export const useHeroes = () => {
 
       return newHero;
     } catch (err) {
-      console.error('히어로 정보가 제대로 전송되지 않았습니다.', err);
+      console.log(err);
+      throw new Error('hero create error');
     }
   };
 

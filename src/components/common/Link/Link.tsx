@@ -12,6 +12,7 @@ export type LinkProps = {
    */
   size: 'sm' | 'lg';
   selected: boolean;
+  className: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => any;
   children: React.ReactNode;
   restProps?: unknown[];
@@ -22,6 +23,7 @@ export const Link = ({
   size,
   selected,
   children,
+  className,
   onClick,
   ...restProps
 }: LinkProps) => {
@@ -35,7 +37,8 @@ export const Link = ({
       className={`
       ${styles.Link}
       ${styles[size]}
-      ${selected ? styles.selected : ''}`}
+      ${selected ? styles.selected : ''}
+      ${className ?? ''}`}
       onClick={onClick ? handleClick : undefined}
       {...restProps}
     >

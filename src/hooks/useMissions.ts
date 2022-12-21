@@ -1,7 +1,7 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { missionListState, userState } from '@/states';
-import axios from 'axios';
 import { useHeroes } from '@/hooks';
+import { AxiosWithRetry } from '@/apis';
 
 export const useMissions = () => {
   const user = useRecoilValue(userState);
@@ -12,17 +12,13 @@ export const useMissions = () => {
   const [missionList, setMissionList] = useRecoilState(missionListState);
 
   const initMissionList = async () => {
-    try {
-      const { data } = await axios.get(`api/groups/${groupId}/missions`);
-      setMissionList(data.body.missions);
-    } catch (err) {
-      console.error(err);
-    }
+    const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/missions`);
+    setMissionList(data.body.missions);
   };
 
   const addMission = async (mission: Mission) => {
     try {
-      const { data } = await axios.post(
+      const { data } = await AxiosWithRetry.post(
         `api/groups/${groupId}/missions`,
         mission
       );
@@ -30,7 +26,8 @@ export const useMissions = () => {
 
       setMissionList((prev) => [newMission, ...prev]);
     } catch (err) {
-      console.error(err);
+      console.log(err);
+      throw new Error('mission create error');
     }
   };
 
@@ -42,7 +39,7 @@ export const useMissions = () => {
     }
   ) => {
     try {
-      await axios.patch(
+      await AxiosWithRetry.patch(
         `api/groups/${groupId}/missions/${missionId}`,
         missionInfo
       );
@@ -72,7 +69,7 @@ export const useMissions = () => {
         updateCompleteNumber(receivers);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error('mission update error');
     }
   };
   return { missionList, initMissionList, addMission, updateMission };
