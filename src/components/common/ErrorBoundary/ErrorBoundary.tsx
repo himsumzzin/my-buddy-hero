@@ -8,9 +8,12 @@ interface ErrorBoundaryState {
   error: boolean;
 }
 
-export class ErrorBoundary extends Component {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   state: ErrorBoundaryState = { error: false };
-  constructor(props: ErrorBoundaryProps) {
+  constructor(props: ErrorBoundaryProps | Readonly<ErrorBoundaryProps>) {
     super(props);
   }
 
