@@ -44,7 +44,6 @@ export const Dialog = ({
   ...restprops
 }: DialogProps) => {
   const level = `level${lv}`;
-  console.log(level);
 
   const dialogRef = useRef<HTMLElement>(null);
 

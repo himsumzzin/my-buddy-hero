@@ -90,7 +90,6 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
       }
       renderResult();
     } catch (err) {
-      console.log(err);
       errorDialog.open();
     }
   };

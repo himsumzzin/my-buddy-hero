@@ -19,7 +19,6 @@ export const useHeroes = () => {
         `/api/groups/${groupId}/heroes`,
         heroInfo
       );
-      console.log('서버에 저장을 성공해써요!');
 
       const newHero = data.body.hero;
       setHeroList((prev) => [...prev, newHero]);
