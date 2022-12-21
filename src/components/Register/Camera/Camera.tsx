@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import styles from './Camera.module.css';
-import { Button, Dialog } from '@/components/common';
+import { Button, ErrorDialog } from '@/components/common';
 import { CSSProperties, useRef, useState } from 'react';
 import { getToonifyImage } from '@/apis/toonify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import ArrowLeft from '@svgs/arrow-left.svg';
 import { debounce } from 'lodash';
-import { useCallback } from 'react';
 import { useDialog } from '@/hooks';
+import { isAxiosError } from 'axios';
 
 export const Camera = (props: any) => {
   const TIMER_DELAY = 5;
@@ -16,6 +16,7 @@ export const Camera = (props: any) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const errorType = useRef<'face' | 'network' | null>(null);
 
   const [isFirstClick, setIsFirstClick] = useState(true);
   const [countdown, setCountdown] = useState(TIMER_DELAY);
@@ -89,7 +90,11 @@ export const Camera = (props: any) => {
           // 이미지가 로드된 이후 img의 src에 url 넣어주기!
           transImage.src = `data:image/webp;base64,${selectProfileImage}`;
           setImgURL(selectProfileImage);
-        } catch {
+        } catch (err: any) {
+          console.log(err);
+          errorType.current = err.message.toLowerCase().includes('face')
+            ? 'face'
+            : 'network';
           errorDialog.open();
           setLoading(false);
         }
@@ -140,12 +145,19 @@ export const Camera = (props: any) => {
   return (
     <div className={`${styles.container}`}>
       {errorDialog.isOpen ? (
-        <Dialog modal={true} onClose={closeModal}>
-          <Dialog.Body className={styles.modal}>
-            얼굴이 잘 보이게 촬영해주세요
-          </Dialog.Body>
-          <Dialog.Footer onClose={closeModal}></Dialog.Footer>
-        </Dialog>
+        <ErrorDialog
+          title={
+            errorType.current === 'face'
+              ? '얼굴이 잘 보이지 않아요!'
+              : undefined
+          }
+          description={
+            errorType.current === 'face'
+              ? '카메라에 좀 더 가까이 와주시고, 마스크와 모자는 벗어주세요'
+              : undefined
+          }
+          onClose={closeModal}
+        />
       ) : null}
       <Button
         size="xs"
