@@ -7,12 +7,11 @@ import Link from 'next/link';
 import router from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
-
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
 }
 
-export default function Signup() {
+export default function Signin() {
   const [inputValue, setInputValue] = useState<IinputValue>({});
   const [serverError, setServerError] = useState({ id: '', message: '' });
 
@@ -28,7 +27,7 @@ export default function Signup() {
       id: 'password',
       type: 'password',
       errMsg: '영어, 숫자, 특수기호 8~16 글자 입력해주세요',
-      labelText: '비번번호 :',
+      labelText: '비밀번호 :',
       regex:
         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
     },
@@ -36,11 +35,10 @@ export default function Signup() {
 
   const handleSubmit = async () => {
     const response = await signIn('credentials', {
-      redirect: false, // 로그인 실패시 페이지 이동을 방지하기 위해 redirect: false
+      redirect: false,
       id: inputValue.id.value,
       password: inputValue.password.value,
     });
-
     if (!response?.error) {
       router.replace('/herolist');
     } else {
@@ -88,6 +86,7 @@ export default function Signup() {
         handleChange={handleChange}
         serverError={serverError}
         className={styles.signinGap}
+        buttonText="로그인"
       ></AuthForm>
       <PWAInstallButton />
       <p className={styles.signinNav}>

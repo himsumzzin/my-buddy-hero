@@ -29,7 +29,7 @@ export default function Signup() {
       id: 'password',
       type: 'password',
       errMsg: '영어, 숫자, 특수기호 8~16 글자 입력해주세요',
-      labelText: '비번번호 :',
+      labelText: '비밀번호 :',
       regex:
         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
     },
@@ -94,6 +94,7 @@ export default function Signup() {
         handleChange={handleChange}
         serverError={serverError}
         className={styles.signupGap}
+        buttonText="회원가입"
       ></AuthForm>
       <p className={styles.signupNav}>
         <span className={styles.signupGuide}>이미 회원이시라면?</span>
