@@ -30,7 +30,7 @@ export default NextAuth({
         if (!isValid) {
           throw new Error('wrong-id');
         }
-        return { id: user.id };
+        return { name: user.groupId };
       },
     }),
   ],
