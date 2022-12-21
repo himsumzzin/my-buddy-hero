@@ -107,7 +107,7 @@ export type AuthFormProps = {
    * step 2. props로 serverError를 넘겨줍니다.
    */
   serverError?: IserverError;
-
+  buttonText: string;
   /**
    * 사용자가 스타일을 추가하고 싶을 때 사용합니다
    */
@@ -120,6 +120,7 @@ export const AuthForm = ({
   handleSubmit,
   handleChange,
   serverError,
+  buttonText,
   className,
 }: AuthFormProps) => {
   const isValid = (info: { id: string; regex?: RegExp; check?: string }) => {
@@ -166,7 +167,7 @@ export const AuthForm = ({
         </Fragment>
       ))}
       <Button size="lg" disabled={!isAllValid()}>
-        가입
+        {buttonText}
       </Button>
     </form>
   );
