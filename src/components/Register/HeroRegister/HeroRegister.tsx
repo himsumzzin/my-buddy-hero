@@ -51,7 +51,7 @@ export const HeroRegister = (props: any) => {
             name="herotitle"
             size="lg"
             labelText="히어로 칭호를 입력해주세요"
-            validText="히어로 칭호를 입력해주세요"
+            validText="10글자 이하로 히어로 칭호를 입력해주세요"
             initialValue={title}
             className={styles.input}
           ></Input>
@@ -59,7 +59,7 @@ export const HeroRegister = (props: any) => {
             name="herodescription"
             size="lg"
             labelText="히어로에 대해서 설명해주세요!"
-            validText="히어로에 대한 설명을 입력해주세요"
+            validText="20글자 이하로 히어로에 대한 설명을 입력해주세요"
             initialValue={description}
             className={styles.input}
           ></Input>
@@ -67,7 +67,7 @@ export const HeroRegister = (props: any) => {
             name="heroname"
             size="lg"
             labelText="이름을 입력해주세요"
-            validText="이름을 입력하세요"
+            validText="5글자 이하로 이름을 입력하세요"
             initialValue={name}
             className={styles.input}
           ></Input>
