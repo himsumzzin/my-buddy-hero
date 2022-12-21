@@ -7,3 +7,5 @@ export * from './Input';
 export * from './Title';
 export * from './Slide';
 export * from './Nav';
+export * from './ErrorPage';
+export * from './ErrorBoundary';
