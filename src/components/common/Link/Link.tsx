@@ -11,11 +11,11 @@ export type LinkProps = {
    * 버튼의 크기는 두 가지로 고정되어 있습니다
    */
   size: 'sm' | 'lg';
-  selected: boolean;
-  className: string;
+  selected?: boolean;
+  className?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => any;
   children: React.ReactNode;
-  restProps?: unknown[];
+  [key: string]: unknown;
 };
 
 export const Link = ({

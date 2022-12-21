@@ -1,5 +1,6 @@
 import FormData from 'form-data';
 import { AxiosWithRetry } from '@/apis';
+import { AxiosError, isAxiosError } from 'axios';
 
 type IModel = 'toonify' | 'toonifyplus' | 'emojify';
 
@@ -19,8 +20,10 @@ export const getToonifyImage = async (data: FormData, model: IModel) => {
     const { data } = await AxiosWithRetry.request(options);
     return data.b64_encoded_output;
   } catch (err) {
-    if (err.response.status === 400) {
-      throw new Error('얼굴인식이 안됩니다');
+    if (isAxiosError(err) && err.response) {
+      if (err.response.status === 400) {
+        throw new Error('얼굴인식이 안됩니다');
+      }
     }
   }
 };
