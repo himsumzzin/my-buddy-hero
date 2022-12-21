@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { randomUUID } from 'crypto';
 import { hashPassword } from '@/utils/server/auth';
 import { dbConnect } from '@/utils/server/dbConnect';
 import { User } from '@/models/index';
@@ -30,7 +31,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     }
 
     const hashedPassword = await hashPassword(req.body.password);
-    const user = new User({ ...req.body, password: hashedPassword });
+    const user = new User({
+      ...req.body,
+      password: hashedPassword,
+      groupId: randomUUID(),
+    });
     user.save();
 
     return res.status(201).json({
