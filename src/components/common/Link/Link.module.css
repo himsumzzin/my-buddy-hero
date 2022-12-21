@@ -5,8 +5,9 @@
 
   width: 314px;
   height: 69px;
-
+  padding: var(--spacing-sm);
   font-style: normal;
+  font-family: var(--font-family-title);
   font-weight: var(--text-weight-bold);
   text-shadow: var(--shadow-default);
 

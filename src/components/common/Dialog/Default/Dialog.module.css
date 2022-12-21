@@ -1,10 +1,10 @@
 .container {
   position: fixed;
-  z-index: 1000;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
   background: transparent;
+  font-family: var(--font-family-content);
 }
 
 .header * {
@@ -19,29 +19,33 @@
   box-shadow: var(--shadow-default);
 }
 
-.closeButton {
-  cursor: pointer;
-  position: absolute;
-  z-index: 200;
-  top: 20px;
-  right: 20px;
-  border: 0;
-  padding: 10px;
-  background: transparent;
-  color: #121212;
-}
-
-.closeButton svg {
-  fill: currentColor;
-}
-
 .dim {
   position: fixed;
-  z-index: 100;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(36, 36, 36, 0.8);
   backdrop-filter: blur(2px);
+}
+
+.level1 {
+  z-index: 199;
+}
+.level1 ~ .dim {
+  z-index: 100;
+}
+
+.level2 {
+  z-index: 299;
+}
+.level2 ~ .dim {
+  z-index: 200;
+}
+
+.level3 {
+  z-index: 399;
+}
+.level3 ~ .dim {
+  z-index: 300;
 }

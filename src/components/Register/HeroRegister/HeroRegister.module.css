@@ -4,6 +4,7 @@
   margin: 0 auto;
   text-align: center;
   position: relative;
+  font-family: var(--font-family-content);
 }
 
 .backBtn {
@@ -21,6 +22,7 @@
 }
 
 .title {
+  font-family: var(--font-family-title);
   font-size: var(--text-size-title);
   text-align: center;
   color: var(--color-main-orange-700);

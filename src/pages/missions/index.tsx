@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { Dialog, Nav } from '@/components/common';
 import { MissionCard, MissionItem } from '@/components/Missions';
 import { filteredMissionListState } from '@/states';
-import { useHeroes, useMissions } from '@/hooks';
+import { useDialog, useHeroes, useMissions } from '@/hooks';
 import styles from './Missions.module.css';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
@@ -15,7 +15,7 @@ export default function Missions() {
   const { initHeroeList } = useHeroes();
   const { initMissionList } = useMissions();
   const filteredMissionList = useRecoilValue(filteredMissionListState);
-  const [openDialog, setOpenDialog] = useState(false);
+  const missionDialog = useDialog();
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
@@ -25,14 +25,14 @@ export default function Missions() {
 
   const openMissionInfo = (mission: Mission) => {
     setSelectedMission(mission);
-    setOpenDialog(true);
+    missionDialog.open();
   };
   const openMissionForm = () => {
-    setOpenDialog(true);
+    missionDialog.open();
   };
   const closeMissionCard = () => {
     setSelectedMission(null);
-    setOpenDialog(false);
+    missionDialog.close();
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Missions() {
           })}
         </ul>
       </div>
-      {openDialog ? (
+      {missionDialog.isOpen ? (
         <Dialog modal onClose={closeMissionCard}>
           <MissionCard
             initialMission={selectedMission}

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+.title {
+  margin-top: var(--spacing-base);
+  font-size: 3rem;
+}
+
+.image {
+  margin-top: var(--spacing-lg);
+  border-radius: 50%;
+}
+
+.description {
+  margin-top: var(--spacing-lg);
+  color: var(--grayscale-white);
+  font-size: var(--text-size-subTitle);
+  text-shadow: var(--shadow-default);
+}
+
+.link {
+  margin-top: var(--spacing-lg);
+  width: 350px;
+  font-size: var(--text-size-subTitle);
+}

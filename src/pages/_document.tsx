@@ -85,8 +85,9 @@ export default function Document() {
           href="/images/icons/favicon-16x16.png"
         />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#FFFFFF" />
+        <link rel="manifest" href="/manifest.json" />
+        <style></style>
       </Head>
       <body>
         <Main />

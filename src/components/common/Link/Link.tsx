@@ -11,10 +11,11 @@ export type LinkProps = {
    * 버튼의 크기는 두 가지로 고정되어 있습니다
    */
   size: 'sm' | 'lg';
-  selected: boolean;
+  selected?: boolean;
+  className?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => any;
   children: React.ReactNode;
-  restProps?: unknown[];
+  [key: string]: unknown;
 };
 
 export const Link = ({
@@ -22,6 +23,7 @@ export const Link = ({
   size,
   selected,
   children,
+  className,
   onClick,
   ...restProps
 }: LinkProps) => {
@@ -35,7 +37,8 @@ export const Link = ({
       className={`
       ${styles.Link}
       ${styles[size]}
-      ${selected ? styles.selected : ''}`}
+      ${selected ? styles.selected : ''}
+      ${className ?? ''}`}
       onClick={onClick ? handleClick : undefined}
       {...restProps}
     >

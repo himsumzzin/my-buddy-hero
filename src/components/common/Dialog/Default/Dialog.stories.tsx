@@ -3,7 +3,7 @@ import { Dialog, DialogProps } from './Dialog';
 import { Link } from '@/components/common';
 
 export default {
-  title: 'Components/Dialog',
+  title: 'Components/Dialog/Default',
   component: Dialog,
   args: {
     modal: false,

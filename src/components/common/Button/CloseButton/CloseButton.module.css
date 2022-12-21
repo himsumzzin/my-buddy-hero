@@ -1,0 +1,11 @@
+.closeButton {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-sm);
+  transform: translate3d(0, -0.5rem, 0);
+  background-color: var(--color-main-orange-300);
+}
+
+.closeButton svg {
+  fill: var(--grayscale-black);
+}

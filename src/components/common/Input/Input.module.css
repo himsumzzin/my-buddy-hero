@@ -9,6 +9,7 @@
   padding: 20px 29px 20px 32px;
   width: 522px;
   height: 69px;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-lg);
   font-weight: var(--text-weight-bold);
   appearance: none;
@@ -25,6 +26,7 @@
   position: absolute;
   left: 32px;
   top: 15px;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-lg);
   font-weight: var(--text-weight-bold);
   transition: var(--transition-fast) ease all;
@@ -35,6 +37,7 @@
   position: absolute;
   left: 32px;
   top: 0;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-md);
   font-weight: var(--text-weight-bold);
   transition: var(--transition-fast) ease all;
@@ -75,6 +78,7 @@
 
 .error {
   color: red;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-md);
   margin-top: 5px;
   text-align: center;

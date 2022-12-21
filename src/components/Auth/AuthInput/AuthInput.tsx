@@ -76,7 +76,6 @@ export const AuthInput = ({
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChange(id, e.target.value);
   };
-  console.log(restProps);
   return (
     <div className={`${styles.container} ${className ?? ''}`}>
       <input

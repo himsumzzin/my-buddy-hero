@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Dialog.module.css';
 import { getTabbableChildren } from '@/utils/client';
-import CancelIcon from '@svgs/close-svgrepo-com.svg';
+import { CloseButton } from '../../Button';
 
 export interface DialogProps {
   /**
@@ -12,29 +12,40 @@ export interface DialogProps {
    */
   modal: boolean;
   /**
+   * Dialog컴포넌트의 z-index를 결정합니다.
+   * Dialog를 중첩해서 사용할 경우, lv이 높은 Dialog가 더 위에 쌓이게 됩니다
+   * 기본값은 1입니다
+   */
+  lv?: 1 | 2 | 3;
+  /**
    * 다이얼로그를 여는 버튼에 대한 참조입니다.
    * 다이얼로그가 닫힐 경우 해당 버튼으로 포커스가 이동합니다.
    */
   opener?: HTMLElement;
   /**
-   * 다이얼로그를 닫는 함수입니다.
+   * 다이얼로그를 닫는 함수입니다. modal prop의 값이 true일 경우, dimmed 영역을 클릭했을 때 onClose 함수가 호출됩니다
    */
-  onClose: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
-  restprops?: unknown[];
+  [key: string]: unknown;
 }
 
 const defaultProps = {
   modal: false,
+  lv: 1,
 };
 
 export const Dialog = ({
   modal,
+  lv,
   opener,
   onClose,
   children,
   ...restprops
 }: DialogProps) => {
+  const level = `level${lv}`;
+  console.log(level);
+
   const dialogRef = useRef<HTMLElement>(null);
 
   const portalContainer = document.getElementById(
@@ -102,7 +113,7 @@ export const Dialog = ({
         role="dialog"
         aria-modal={modal}
         tabIndex={-1}
-        className={styles.container}
+        className={`${styles.container} ${styles[level]}`}
         {...restprops}
       >
         {children}
@@ -123,10 +134,11 @@ Dialog.Header = function DialogHeader({ children }: HeaderProps) {
 };
 
 interface BodyProps {
+  className?: string;
   children: React.ReactNode;
 }
-Dialog.Body = function DialogBody({ children }: BodyProps) {
-  return <div className={styles.body}>{children}</div>;
+Dialog.Body = function DialogBody({ className, children }: BodyProps) {
+  return <div className={`${styles.body} ${className}`}>{children}</div>;
 };
 
 interface FooterProps {
@@ -136,15 +148,13 @@ interface FooterProps {
 Dialog.Footer = function DialogFooter({ children, onClose }: FooterProps) {
   return (
     <footer className={styles.footer}>
-      <button
+      <CloseButton
         type="button"
         className={styles.closeButton}
         aria-label="모달 다이얼로그 닫기"
         title="모달 다이얼로그 닫기"
-        onClick={onClose}
-      >
-        <CancelIcon />
-      </button>
+        onClose={onClose}
+      />
       {children}
     </footer>
   );

@@ -1,22 +1,27 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import styles from './Camera.module.css';
-import { Button } from '@/components/common';
+import { Button, Dialog } from '@/components/common';
 import { CSSProperties, useRef, useState } from 'react';
 import { getToonifyImage } from '@/apis/toonify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import ArrowLeft from '@svgs/arrow-left.svg';
+import { debounce } from 'lodash';
+import { useCallback } from 'react';
+import { useDialog } from '@/hooks';
 
 export const Camera = (props: any) => {
+  const TIMER_DELAY = 5;
   const { handlerRegisterPage, saveHeroInfo } = props;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [isFirstClick, setIsFirstClick] = useState(true);
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(TIMER_DELAY);
   const [imgURL, setImgURL] = useState('');
   const [loading, setLoading] = useState(false);
+  const errorDialog = useDialog();
 
   const setDevice = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -77,7 +82,7 @@ export const Camera = (props: any) => {
             const canvas = canvasRef.current?.getContext(
               '2d'
             ) as CanvasRenderingContext2D;
-            canvas.drawImage(transImage, 0, 0, 530, 450);
+            canvas.drawImage(transImage, 0, 0, 522, 430);
             setLoading(false);
           };
 
@@ -85,7 +90,8 @@ export const Camera = (props: any) => {
           transImage.src = `data:image/webp;base64,${selectProfileImage}`;
           setImgURL(selectProfileImage);
         } catch {
-          console.error('fail to ToonifyImage');
+          errorDialog.open();
+          setLoading(false);
         }
       },
       'image/webp',
@@ -112,8 +118,8 @@ export const Camera = (props: any) => {
   };
 
   const retakeThePictureHandler = () => {
-    if (!isFirstClick) return;
-    setCountdown(5);
+    if (isFirstClick) return;
+    setCountdown(TIMER_DELAY);
     countDownAndTakeAPicture();
   };
 
@@ -123,17 +129,24 @@ export const Camera = (props: any) => {
     borderColor: 'green',
   };
 
-  const buttonActive = () => {
-    if (countdown === 5 && isFirstClick) {
-      return true;
-    } else if (loading) {
-      return true;
-    }
-    return false;
+  const isBtnDisable =
+    loading || (countdown && countdown < TIMER_DELAY) || isFirstClick;
+
+  const closeModal = () => {
+    errorDialog.close();
+    setCountdown(TIMER_DELAY);
   };
 
   return (
     <div className={`${styles.container}`}>
+      {errorDialog.isOpen ? (
+        <Dialog modal={true} onClose={closeModal}>
+          <Dialog.Body className={styles.modal}>
+            얼굴이 잘 보이게 촬영해주세요
+          </Dialog.Body>
+          <Dialog.Footer onClose={closeModal}></Dialog.Footer>
+        </Dialog>
+      ) : null}
       <Button
         size="xs"
         onClick={handlerRegisterPage}
@@ -187,26 +200,28 @@ export const Camera = (props: any) => {
               countdown === 0 ? styles.show : styles.hidden
             }`}
             ref={canvasRef}
-            width={530}
-            height={450}
+            width={522}
+            height={430}
           ></canvas>
         </div>
       </div>
       <div className={styles.buttonContainer}>
         <Button
           size="md"
-          onClick={retakeThePictureHandler}
-          disabled={buttonActive()}
+          onClick={debounce(() => {
+            retakeThePictureHandler();
+          }, 1000)}
+          disabled={isBtnDisable}
           className={styles.button}
         >
           다시 찍기
         </Button>
         <Button
           size="md"
-          onClick={() => {
+          onClick={debounce(() => {
             saveHeroInfo(imgURL);
-          }}
-          disabled={buttonActive()}
+          }, 1000)}
+          disabled={isBtnDisable}
           className={styles.button}
         >
           완료

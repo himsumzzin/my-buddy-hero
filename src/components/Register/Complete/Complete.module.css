@@ -2,7 +2,8 @@
   width: 100vh;
   height: 100vh;
   margin: 0 auto;
-  padding-top: 5%;
+  padding-top: 7%;
+  font-family: var(--font-family-content);
 }
 
 .hidden {

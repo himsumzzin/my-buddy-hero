@@ -1,0 +1,17 @@
+.button {
+  width: 522px;
+  height: 69px;
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-family-content);
+  font-weight: var(--text-weight-bold);
+  font-size: var(--text-size-lg);
+  color: var(--grayscale-white);
+  background: cornflowerblue;
+  box-shadow: var(--shadow-default);
+  margin-top: var(--spacing-sm);
+}
+
+.button:hover,
+.button:active {
+  background: dodgerblue;
+}

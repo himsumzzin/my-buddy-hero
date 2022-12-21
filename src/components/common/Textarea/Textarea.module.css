@@ -11,6 +11,7 @@
 
   color: var(--grayscale-darkgray);
 
+  font-family: var(--font-family-content);
   font-size: var(--text-size-base);
   font-weight: 600;
 

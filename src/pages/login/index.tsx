@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { AuthForm } from '@/components/Auth';
-import { Title } from '@/components/common';
+import { Title, PWAInstallButton } from '@/components/common';
 import styles from './login.module.css';
 import Link from 'next/link';
 import router from 'next/router';
@@ -90,6 +90,7 @@ export default function Signup() {
         serverError={serverError}
         className={styles.signinGap}
       ></AuthForm>
+      <PWAInstallButton />
       <p className={styles.signinNav}>
         <span className={styles.signinGuide}>아직 회원이 아니시라면?</span>
         <Link href="/signup" legacyBehavior>
