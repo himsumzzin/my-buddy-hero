@@ -1,0 +1,17 @@
+.body {
+  color: var(--grayscale-white);
+  background-color: var(--color-main-orange-700);
+  text-align: center;
+  box-shadow: var(--shadow-default);
+}
+
+.title {
+  font-size: var(--text-size-subTitle);
+  font-weight: var(--text-weight-bold);
+}
+
+.description {
+  margin-top: var(--spacing-base);
+  white-space: nowrap;
+  font-size: var(--text-size-lg);
+}
