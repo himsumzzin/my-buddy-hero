@@ -12,6 +12,13 @@
   height: 100vh;
   margin: 0 auto;
   padding-top: 10%;
+  font-family: var(--font-family-content);
+}
+
+.modal {
+  font-size: var(--text-size-subTitle);
+  font-weight: var(--text-weight-bold);
+  background-color: var(--color-main-orange-600);
 }
 
 .backBtn {
@@ -93,6 +100,7 @@
 }
 
 .video {
+  z-index: 9999;
   border-radius: var(--border-radius-md);
   background: #d6d2c6;
   box-shadow: var(--shadow-default);

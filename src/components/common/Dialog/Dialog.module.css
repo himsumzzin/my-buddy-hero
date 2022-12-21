@@ -5,6 +5,7 @@
   left: 50%;
   translate: -50% -50%;
   background: transparent;
+  font-family: var(--font-family-content);
 }
 
 .header * {
