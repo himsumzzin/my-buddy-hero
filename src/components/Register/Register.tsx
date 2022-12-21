@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useHeroes } from '@/hooks';
+import { useDialog, useHeroes } from '@/hooks';
 import { initialHero } from '@/states';
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
+import { ErrorDialog } from '../common';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
 
@@ -12,6 +13,7 @@ export const Register = () => {
   const [page, setPage] = useState<Stage>('HeroRegister');
   const [heroInfo, setHeroInfo] = useState<Hero>(initialHero);
   const { createHero } = useHeroes();
+  const errorDialog = useDialog();
 
   const getHeroInfo = (newHeroInfo: Hero) => {
     setHeroInfo({ ...heroInfo, ...newHeroInfo });
@@ -30,6 +32,7 @@ export const Register = () => {
       setPage('Complete');
     } catch (err) {
       console.error('히어로 정보가 제대로 전송되지 않았습니다.', err);
+      errorDialog.open();
     }
   };
 
@@ -62,6 +65,7 @@ export const Register = () => {
       ) : (
         <Complete hero={heroInfo} reset={resetPage}></Complete>
       )}
+      {errorDialog.isOpen ? <ErrorDialog onClose={errorDialog.close} /> : null}
     </>
   );
 };

@@ -12,15 +12,8 @@ export const useMissions = () => {
   const [missionList, setMissionList] = useRecoilState(missionListState);
 
   const initMissionList = async () => {
-    try {
-      const { data } = await AxiosWithRetry.get(
-        `api/groups/${groupId}/missions`
-      );
-
-      setMissionList(data.body.missions);
-    } catch (err) {
-      console.error(err);
-    }
+    const { data } = await AxiosWithRetry.get(`api/groups/${groupId}/missions`);
+    setMissionList(data.body.missions);
   };
 
   const addMission = async (mission: Mission) => {
@@ -33,7 +26,8 @@ export const useMissions = () => {
 
       setMissionList((prev) => [newMission, ...prev]);
     } catch (err) {
-      console.error(err);
+      console.log(err);
+      throw new Error('mission create error');
     }
   };
 
@@ -75,7 +69,7 @@ export const useMissions = () => {
         updateCompleteNumber(receivers);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error('mission update error');
     }
   };
   return { missionList, initMissionList, addMission, updateMission };

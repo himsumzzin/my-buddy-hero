@@ -2,8 +2,9 @@ import { useState, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import { defaultMission, initialHero } from '@/states';
-import { useMissions } from '@/hooks/useMissions';
+import { useMissions, useDialog } from '@/hooks';
 
+import { ErrorDialog } from '@/components/common';
 import { MissionForm } from '../MissionForm';
 import { MissionInfo } from '../MissionInfo';
 import { HeroList } from '../HeroList';
@@ -42,10 +43,12 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
     initialMission ?? defaultMission
   );
   const { addMission, updateMission } = useMissions();
+  const errorDialog = useDialog();
 
   const missionStatus = useRef<MissionStatus>(
     initialMission ? 'update' : 'create'
   );
+
   const heroInfo = useRef<Hero>(initialHero);
 
   const renderMissionForm = () => setCurrentComponent('MissionForm');
@@ -71,21 +74,25 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
     heroInfo.current = selectedHeroInfo;
 
     const status = missionStatus.current;
-    switch (status) {
-      case 'create':
-        await addMission({ ...mission, authorId: heroInfo.current.id });
-        break;
-      case 'update':
-        await updateMission(mission.id, { receiver: selectedHeroInfo.id });
-        break;
-      case 'complete':
-        await updateMission(mission.id, {
-          receivers: mission.receivers,
-        });
-        break;
+    try {
+      switch (status) {
+        case 'create':
+          await addMission({ ...mission, authorId: heroInfo.current.id });
+          break;
+        case 'update':
+          await updateMission(mission.id, { receiver: selectedHeroInfo.id });
+          break;
+        case 'complete':
+          await updateMission(mission.id, {
+            receivers: mission.receivers,
+          });
+          break;
+      }
+      renderResult();
+    } catch (err) {
+      console.log(err);
+      errorDialog.open();
     }
-
-    renderResult();
   };
 
   return (
@@ -122,6 +129,7 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
           />
         )}
       </AnimatePresence>
+      {errorDialog.isOpen ? <ErrorDialog onClose={errorDialog.close} /> : null}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import PacmanLoader from 'react-spinners/PacmanLoader';
 import ArrowLeft from '@svgs/arrow-left.svg';
 import { debounce } from 'lodash';
 import { useCallback } from 'react';
+import { useDialog } from '@/hooks';
 
 export const Camera = (props: any) => {
   const TIMER_DELAY = 5;
@@ -20,7 +21,7 @@ export const Camera = (props: any) => {
   const [countdown, setCountdown] = useState(TIMER_DELAY);
   const [imgURL, setImgURL] = useState('');
   const [loading, setLoading] = useState(false);
-  const [modal, setModal] = useState(false);
+  const errorDialog = useDialog();
 
   const setDevice = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -89,7 +90,7 @@ export const Camera = (props: any) => {
           transImage.src = `data:image/webp;base64,${selectProfileImage}`;
           setImgURL(selectProfileImage);
         } catch {
-          setModal(true);
+          errorDialog.open();
           setLoading(false);
         }
       },
@@ -132,13 +133,13 @@ export const Camera = (props: any) => {
     loading || (countdown && countdown < TIMER_DELAY) || isFirstClick;
 
   const closeModal = () => {
-    setModal(false);
+    errorDialog.close();
     setCountdown(TIMER_DELAY);
   };
 
   return (
     <div className={`${styles.container}`}>
-      {modal ? (
+      {errorDialog.isOpen ? (
         <Dialog modal={true} onClose={closeModal}>
           <Dialog.Body className={styles.modal}>
             얼굴이 잘 보이게 촬영해주세요
