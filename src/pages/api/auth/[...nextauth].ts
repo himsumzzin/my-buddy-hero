@@ -14,7 +14,7 @@ export default NextAuth({
         id: { label: '아이디 :', type: 'text' },
         password: { label: '비밀번호 :', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         if (!credentials) throw new Error('credentials is null!');
         await dbConnect();
         const user = await User.findOne({ id: credentials.id }).exec();
@@ -30,7 +30,7 @@ export default NextAuth({
         if (!isValid) {
           throw new Error('wrong-id');
         }
-        return { name: user.groupId };
+        return { name: user.groupId } as any;
       },
     }),
   ],
