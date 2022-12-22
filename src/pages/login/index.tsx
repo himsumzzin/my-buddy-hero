@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import { AuthForm } from '@/components/Auth';
-import { Title, PWAInstallButton } from '@/components/common';
-import styles from './login.module.css';
+import { GetServerSideProps } from 'next';
+import { getSession, signIn } from 'next-auth/react';
+import Head from 'next/head';
 import Link from 'next/link';
 import router from 'next/router';
-import { getSession, signIn } from 'next-auth/react';
-import { GetServerSideProps } from 'next';
-import { Slide } from '@/components/common';
+import { AuthForm } from '@/components/Auth';
+import { Title, PWAInstallButton, Slide } from '@/components/common';
+import styles from './login.module.css';
+
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
 }
@@ -78,25 +79,30 @@ export default function Signin() {
   }, []);
 
   return (
-    <Slide direction="left" className={styles.container}>
-      <Title className={styles.title}>로그인</Title>
-      <AuthForm
-        inputValue={inputValue}
-        formInfo={formInfo}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        serverError={serverError}
-        className={styles.signinGap}
-        buttonText="로그인"
-      ></AuthForm>
-      <PWAInstallButton />
-      <p className={styles.signinNav}>
-        <span className={styles.signinGuide}>아직 회원이 아니시라면?</span>
-        <Link href="/signup" legacyBehavior>
-          <a className={styles.signinLink}>{'회원가입'}</a>
-        </Link>
-      </p>
-    </Slide>
+    <>
+      <Head>
+        <title>내 짝꿍 히어로</title>
+      </Head>
+      <Slide direction="left" className={styles.container}>
+        <Title className={styles.title}>로그인</Title>
+        <AuthForm
+          inputValue={inputValue}
+          formInfo={formInfo}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          serverError={serverError}
+          className={styles.signinGap}
+          buttonText="로그인"
+        ></AuthForm>
+        <PWAInstallButton />
+        <p className={styles.signinNav}>
+          <span className={styles.signinGuide}>아직 회원이 아니시라면?</span>
+          <Link href="/signup" legacyBehavior>
+            <a className={styles.signinLink}>{'회원가입'}</a>
+          </Link>
+        </p>
+      </Slide>
+    </>
   );
 }
 

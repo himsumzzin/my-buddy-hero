@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { getSession } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
-import { Dialog, Nav } from '@/components/common';
-import { MissionCard, MissionItem } from '@/components/Missions';
 import { filteredMissionListState } from '@/states';
 import { useDialog, useHeroes, useMissions } from '@/hooks';
+import { Dialog, Nav, Slide } from '@/components/common';
+import { MissionCard, MissionItem } from '@/components/Missions';
 import styles from './Missions.module.css';
-import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
-import { Slide } from '@/components/common';
 
 export default function Missions() {
   const router = useRouter();
@@ -37,34 +37,39 @@ export default function Missions() {
   };
 
   return (
-    <div className={styles.container}>
-      <Nav
-        buttonName="임무 등록"
-        onButtonClick={openMissionForm}
-        currentPage={router?.asPath}
-      />
-      <Slide direction="left" className={styles.missionContainer}>
-        <ul className={styles.missionList}>
-          {filteredMissionList.map((mission) => {
-            return (
-              <MissionItem
-                key={mission.id}
-                mission={mission}
-                onClick={openMissionInfo}
-              />
-            );
-          })}
-        </ul>
-      </Slide>
-      {missionDialog.isOpen ? (
-        <Dialog modal onClose={closeMissionCard}>
-          <MissionCard
-            initialMission={selectedMission}
-            onClose={closeMissionCard}
-          />
-        </Dialog>
-      ) : null}
-    </div>
+    <>
+      <Head>
+        <title>내 짝꿍 히어로</title>
+      </Head>
+      <div className={styles.container}>
+        <Nav
+          buttonName="임무 등록"
+          onButtonClick={openMissionForm}
+          currentPage={router?.asPath}
+        />
+        <Slide direction="left" className={styles.missionContainer}>
+          <ul className={styles.missionList}>
+            {filteredMissionList.map((mission) => {
+              return (
+                <MissionItem
+                  key={mission.id}
+                  mission={mission}
+                  onClick={openMissionInfo}
+                />
+              );
+            })}
+          </ul>
+        </Slide>
+        {missionDialog.isOpen ? (
+          <Dialog modal onClose={closeMissionCard}>
+            <MissionCard
+              initialMission={selectedMission}
+              onClose={closeMissionCard}
+            />
+          </Dialog>
+        ) : null}
+      </div>
+    </>
   );
 }
 
