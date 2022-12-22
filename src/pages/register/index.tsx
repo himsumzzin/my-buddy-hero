@@ -1,11 +1,15 @@
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import Head from 'next/head';
 import { AnimatePresence } from 'framer-motion';
 import { Register } from '@/components/Register';
 
 export default function HeroRegister() {
   return (
     <>
+      <Head>
+        <title>내 짝꿍 히어로</title>
+      </Head>
       <AnimatePresence>
         <Register />
       </AnimatePresence>

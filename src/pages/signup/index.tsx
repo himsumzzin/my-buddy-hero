@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import { AuthForm } from '@/components/Auth';
-import { Title } from '@/components/common';
-import styles from './signup.module.css';
-import Link from 'next/link';
-import axios from 'axios';
-import router from 'next/router';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
-import { Slide } from '@/components/common';
+import Link from 'next/link';
+import Head from 'next/head';
+import router from 'next/router';
+import { AxiosWithRetry } from '@/apis';
+import { AuthForm } from '@/components/Auth';
+import { Title, Slide } from '@/components/common';
+import styles from './signup.module.css';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
@@ -45,7 +45,7 @@ export default function Signup() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('api/auth/signup', {
+      const response = await AxiosWithRetry.post('api/auth/signup', {
         id: inputValue.id.value,
         password: inputValue.password.value,
       });
@@ -86,24 +86,29 @@ export default function Signup() {
   }, []);
 
   return (
-    <Slide direction="left" className={styles.container}>
-      <Title className={styles.title}>회원가입</Title>
-      <AuthForm
-        inputValue={inputValue}
-        formInfo={formInfo}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        serverError={serverError}
-        className={styles.signupGap}
-        buttonText="회원가입"
-      ></AuthForm>
-      <p className={styles.signupNav}>
-        <span className={styles.signupGuide}>이미 회원이시라면?</span>
-        <Link href="/login" legacyBehavior>
-          <a className={styles.signupLink}>{'로그인'}</a>
-        </Link>
-      </p>
-    </Slide>
+    <>
+      <Head>
+        <title>내 짝꿍 히어로</title>
+      </Head>
+      <Slide direction="left" className={styles.container}>
+        <Title className={styles.title}>회원가입</Title>
+        <AuthForm
+          inputValue={inputValue}
+          formInfo={formInfo}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          serverError={serverError}
+          className={styles.signupGap}
+          buttonText="회원가입"
+        ></AuthForm>
+        <p className={styles.signupNav}>
+          <span className={styles.signupGuide}>이미 회원이시라면?</span>
+          <Link href="/login" legacyBehavior>
+            <a className={styles.signupLink}>{'로그인'}</a>
+          </Link>
+        </p>
+      </Slide>
+    </>
   );
 }
 

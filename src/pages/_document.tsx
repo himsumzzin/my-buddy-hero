@@ -10,10 +10,6 @@ export default function Document() {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <meta
-          name="description"
-          content="히어로 역할놀이를 할 수 있는 앱입니다."
-        />
         <meta name="keywords" content="mybuddyhero" />
         <link
           rel="apple-touch-icon"
