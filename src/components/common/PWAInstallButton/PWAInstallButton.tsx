@@ -14,10 +14,17 @@ export const PWAInstallButton = () => {
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPrompt | null>(null);
 
+  let isInstall;
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', (e: any) => {
       e.preventDefault();
-      setInstallPrompt(e);
+
+      isInstall = window.matchMedia('(display-mode: standalone)').matches;
+      if (isInstall) {
+        console.log('display-mode is standalone');
+      } else {
+        setInstallPrompt(e);
+      }
     });
   }, [installPrompt]);
 
@@ -31,9 +38,9 @@ export const PWAInstallButton = () => {
     setInstallPrompt(null);
   };
 
-  return installPrompt ? (
+  return isInstall ? null : (
     <button className={styles.button} onClick={installApp}>
       바탕화면에 설치해서 편리하게 사용하세요!
     </button>
-  ) : null;
+  );
 };
