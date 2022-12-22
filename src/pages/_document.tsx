@@ -86,6 +86,14 @@ export default function Document() {
         />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#FFFFFF" />
+        <meta property="og:title" content="My Buddy Hero" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mybuddyhero.com" />
+        <meta property="og:image" content="/images/icons/ogImage.jpg" />
+        <meta
+          property="description"
+          content="히어로 역할 놀이를 통한 교육 서비스"
+        />
         <link rel="manifest" href="/manifest.json" />
         <style></style>
       </Head>

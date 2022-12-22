@@ -10,7 +10,6 @@
   display: flex;
   overflow: scroll;
   flex-direction: row;
-  justify-content: space-between;
   gap: var(--spacing-base);
   padding-top: 2%;
   background-color: var(--color-main-orange-500);
