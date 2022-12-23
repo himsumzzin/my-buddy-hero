@@ -3,11 +3,16 @@ import styles from './MissionItem.module.css';
 import ArrowLeftIcon from '@svgs/arrow-left.svg';
 
 export interface IMissionItemProps {
+  author: Hero;
   mission: Mission;
   onClick: (mission: Mission) => void;
 }
 
-export const MissionItem = ({ mission, onClick }: IMissionItemProps) => {
+export const MissionItem = ({
+  mission,
+  author,
+  onClick,
+}: IMissionItemProps) => {
   const { id, title, maxReceiver, receivers, isComplete } = mission;
   const isFull = maxReceiver === receivers.length;
 
@@ -29,9 +34,18 @@ export const MissionItem = ({ mission, onClick }: IMissionItemProps) => {
       >
         <p className={styles.title}>{title}</p>
         <div>
-          <p className={styles.maxReceivers}>
-            {maxReceiver - receivers.length}명의 도움이 필요해요!
-          </p>
+          {author ? (
+            <div className={styles.authorBox}>
+              <p className={styles.author}>{author.title}</p>
+              <Image
+                className={`${styles.profileImage}`}
+                src={author.profileImage}
+                alt={`${author.name} 히어로`}
+                width={65}
+                height={65}
+              />
+            </div>
+          ) : null}
           <p className={styles.checkMission}>
             <span>임무 확인</span>
             <ArrowLeftIcon

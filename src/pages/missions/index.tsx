@@ -13,7 +13,7 @@ import styles from './Missions.module.css';
 
 export default function Missions() {
   const router = useRouter();
-  const { initHeroeList } = useHeroes();
+  const { initHeroeList, getHero } = useHeroes();
   const { initMissionList } = useMissions();
   const filteredMissionList = useRecoilValue(filteredMissionListState);
   const missionDialog = useDialog();
@@ -48,17 +48,22 @@ export default function Missions() {
           currentPage={router?.asPath}
         />
         <Slide direction="left" className={styles.missionContainer}>
-          <ul className={styles.missionList}>
-            {filteredMissionList.map((mission) => {
-              return (
-                <MissionItem
-                  key={mission.id}
-                  mission={mission}
-                  onClick={openMissionInfo}
-                />
-              );
-            })}
-          </ul>
+          {filteredMissionList.length > 0 ? (
+            <ul className={styles.missionList}>
+              {filteredMissionList.map((mission) => {
+                return (
+                  <MissionItem
+                    key={mission.id}
+                    author={getHero(mission.authorId) as Hero}
+                    mission={mission}
+                    onClick={openMissionInfo}
+                  />
+                );
+              })}
+            </ul>
+          ) : (
+            <p>임무를 등록해주세요!</p>
+          )}
         </Slide>
         {missionDialog.isOpen ? (
           <Dialog modal onClose={closeMissionCard}>

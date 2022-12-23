@@ -34,6 +34,9 @@ export const useHeroes = () => {
     }
   };
 
+  const getHero = (heroId: string) =>
+    heroList.find((hero) => hero.id === heroId);
+
   const updateCompleteNumber = (heroIds: string[]) => {
     setHeroList((prev) =>
       prev.map((hero) =>
@@ -49,6 +52,7 @@ export const useHeroes = () => {
     initHeroeList,
     resetHeroList,
     createHero,
+    getHero,
     updateCompleteNumber,
   };
 };
