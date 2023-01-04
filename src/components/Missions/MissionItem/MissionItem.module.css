@@ -59,13 +59,26 @@
   white-space: nowrap;
 }
 
-.maxReceivers {
-  font-family: var(--font-family-content);
+.authorBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}
+
+.author {
+  display: inline-block;
   padding: var(--spacing-xs) 0;
+  font-family: var(--font-family-content);
   font-size: var(--text-size-sm);
+}
+.profileImage {
+  display: inline-block;
+  border-radius: 50%;
 }
 
 .checkMission {
+  margin-top: var(--text-size-sm);
   font-family: var(--font-family-content);
   font-size: var(--text-size-lg);
   display: flex;

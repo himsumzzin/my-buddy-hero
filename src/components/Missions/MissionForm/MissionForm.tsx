@@ -34,7 +34,7 @@ export const MissionForm = ({
   onSubmit,
   onClose,
 }: MissionFormProps) => {
-  const { title, maxReceiver, description } = mission;
+  const { id, title, maxReceiver, description } = mission;
 
   const handleSubmit = (e: React.FormEvent<SummaryForm>) => {
     e.preventDefault();
@@ -64,7 +64,7 @@ export const MissionForm = ({
           />
           <Input
             name="maxReceiver"
-            initialValue={maxReceiver}
+            initialValue={id ? maxReceiver : undefined}
             size="md"
             labelText="몇 명의 히어로가 필요한가요?"
             placeholder="몇 명의 히어로가 필요한가요?"

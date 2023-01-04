@@ -34,7 +34,9 @@ export const MissionInfo = ({
       <div className={styles.textBox}>
         <p className={styles.missionTitle}>{title}</p>
         <p className={styles.description}>{description}</p>
-        <p className={styles.maxReceiver}>{maxReceiver}명이 더 필요해요!</p>
+        <p className={styles.maxReceiver}>
+          {maxReceiver - receivers.length}명이 더 필요해요!
+        </p>
       </div>
       <div className={styles.buttonBox}>
         <Button
