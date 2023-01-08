@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from './MissionItem.module.css';
-import ArrowLeftIcon from '@svgs/arrow-left.svg';
+import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
 
 export interface IMissionItemProps {
   author: Hero;
@@ -19,7 +19,7 @@ export const MissionItem = ({
   const handleClick = () => {
     onClick(mission);
   };
-  // return <button>button</button>;
+
   return (
     <li
       className={`${styles.container} ${isComplete ? styles.disabled : ''} ${
@@ -52,8 +52,6 @@ export const MissionItem = ({
               width={24}
               height={24}
               className={styles.arrowIcon}
-              src="/svgs/arrow-right.svg"
-              alt=""
               aria-hidden="true"
             />
           </p>

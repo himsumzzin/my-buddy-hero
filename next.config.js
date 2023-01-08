@@ -16,13 +16,36 @@ module.exports = withPWA({
   },
   swcMinify: true,
   webpack(config) {
-    config.module.rules = config.module.rules.filter((rule) =>
-      rule.test && !rule.test.test('.svg') ? false : true
+    config.module.rules = config.module.rules.filter(
+      (rule) => !rule.test?.test('.svg')
     );
 
     config.module.rules.push({
       test: /\.svg$/i,
-      use: ['@svgr/webpack'],
+      oneOf: [
+        {
+          dependency: { not: ['url'] },
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                titleProp: true,
+                svgo: true,
+              },
+            },
+            'new-url-loader',
+          ],
+        },
+        {
+          type: 'asset/resource',
+          generator: {
+            filename: 'static/[name].[contenthash][ext][query]',
+          },
+          parser: {
+            dataUrlCondition: 4 * 1024,
+          },
+        },
+      ],
     });
 
     config.resolve.alias = {

@@ -5,7 +5,7 @@ import { Button, ErrorDialog, Slide } from '@/components/common';
 import { CSSProperties, useRef, useState } from 'react';
 import { getToonifyImage } from '@/apis/toonify';
 import PacmanLoader from 'react-spinners/PacmanLoader';
-import ArrowLeft from '@svgs/arrow-left.svg';
+import { ReactComponent as ArrowLeft } from '@svgs/arrow-left.svg';
 import { debounce } from 'lodash';
 import { useDialog } from '@/hooks';
 import { isAxiosError } from 'axios';

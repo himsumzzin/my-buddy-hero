@@ -45,22 +45,31 @@ module.exports = {
     config.module.rules.push(
       // svg 로더
       {
-        test: /\.svg$/,
-        use: [
+        test: /\.svg$/i,
+        oneOf: [
           {
-            loader: '@svgr/webpack',
+            dependency: { not: ['url'] },
+            use: [
+              {
+                loader: '@svgr/webpack',
+                options: {
+                  titleProp: true,
+                  svgo: true,
+                },
+              },
+              'new-url-loader',
+            ],
           },
           {
-            loader: 'file-loader',
-            options: {
-              name: 'static/media/[path][name].[ext]',
+            type: 'asset/resource',
+            generator: {
+              filename: 'static/[name].[contenthash][ext][query]',
+            },
+            parser: {
+              dataUrlCondition: 4 * 1024,
             },
           },
         ],
-        type: 'javascript/auto',
-        issuer: {
-          and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
-        },
       },
       // postCSS 포함 css 로더
       {

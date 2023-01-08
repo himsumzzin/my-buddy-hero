@@ -6,7 +6,7 @@ import { heroesState } from '@/states/heroes';
 
 import { Input, Button, Title } from '@/components/common';
 import { HeroItem } from './HeroItem';
-import ArrowLeftIcon from '@svgs/arrow-left.svg';
+import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
 
 import styles from './HeroList.module.css';
 import { Slide } from '@/components/common';

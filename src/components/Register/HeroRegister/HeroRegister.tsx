@@ -1,7 +1,7 @@
 import { Input, Button, Slide } from '@/components/common';
 import styles from './HeroRegister.module.css';
 import { useRouter } from 'next/router';
-import ArrowLeft from '@svgs/arrow-left.svg';
+import { ReactComponent as ArrowLeft } from '@svgs/arrow-left.svg';
 
 export const HeroRegister = (props: any) => {
   const router = useRouter();
@@ -26,7 +26,7 @@ export const HeroRegister = (props: any) => {
       title: elements.herotitle.value,
       description: elements.herodescription.value,
       name: elements.heroname.value,
-      code: +elements.herocode.value,
+      code: elements.herocode.value,
     });
   };
 
