@@ -50,6 +50,20 @@ export const HeroList = ({
 
   const { receivers, authorId } = mission;
 
+  const getErrorMessage = () => {
+    if (!selectedHeroId) {
+      return '히어로를 선택해주세요!';
+    }
+    switch (missionStatus) {
+      case 'create':
+        return '히어로 코드가 올바르지 않습니다. 다시 입력해주세요';
+      case 'update':
+        return '임무를 수락할 수 없는 히어로입니다.';
+      case 'complete':
+        return '임무를 종료할 수 없는 히어로입니다.';
+    }
+  };
+
   const selectHero = useCallback(
     (e: React.MouseEvent<HTMLUListElement>) => {
       const heroId = e.target.closest('li')?.dataset?.heroId;
@@ -94,7 +108,7 @@ export const HeroList = ({
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3}>히어로 선택</Title>
+        <Title lv={3}>당신은 누구인가요?</Title>
       </header>
       <div className={styles.heroesBox}>
         <ul className={styles.ul} onClick={selectHero}>
@@ -121,11 +135,7 @@ export const HeroList = ({
           placeholder="히어로 코드:"
         />
         {!isValid ? (
-          <span className={styles.errorMessage}>
-            {selectedHeroId
-              ? '히어로 코드를 확인해주세요!'
-              : '히어로를 선택해주세요!'}
-          </span>
+          <span className={styles.errorMessage}>{getErrorMessage()}</span>
         ) : null}
         <Button size="sm">완료</Button>
       </form>
