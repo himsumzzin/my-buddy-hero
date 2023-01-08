@@ -1,5 +1,5 @@
 import { Input, Textarea, Button, Title, Slide } from '@/components/common';
-import CloseIcon from '@svgs/close.svg';
+import { ReactComponent as CloseIcon } from '@svgs/close.svg';
 import { Summary } from '../MissionCard';
 import styles from './MissionForm.module.css';
 

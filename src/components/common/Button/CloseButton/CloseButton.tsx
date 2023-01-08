@@ -1,5 +1,5 @@
 import { Button } from '@/components/common';
-import CloseIcon from '@svgs/close.svg';
+import { ReactComponent as CloseIcon } from '@svgs/close.svg';
 import styles from './CloseButton.module.css';
 
 export interface CloseButtonProps {
