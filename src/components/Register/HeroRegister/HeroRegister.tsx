@@ -26,7 +26,7 @@ export const HeroRegister = (props: any) => {
       title: elements.herotitle.value,
       description: elements.herodescription.value,
       name: elements.heroname.value,
-      code: +elements.herocode.value,
+      code: elements.herocode.value,
     });
   };
 

@@ -8,9 +8,9 @@ export default {
     heroInfo: {
       id: '123',
       groupId: '1',
-      title: '타이틀',
+      title: '휴지맨',
       name: '김현진',
-      code: '휴지맨',
+      code: '1234',
       profileImage: '/images/hero2.png',
       completeNumber: 5,
       description: '저는 휴지를 정말 잘 주워요!',
