@@ -2,7 +2,7 @@ import { Textarea, TextareaProps } from './Textarea';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Textarea',
+  title: 'Components/Common/Textarea',
   component: Textarea,
   args: {
     labelValue: 'Textarea 컴포넌트입니다',

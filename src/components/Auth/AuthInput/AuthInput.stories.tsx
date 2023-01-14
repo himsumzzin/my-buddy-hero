@@ -2,7 +2,7 @@ import { AuthInput, AuthInputProps } from '@/components/Auth';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/AuthInput',
+  title: 'Components/Auth/AuthInput',
   component: AuthInput,
   parameters: {
     docs: {

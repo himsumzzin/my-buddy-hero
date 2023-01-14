@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Title, TitleProps } from './Title';
 
 export default {
-  title: 'Components/Title',
+  title: 'Components/Common/Title',
   component: Title,
   args: {
     lv: 2,
