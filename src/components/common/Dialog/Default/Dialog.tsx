@@ -126,10 +126,20 @@ export const Dialog = ({
 Dialog.defaultProps = defaultProps;
 
 interface HeaderProps {
+  className?: string;
   children: React.ReactNode;
+  [key: string]: unknown;
 }
-Dialog.Header = function DialogHeader({ children }: HeaderProps) {
-  return <header className={styles.header}>{children}</header>;
+Dialog.Header = function DialogHeader({
+  className,
+  children,
+  ...restProps
+}: HeaderProps) {
+  return (
+    <header className={`${styles.header} ${className}`} {...restProps}>
+      {children}
+    </header>
+  );
 };
 
 interface BodyProps {
@@ -142,6 +152,9 @@ Dialog.Body = function DialogBody({ className, children }: BodyProps) {
 
 interface FooterProps {
   children?: React.ReactNode;
+  /**
+   * Dialog를 닫는 함수입니다. Dialog 컴포넌트의 onClose prop과 동일한 함수를 사용합니다.
+   */
   onClose: () => void;
 }
 Dialog.Footer = function DialogFooter({ children, onClose }: FooterProps) {

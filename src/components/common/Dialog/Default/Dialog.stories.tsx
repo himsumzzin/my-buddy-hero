@@ -14,8 +14,11 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          '콘텐츠를 원하는 대로 조립할 수 있는 다이얼로그 컴포넌트입니다.',
+        component: `콘텐츠를 원하는 대로 조립할 수 있는 다이얼로그 컴포넌트입니다.
+          다이얼로그 렌더링을 결정하는 상태와 열고 닫는 함수는 직접 가지지 않습니다.
+          Dialog컴포넌트는 자체적인 레이아웃을 가지지 않습니다.
+          기본 레이아웃과 디자인을 활용하고 싶다면 Dialog.Header / Dialog.Body / Dialog.Footer 컴포넌트를 사용합니다.
+          `,
       },
     },
   },
