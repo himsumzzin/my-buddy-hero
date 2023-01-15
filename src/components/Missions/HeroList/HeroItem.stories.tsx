@@ -8,7 +8,7 @@ export default {
     id: '1',
     profileImage: '/images/hero1.png',
     name: '김현진',
-    code: '휴지맨',
+    title: '휴지맨',
   },
   parameters: {
     docs: {

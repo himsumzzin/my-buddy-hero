@@ -1,15 +1,13 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Dialog, DialogProps } from './Dialog';
-import { Link } from '@/components/common';
+import { Button, Link } from '@/components/common';
+import { useDialog } from '@/hooks';
 
 export default {
   title: 'Components/Dialog/Default',
   component: Dialog,
   args: {
     modal: false,
-    onClose: () => {
-      console.log('close!');
-    },
   },
   parameters: {
     docs: {
@@ -21,9 +19,19 @@ export default {
   },
 } as ComponentMeta<typeof Dialog>;
 
-const Template: ComponentStory<typeof Dialog> = (args: DialogProps) => (
-  <Dialog {...args} />
-);
+const Template: ComponentStory<typeof Dialog> = (args: DialogProps) => {
+  const dialogStory = useDialog();
+  return (
+    <>
+      <Button size="md" onClick={dialogStory.open}>
+        다이얼로그 열기
+      </Button>
+      {dialogStory.isOpen ? (
+        <Dialog onClose={dialogStory.close} {...args} />
+      ) : null}
+    </>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
