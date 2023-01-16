@@ -3,7 +3,7 @@ import { Link, LinkProps } from './Link';
 // import styles from './Link.module.css';
 
 export default {
-  title: 'Components/Link',
+  title: 'Components/Common/Link',
   component: Link,
   args: {
     href: '/',

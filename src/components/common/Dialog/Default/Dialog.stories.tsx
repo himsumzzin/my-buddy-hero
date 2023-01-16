@@ -1,29 +1,40 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Dialog, DialogProps } from './Dialog';
-import { Link } from '@/components/common';
+import { Button, Link } from '@/components/common';
+import { useDialog } from '@/hooks';
 
 export default {
-  title: 'Components/Dialog/Default',
+  title: 'Components/Common/Dialog/Default',
   component: Dialog,
   args: {
     modal: false,
-    onClose: () => {
-      console.log('close!');
-    },
   },
   parameters: {
     docs: {
       description: {
-        component:
-          '콘텐츠를 원하는 대로 조립할 수 있는 다이얼로그 컴포넌트입니다.',
+        component: `콘텐츠를 원하는 대로 조립할 수 있는 다이얼로그 컴포넌트입니다.
+          다이얼로그 렌더링을 결정하는 상태와 열고 닫는 함수는 직접 가지지 않습니다.
+          Dialog컴포넌트는 자체적인 레이아웃을 가지지 않습니다.
+          기본 레이아웃과 디자인을 활용하고 싶다면 Dialog.Header / Dialog.Body / Dialog.Footer 컴포넌트를 사용합니다.
+          `,
       },
     },
   },
 } as ComponentMeta<typeof Dialog>;
 
-const Template: ComponentStory<typeof Dialog> = (args: DialogProps) => (
-  <Dialog {...args} />
-);
+const Template: ComponentStory<typeof Dialog> = (args: DialogProps) => {
+  const dialogStory = useDialog();
+  return (
+    <>
+      <Button size="md" onClick={dialogStory.open}>
+        다이얼로그 열기
+      </Button>
+      {dialogStory.isOpen ? (
+        <Dialog onClose={dialogStory.close} {...args} />
+      ) : null}
+    </>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {

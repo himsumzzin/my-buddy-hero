@@ -2,13 +2,13 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { HeroItem, HeroItemProps } from './HeroItem';
 
 export default {
-  title: 'Pages/Missions/HeroItem',
+  title: 'Components/Missions/HeroItem',
   component: HeroItem,
   args: {
     id: '1',
     profileImage: '/images/hero1.png',
     name: '김현진',
-    code: '휴지맨',
+    title: '휴지맨',
   },
   parameters: {
     docs: {

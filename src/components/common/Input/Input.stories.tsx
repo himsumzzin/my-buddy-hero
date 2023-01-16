@@ -2,7 +2,7 @@ import { Input, InputProps } from '@/components/common';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Input',
+  title: 'Components/Common/Input',
   component: Input,
   parameters: {
     docs: {

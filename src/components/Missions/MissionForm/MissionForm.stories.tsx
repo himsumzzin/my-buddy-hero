@@ -4,7 +4,7 @@ import { Summary } from '../MissionCard';
 import { defaultMission } from '@/states';
 
 export default {
-  title: 'Pages/Missions/MissionForm',
+  title: 'Components/Missions/MissionForm',
   component: MissionForm,
   args: {
     mission: defaultMission,

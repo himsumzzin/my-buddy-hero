@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ErrorDialog, ErrorDialogProps } from './ErrorDialog';
 
 export default {
-  title: 'Components/Dialog/ErrorDialog',
+  title: 'Components/Common/Dialog/ErrorDialog',
   component: ErrorDialog,
   args: {
     onClose: () => {

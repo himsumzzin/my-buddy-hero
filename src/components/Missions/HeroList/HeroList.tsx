@@ -3,13 +3,10 @@
 import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { heroesState } from '@/states/heroes';
-
-import { Input, Button, Title } from '@/components/common';
+import { Input, Button, Title, Slide } from '@/components/common';
 import { HeroItem } from './HeroItem';
-import ArrowLeftIcon from '@svgs/arrow-left.svg';
-
+import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
 import styles from './HeroList.module.css';
-import { Slide } from '@/components/common';
 
 export interface HeroListProps {
   /**
@@ -47,8 +44,23 @@ export const HeroList = ({
   const heroList = useRecoilValue(heroesState);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   const { receivers, authorId } = mission;
+
+  const getErrorMessage = () => {
+    if (!selectedHeroId) {
+      return '히어로를 선택해주세요!';
+    }
+    switch (missionStatus) {
+      case 'create':
+        return '히어로 코드가 올바르지 않습니다. 다시 입력해주세요';
+      case 'update':
+        return '임무를 수락할 수 없는 히어로입니다.';
+      case 'complete':
+        return '임무를 종료할 수 없는 히어로입니다.';
+    }
+  };
 
   const selectHero = useCallback(
     (e: React.MouseEvent<HTMLUListElement>) => {
@@ -74,27 +86,26 @@ export const HeroList = ({
       (hero) => hero.id === selectedHeroId && hero.code === submittedCode
     );
 
-    switch (missionStatus) {
-      case 'create':
-        matchedHero ? onSubmit(matchedHero) : setIsValid(false);
-        break;
-      case 'update':
-        matchedHero && matchedHero.id !== authorId
-          ? onSubmit(matchedHero)
-          : setIsValid(false);
-        break;
-      case 'complete':
-        matchedHero && matchedHero.id === authorId
-          ? onSubmit(matchedHero)
-          : setIsValid(false);
-        break;
+    if (
+      (missionStatus === 'create' && matchedHero) ||
+      (missionStatus === 'update' &&
+        matchedHero &&
+        matchedHero.id !== authorId) ||
+      (missionStatus === 'complete' &&
+        matchedHero &&
+        matchedHero.id === authorId)
+    ) {
+      setIsFetching(true);
+      onSubmit(matchedHero);
+    } else {
+      setIsValid(false);
     }
   };
 
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3}>히어로 선택</Title>
+        <Title lv={3}>당신은 누구인가요?</Title>
       </header>
       <div className={styles.heroesBox}>
         <ul className={styles.ul} onClick={selectHero}>
@@ -121,13 +132,11 @@ export const HeroList = ({
           placeholder="히어로 코드:"
         />
         {!isValid ? (
-          <span className={styles.errorMessage}>
-            {selectedHeroId
-              ? '히어로 코드를 확인해주세요!'
-              : '히어로를 선택해주세요!'}
-          </span>
+          <span className={styles.errorMessage}>{getErrorMessage()}</span>
         ) : null}
-        <Button size="sm">완료</Button>
+        <Button size="sm" disabled={isFetching}>
+          완료
+        </Button>
       </form>
       <Button size="xs" className={styles.goBackButton} onClick={onGoBack}>
         <ArrowLeftIcon width="32px" height="32px" viewBox="0 0 24 24" />

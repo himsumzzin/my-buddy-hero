@@ -1,5 +1,5 @@
 import { Button, Title, Slide } from '@/components/common';
-import CloseIcon from '@svgs/close.svg';
+import { ReactComponent as CloseIcon } from '@svgs/close.svg';
 import styles from './MissionInfo.module.css';
 
 export interface MissionInfoProps {

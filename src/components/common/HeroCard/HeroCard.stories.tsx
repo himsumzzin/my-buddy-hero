@@ -2,7 +2,7 @@ import { HeroCard, HeroCardProps } from '@/components/common';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/HeroCard',
+  title: 'Components/Common/HeroCard',
   component: HeroCard,
   parameters: {
     docs: {

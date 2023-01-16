@@ -1,4 +1,7 @@
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 522px;
   height: 69px;
   border-radius: var(--border-radius-lg);
