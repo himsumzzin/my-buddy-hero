@@ -5,15 +5,15 @@ import styles from './ErrorPage.module.css';
 export interface ErrorPageProps {
   title: string;
   description: string;
-  linkTo: string;
-  linkText: string;
+  redirectTo: string;
+  redirectText: string;
 }
 
 export const ErrorPage = ({
   title,
   description,
-  linkTo,
-  linkText,
+  redirectTo,
+  redirectText,
 }: ErrorPageProps) => {
   return (
     <section className={styles.container}>
@@ -28,8 +28,8 @@ export const ErrorPage = ({
         className={styles.image}
       />
       <p className={styles.description}>{description}</p>
-      <Link href={linkTo} size="lg" className={styles.link}>
-        {linkText}
+      <Link href={redirectTo} size="lg" className={styles.link}>
+        {redirectText}
       </Link>
     </section>
   );

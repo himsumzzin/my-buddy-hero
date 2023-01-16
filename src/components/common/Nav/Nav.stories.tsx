@@ -3,7 +3,7 @@ import { Nav, NavProps } from './Nav';
 // import styles from './Link.module.css';
 
 export default {
-  title: 'Components/Nav',
+  title: 'Components/Common/Nav',
   component: Nav,
   parameters: {
     docs: {

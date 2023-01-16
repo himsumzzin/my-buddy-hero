@@ -4,7 +4,7 @@ import { HeroCard } from '@/components/common';
 import { initialHero } from '@/states';
 
 export default {
-  title: 'Components/Slide',
+  title: 'Components/Common/Slide',
   component: Slide,
   args: {
     children: <HeroCard hero={initialHero} />,

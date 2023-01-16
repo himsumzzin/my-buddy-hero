@@ -2,7 +2,7 @@ import { AuthForm, AuthFormProps } from '@/components/Auth';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/AuthForm',
+  title: 'Components/Auth/AuthForm',
   component: AuthForm,
   parameters: {
     docs: {

@@ -32,8 +32,8 @@ export class ErrorBoundary extends Component<
         <ErrorPage
           title="히어로들을 불러오는데 실패했어요!"
           description="인터넷 연결이 잘 되어있는지 확인해주세요"
-          linkTo={window.location.pathname}
-          linkText="새로고침하기"
+          redirectTo={window.location.pathname}
+          redirectText="새로고침하기"
         />
       );
     }

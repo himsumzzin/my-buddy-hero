@@ -3,7 +3,7 @@ import { HeroList, HeroListProps } from './HeroList';
 import { defaultMission } from '@/states';
 
 export default {
-  title: 'Pages/Missions/HeroList',
+  title: 'Components/Missions/HeroList',
   component: HeroList,
   args: {
     mission: defaultMission,

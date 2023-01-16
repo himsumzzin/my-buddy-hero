@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '@/components/common';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/Common/Button',
   component: Button,
   parameters: {
     docs: {

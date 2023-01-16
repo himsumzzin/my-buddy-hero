@@ -2,7 +2,7 @@ import { Camera } from '@/components/Register/Camera';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Camera',
+  title: 'Components/Register/Camera',
   component: Camera,
   parameters: {
     docs: {
