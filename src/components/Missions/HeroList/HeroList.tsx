@@ -3,13 +3,10 @@
 import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { heroesState } from '@/states/heroes';
-
-import { Input, Button, Title } from '@/components/common';
+import { Input, Button, Title, Slide } from '@/components/common';
 import { HeroItem } from './HeroItem';
 import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
-
 import styles from './HeroList.module.css';
-import { Slide } from '@/components/common';
 
 export interface HeroListProps {
   /**
@@ -47,6 +44,7 @@ export const HeroList = ({
   const heroList = useRecoilValue(heroesState);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   const { receivers, authorId } = mission;
 
@@ -88,20 +86,19 @@ export const HeroList = ({
       (hero) => hero.id === selectedHeroId && hero.code === submittedCode
     );
 
-    switch (missionStatus) {
-      case 'create':
-        matchedHero ? onSubmit(matchedHero) : setIsValid(false);
-        break;
-      case 'update':
-        matchedHero && matchedHero.id !== authorId
-          ? onSubmit(matchedHero)
-          : setIsValid(false);
-        break;
-      case 'complete':
-        matchedHero && matchedHero.id === authorId
-          ? onSubmit(matchedHero)
-          : setIsValid(false);
-        break;
+    if (
+      (missionStatus === 'create' && matchedHero) ||
+      (missionStatus === 'update' &&
+        matchedHero &&
+        matchedHero.id !== authorId) ||
+      (missionStatus === 'complete' &&
+        matchedHero &&
+        matchedHero.id === authorId)
+    ) {
+      setIsFetching(true);
+      onSubmit(matchedHero);
+    } else {
+      setIsValid(false);
     }
   };
 
@@ -137,7 +134,9 @@ export const HeroList = ({
         {!isValid ? (
           <span className={styles.errorMessage}>{getErrorMessage()}</span>
         ) : null}
-        <Button size="sm">완료</Button>
+        <Button size="sm" disabled={isFetching}>
+          완료
+        </Button>
       </form>
       <Button size="xs" className={styles.goBackButton} onClick={onGoBack}>
         <ArrowLeftIcon width="32px" height="32px" viewBox="0 0 24 24" />
