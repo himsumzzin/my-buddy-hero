@@ -8,7 +8,7 @@ export default function HeroRegister() {
   return (
     <>
       <Head>
-        <title>내 짝꿍 히어로</title>
+        <title>나만의 히어로를 만들어보세요</title>
       </Head>
       <AnimatePresence>
         <Register />

@@ -81,7 +81,7 @@ export default function Signin() {
   return (
     <>
       <Head>
-        <title>내 짝꿍 히어로</title>
+        <title>로그인 페이지 입니다</title>
       </Head>
       <Slide direction="left" className={styles.container}>
         <Title className={styles.title}>로그인</Title>
