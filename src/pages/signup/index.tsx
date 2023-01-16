@@ -88,7 +88,7 @@ export default function Signup() {
   return (
     <>
       <Head>
-        <title>내 짝꿍 히어로</title>
+        <title>회원가입 페이지 입니다</title>
       </Head>
       <Slide direction="left" className={styles.container}>
         <Title className={styles.title}>회원가입</Title>

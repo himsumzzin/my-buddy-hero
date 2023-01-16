@@ -39,7 +39,7 @@ export default function Missions() {
   return (
     <>
       <Head>
-        <title>내 짝꿍 히어로</title>
+        <title>임무를 수행해보세요!</title>
       </Head>
       <div className={styles.container}>
         <Nav

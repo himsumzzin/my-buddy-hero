@@ -20,7 +20,7 @@ export default function Herolist() {
   return (
     <>
       <Head>
-        <title>내 짝꿍 히어로</title>
+        <title>멋진 히어로들을 확인하세요!</title>
       </Head>
       <div className={styles.container}>
         <Nav
