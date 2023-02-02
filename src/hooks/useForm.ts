@@ -46,8 +46,6 @@ export const useForm = ({ initialValues, validate, onSubmit }: IuseForm) => {
     onSubmit(values);
   };
 
-  const runValidator = useCallback(() => validate(values), [values]);
-
   const getFieldProps = (name: string) => {
     const value = values[name];
     const onBlur = handleBlur;
@@ -62,9 +60,9 @@ export const useForm = ({ initialValues, validate, onSubmit }: IuseForm) => {
   };
 
   useEffect(() => {
-    const errors = runValidator();
+    const errors = validate(values);
     setErrors(errors);
-  }, [runValidator]);
+  }, [values]);
 
   const isValid = () => {
     return (
