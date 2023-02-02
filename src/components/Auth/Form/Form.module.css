@@ -1,0 +1,7 @@
+.formContainer {
+  position: relative;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto ;
+}
