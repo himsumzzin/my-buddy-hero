@@ -106,7 +106,7 @@ export function Input({
       <label
         htmlFor={inputId}
         className={`${styles.label} ${size === 'lg2' ? 'srOnly' : ''} ${
-          size !== 'lg' ? '' : value ? styles.top : 'qwe'
+          size === 'lg' && value ? styles.top : ''
         }`}
       >
         {labelText}
