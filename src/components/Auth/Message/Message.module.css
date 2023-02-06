@@ -1,0 +1,8 @@
+.error {
+  color: red;
+  font-family: var(--font-family-content);
+  font-size: var(--text-size-md);
+  height: 0;
+  text-align: center;
+  margin: 5px auto 0;
+}
