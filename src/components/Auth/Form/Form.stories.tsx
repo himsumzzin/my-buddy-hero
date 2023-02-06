@@ -4,6 +4,7 @@ import {
   Input,
   Textarea,
   ErrorMessage,
+  Message,
 } from '@/components/Auth';
 import { Button } from '@/components/common';
 import styles from '@/pages/login/login.module.css';
@@ -72,10 +73,7 @@ const LoginFailedTemplate: ComponentStory<typeof Form> = (args: FormProps) => {
       >
         <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
       </Input>
-      <ErrorMessage
-        serverError={serverError}
-        className={styles.serverErrorMsg}
-      ></ErrorMessage>
+      <Message error={serverError} className={styles.serverErrorMsg}></Message>
       <Button size="lg" disabled={!isValid()}>
         로그인
       </Button>
