@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement, JSXElementConstructor } from 'react';
+import { cloneElement, ReactElement } from 'react';
 import styles from './Input.module.css';
 import { useId } from 'react';
 
@@ -75,7 +75,7 @@ export type InputProps = {
    * input의 크기가 lg2일 경우에만 넣어줍니다.
    */
   placeholder?: string;
-  children?: ReactElement<any, string | JSXElementConstructor<any>>;
+  children?: ReactElement<any>;
 };
 
 export function Input({
