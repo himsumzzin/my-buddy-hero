@@ -41,8 +41,3 @@ ErroredErrorMessage.args = {
   touched: { id: false },
   errors: { id: '아이디를 올바르게 입력해 주세요.' },
 };
-
-export const ServerErrorMessage = Template.bind({});
-ServerErrorMessage.args = {
-  serverError: '로그인에 실패하였습니다.',
-};
