@@ -3,8 +3,8 @@ import {
   FormProps,
   Input,
   Textarea,
+  ValidationErrorMessage,
   ErrorMessage,
-  Message,
 } from '@/components/Auth';
 import { Button } from '@/components/common';
 import styles from '@/pages/login/login.module.css';
@@ -60,20 +60,31 @@ const LoginFailedTemplate: ComponentStory<typeof Form> = (args: FormProps) => {
         name="id"
         size="lg"
         labelText="아이디 :"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Input
         type="password"
         name="password"
         size="lg"
         labelText="비밀번호 :"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
-      <Message error={serverError} className={styles.serverErrorMsg}></Message>
+      <ErrorMessage
+        error={serverError}
+        className={styles.serverErrorMsg}
+      ></ErrorMessage>
       <Button size="lg" disabled={!isValid()}>
         로그인
       </Button>
@@ -129,36 +140,52 @@ const HeroRegisterTemplate: ComponentStory<typeof Form> = (args: FormProps) => {
         name="heroname"
         size="lg"
         labelText="어떤 히어로가 되고 싶은가요?"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Input
         type="text"
         name="herodescription"
         size="lg"
         labelText="히어로에 대해서 설명해 주세요!"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Input
         type="text"
         name="name"
         size="lg"
         labelText="이름을 입력해 주세요"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Input
         type="text"
         name="herocode"
         size="lg"
         labelText="히어로 넘버를 입력해 주세요~"
+        border="round"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Button size="lg" disabled={!isValid()}>
         히어로로 변신!
@@ -201,9 +228,13 @@ const HeroCardSelectTemplate: ComponentStory<typeof Form> = (
         name="herocode"
         size="md"
         labelText="히어로 코드"
+        border="rec"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Button size="lg" disabled={!isAllValid()}>
         완료
@@ -255,21 +286,29 @@ const MissionRegisterTemplate: ComponentStory<typeof Form> = (
       <Input
         type="text"
         name="missiontitle"
-        size="lg2"
+        size="lg"
         labelText="미션 제목"
         placeholder="어떤 임무인가요?"
+        border="rec"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Input
         type="number"
         name="missionheadcount"
         size="sm"
         labelText="몇 명이 필요한가요?"
+        border="rec"
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Input>
       <Textarea
         name="missionDescription"
@@ -278,7 +317,10 @@ const MissionRegisterTemplate: ComponentStory<typeof Form> = (
         hiddenLabel={true}
         getFieldProps={getFieldProps}
       >
-        <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+        <ValidationErrorMessage
+          touched={touched}
+          errors={errors}
+        ></ValidationErrorMessage>
       </Textarea>
       <Button size="lg" disabled={!isValid()}>
         등록

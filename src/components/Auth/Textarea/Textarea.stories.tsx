@@ -1,4 +1,8 @@
-import { Textarea, TextareaProps, ErrorMessage } from '@/components/Auth';
+import {
+  Textarea,
+  TextareaProps,
+  ValidationErrorMessage,
+} from '@/components/Auth';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useForm } from '@/hooks';
 
@@ -35,7 +39,7 @@ const Template: ComponentStory<typeof Textarea> = (args: TextareaProps) => {
   });
   return (
     <Textarea getFieldProps={getFieldProps} {...args}>
-      <ErrorMessage touched={touched} errors={errors} />
+      <ValidationErrorMessage touched={touched} errors={errors} />
     </Textarea>
   );
 };
