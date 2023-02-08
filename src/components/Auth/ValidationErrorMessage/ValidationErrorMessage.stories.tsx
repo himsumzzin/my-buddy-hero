@@ -1,9 +1,12 @@
-import { ErrorMessage, ErrorMessageProps } from '@/components/Auth';
+import {
+  ValidationErrorMessage,
+  ValidationErrorMessageProps,
+} from '@/components/Auth';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Auth/ErrorMessage',
-  component: ErrorMessage,
+  title: 'Components/Auth/ValidationErrorMessage',
+  component: ValidationErrorMessage,
   parameters: {
     docs: {
       description: {
@@ -13,12 +16,12 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof ErrorMessage>;
+} as ComponentMeta<typeof ValidationErrorMessage>;
 
-const Template: ComponentStory<typeof ErrorMessage> = (
-  args: ErrorMessageProps
+const Template: ComponentStory<typeof ValidationErrorMessage> = (
+  args: ValidationErrorMessageProps
 ) => {
-  return <ErrorMessage {...args}></ErrorMessage>;
+  return <ValidationErrorMessage {...args}></ValidationErrorMessage>;
 };
 
 export const TouchedAndErroredErrorMessage = Template.bind({});

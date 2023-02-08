@@ -1,4 +1,4 @@
-import { Input, InputProps, ErrorMessage } from '@/components/Auth';
+import { Input, InputProps, ValidationErrorMessage } from '@/components/Auth';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useForm } from '@/hooks';
 
@@ -75,7 +75,10 @@ const Template: ComponentStory<typeof Input> = (args: InputProps) => {
   });
   return (
     <Input getFieldProps={getFieldProps} {...args}>
-      <ErrorMessage touched={touched} errors={errors}></ErrorMessage>
+      <ValidationErrorMessage
+        touched={touched}
+        errors={errors}
+      ></ValidationErrorMessage>
     </Input>
   );
 };

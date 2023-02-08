@@ -1,4 +1,3 @@
-import styles from './ErrorMessage.module.css';
 import { Message } from '../Message';
 interface Ierror {
   [key: string]: string;
@@ -8,7 +7,7 @@ interface Itouched {
   [key: string]: boolean;
 }
 
-export type ErrorMessageProps = {
+export type ValidationErrorMessageProps = {
   /**
    * 어떤 인풋의 에러메세지로 사용할건지 양식을 선택하세요. <br>
    * 사용할 input에 짝을 맞춰 넣어주세요.<br>
@@ -34,12 +33,12 @@ export type ErrorMessageProps = {
   className?: string;
 };
 
-export function ErrorMessage({
+export function ValidationErrorMessage({
   name,
   touched,
   errors,
   className,
-}: ErrorMessageProps) {
+}: ValidationErrorMessageProps) {
   if (!name) return null;
   if (!touched[name] || !errors[name]) {
     return null;
