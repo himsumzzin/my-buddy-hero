@@ -26,13 +26,7 @@ export type InputProps = {
    * lg <br>
    * - 가장 큰 input <br>
    * - placeholder 대용으로 label 사용 <br>
-   * - input이 focus되거나 value가 있을 경우 label 좌상단으로 이동 <br>
-   * <br>
-   *
-   * lg2 <br>
-   * - 가장 큰 input <br>
-   * - placeholder 사용으로 label은 sr-only <br>
-   * - lg 사이즈 input 보다 각짐 <br>
+   * - lg일 때만 input이 focus되거나 value가 있을 경우 label 좌상단으로 이동 <br>
    * <br>
    *
    * md <br>
@@ -44,13 +38,19 @@ export type InputProps = {
    * - 작은 사이즈 input (200px) <br>
    * - label 사용으로 placeholer 사용 안함 <br>
    */
-  size: 'sm' | 'md' | 'lg' | 'lg2';
+  size: 'sm' | 'md' | 'lg';
   /**
    * 인풋에 미리 보여질 텍스트를 입력해 주세요. <br>
-   * input size가 lg2일 경우 sr-only 처리됩니다. <br>
+   * placeholder가 존재할 경우 sr-only 처리됩니다. <br>
    * ex) placeholder에 적을 단어를 적으면 됩니다.
    */
   labelText: string;
+  /**
+   * Input 컴포넌트의 border-radius를 결정한다. <br>
+   * rec : 8px <br>
+   * round : 100px
+   */
+  border: 'rec' | 'round';
   /**
    * getFieldProps 함수를 통해서 Input 컴포넌트에 기본적으로 필요한 요소들을 설정합니다. <br>
    * useForm 사용시 return 값인 getFieldProps을 props로 내려줍니다. <br>
@@ -71,8 +71,8 @@ export type InputProps = {
    */
   maxLength?: number;
   /**
-   * input의 placeholder를 설정
-   * input의 크기가 lg2일 경우에만 넣어줍니다.
+   * input의 placeholder를 설정 <br>
+   * placeholder가 있다면 label은 sr-only처리 됩니다.
    */
   placeholder?: string;
   children?: ReactElement<any>;
@@ -86,6 +86,8 @@ export function Input({
   className,
   children,
   maxLength,
+  placeholder,
+  border,
   ...props
 }: InputProps) {
   const inputId = useId();
@@ -96,16 +98,17 @@ export function Input({
     <div className={`${styles.container} ${className}`}>
       <input
         id={inputId}
-        className={`${styles.input} ${styles[size]} ${className}`}
+        className={`${styles.input} ${styles[size]} ${styles[border]} ${className}`}
         autoComplete="false"
         maxLength={maxLength}
+        placeholder={placeholder}
         min="1"
         {...props}
         {...getFieldProps(name)}
       />
       <label
         htmlFor={inputId}
-        className={`${styles.label} ${size === 'lg2' ? 'srOnly' : ''} ${
+        className={`${styles.label} ${placeholder ? 'srOnly' : ''} ${
           size === 'lg' && value ? styles.top : ''
         }`}
       >

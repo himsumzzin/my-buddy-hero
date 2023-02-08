@@ -86,6 +86,7 @@ IdInputWithErrorMsg.args = {
   name: 'id',
   size: 'lg',
   labelText: '아이디 :',
+  border: 'round',
 };
 
 export const PasswordWithErrorMsg = Template.bind({});
@@ -94,6 +95,7 @@ PasswordWithErrorMsg.args = {
   name: 'password',
   size: 'lg',
   labelText: '비밀번호 :',
+  border: 'round',
 };
 
 export const ConfirmPasswordWithErrorMsg = Template.bind({});
@@ -102,15 +104,17 @@ ConfirmPasswordWithErrorMsg.args = {
   name: 'pwcheck',
   size: 'lg',
   labelText: '비밀번호 확인 :',
+  border: 'round',
 };
 
 export const MissionTitleInput = Template.bind({});
 MissionTitleInput.args = {
   type: 'text',
   name: 'missiontitle',
-  size: 'lg2',
+  size: 'lg',
   labelText: '어떤 임무인가요?',
   placeholder: '어떤 임무인가요?',
+  border: 'rec',
 };
 
 export const MissionHeadcountInput = Template.bind({});
@@ -119,6 +123,7 @@ MissionHeadcountInput.args = {
   name: 'missionheadcount',
   size: 'sm',
   labelText: '몇 명이 필요한가요?',
+  border: 'rec',
 };
 
 export const HeroNumberInput = Template.bind({});
@@ -128,6 +133,7 @@ HeroNumberInput.args = {
   size: 'md',
   labelText: '나의 히어로 코드',
   maxLength: 4,
+  border: 'rec',
 };
 
 export const HeroNameInput = Template.bind({});
@@ -136,4 +142,5 @@ HeroNameInput.args = {
   name: 'heroname',
   size: 'lg',
   labelText: '어떤 히어로가 되고 싶은가요?',
+  border: 'rec',
 };
