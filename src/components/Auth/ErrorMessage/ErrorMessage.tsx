@@ -1,6 +1,6 @@
-import styles from './Message.module.css';
+import styles from './ErrorMessage.module.css';
 
-export type MessageProps = {
+export type ErrorMessageProps = {
   /**
    * 에러메세지를 나타냅니다. <br>
    * string으로 넣어주면 됩니다.
@@ -12,7 +12,7 @@ export type MessageProps = {
   className?: string;
 };
 
-export function Message({ error, className }: MessageProps) {
+export function ErrorMessage({ error, className }: ErrorMessageProps) {
   return error !== '' ? (
     <p className={`${styles.error} ${className}`}>{error}</p>
   ) : null;

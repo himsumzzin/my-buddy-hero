@@ -1,4 +1,4 @@
-import { Message } from '../Message';
+import { ErrorMessage } from '../ErrorMessage';
 interface Ierror {
   [key: string]: string;
 }
@@ -43,5 +43,5 @@ export function ValidationErrorMessage({
   if (!touched[name] || !errors[name]) {
     return null;
   }
-  return <Message className={className} error={errors[name]} />;
+  return <ErrorMessage className={className} error={errors[name]} />;
 }
