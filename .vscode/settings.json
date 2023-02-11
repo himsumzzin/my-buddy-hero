@@ -2,6 +2,7 @@
   "path-intellisense.extensionOnImport": true,
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src",
+    "@public": "${workspaceRoot}/public",
     "@svgs": "${workspaceRoot}/public/svgs",
     "@images": "${workspaceRoot}/public/images"
   },
@@ -11,5 +12,14 @@
   },
   "emmet.includeLanguages": {
     "postcss": "css"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true
   }
 }
