@@ -7,7 +7,7 @@ import Link from 'next/link';
 import router from 'next/router';
 import { AuthForm } from '@/components/Auth';
 import { Title, PWAInstallButton, Slide } from '@/components/common';
-import styles from './login.module.css';
+import styles from '@styles/Login.module.css';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };

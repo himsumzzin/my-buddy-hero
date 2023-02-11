@@ -2,6 +2,7 @@
   "path-intellisense.extensionOnImport": true,
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src",
+    "@styles": "${workspaceRoot}/src/styles",
     "@public": "${workspaceRoot}/public",
     "@svgs": "${workspaceRoot}/public/svgs",
     "@images": "${workspaceRoot}/public/images"

@@ -55,6 +55,7 @@ module.exports = withPWA({
       ...config.resolve.alias,
       '@': resolve('src'),
       '@public': resolve('public'),
+      '@styles': resolve('src/styles'),
       '@images': resolve('public/images'),
       '@svgs': resolve('public/svgs'),
     };

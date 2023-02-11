@@ -8,7 +8,7 @@ import router from 'next/router';
 import { AxiosWithRetry } from '@/apis';
 import { AuthForm } from '@/components/Auth';
 import { Title, Slide } from '@/components/common';
-import styles from './signup.module.css';
+import styles from '@styles/Signup.module.css';
 
 interface IinputValue {
   [key: string]: { value: string; isDirty: boolean };
