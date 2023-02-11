@@ -6,17 +6,19 @@
   --grayscale-snow: #f2f2f2;
   --grayscale-white: #ffffff;
 
-  --color-main-orange-700: #ffc800;
-  --color-main-orange-600: #ffd94d;
-  --color-main-orange-500: #ffe480;
-  --color-main-orange-400: #ffefb3;
-  --color-main-orange-300: #fff4cc;
-  --color-main-orange-200: #fffae5;
+  --color-main-red: #FF6B6B;
+  --color-main-yellow: #FFD93D;
+  --color-main-green: #6BCB77;
+  --color-main-skyblue: #4D96FF;
+  --color-main-blue: #1453BF;
+  --color-main-pupple: #8E6AFF;
+  --color-main-pink: #FB82CE;
 
-  --color-main-active: #c19802;
-  --color-main-hover: #c19802;
+  --color-main-background: #EFF5FF;
+  --color-main-active: #4DBFFF;
 
-  --color-green: #67e774;
+  --color-btn-default: #8FADE3;
+  --color-btn-hover: #1453BF;
 
   --spacing-xs: 0.5rem; /* 8px */
   --spacing-sm: 1rem; /* 16px */
@@ -39,7 +41,6 @@
   --border-radius-lg: 6.25rem; /* 100px */
 
   --shadow-default: 1px 3px 4px rgba(0, 0, 0, 0.25);
-  --shadow-blur: 2px 2px 10px #d9cc9e;
 
   --transition-slow: 1s;
   --transition-default: 0.5s;
