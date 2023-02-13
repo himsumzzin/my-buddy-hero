@@ -99,7 +99,7 @@ export function Input({
       <input
         id={inputId}
         className={`${styles.input} ${styles[size]} ${styles[border]} ${className}`}
-        autoComplete="false"
+        autoComplete="off"
         maxLength={maxLength}
         placeholder={placeholder}
         min="1"
