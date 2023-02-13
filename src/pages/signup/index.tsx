@@ -87,12 +87,15 @@ export default function Signup() {
   return (
     <>
       <Head>
-        <title>회원가입 페이지 입니다</title>
+        <title>회원가입</title>
       </Head>
       <Slide direction="left" className={styles.container}>
         <Title className={styles.title}>회원가입</Title>
-        <Form handleSubmit={handleSubmit} className={styles.signupGap}>
-          <legend className="sr-only">회원가입 폼</legend>
+        <Form
+          description={'회원가입'}
+          handleSubmit={handleSubmit}
+          className={styles.signupGap}
+        >
           <Input
             type="text"
             name="id"

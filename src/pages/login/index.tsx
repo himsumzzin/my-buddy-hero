@@ -82,12 +82,15 @@ export default function Signin() {
   return (
     <>
       <Head>
-        <title>로그인 페이지 입니다</title>
+        <title>로그인</title>
       </Head>
       <Slide direction="left" className={styles.container}>
         <Title className={styles.title}>로그인</Title>
-        <Form handleSubmit={handleSubmit} className={styles.signinGap}>
-          <legend className="sr-only">회원가입 폼</legend>
+        <Form
+          description={'로그인'}
+          handleSubmit={handleSubmit}
+          className={styles.signinGap}
+        >
           <Input
             type="text"
             name="id"
