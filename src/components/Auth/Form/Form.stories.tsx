@@ -53,8 +53,11 @@ const LoginFailedTemplate: ComponentStory<typeof Form> = (args: FormProps) => {
     },
   });
   return (
-    <Form handleSubmit={handleSubmit} className={styles.signinGap}>
-      <legend className="sr-only">회원가입 폼</legend>
+    <Form
+      description={'화원가입'}
+      handleSubmit={handleSubmit}
+      className={styles.signinGap}
+    >
       <Input
         type="text"
         name="id"
@@ -133,8 +136,11 @@ const HeroRegisterTemplate: ComponentStory<typeof Form> = (args: FormProps) => {
     },
   });
   return (
-    <Form handleSubmit={handleSubmit} className={styles.signinGap}>
-      <legend className="sr-only">히어로 등록 폼</legend>
+    <Form
+      description={'히어로 등록'}
+      handleSubmit={handleSubmit}
+      className={styles.signinGap}
+    >
       <Input
         type="text"
         name="heroname"
@@ -221,8 +227,11 @@ const HeroCardSelectTemplate: ComponentStory<typeof Form> = (
     return isValid() && selectedHero.length !== 0;
   };
   return (
-    <Form handleSubmit={handleSubmit} className={styles.signinGap}>
-      <legend className="sr-only">히어로 카드 선택 폼</legend>
+    <Form
+      description={'히어로 카드 선택'}
+      handleSubmit={handleSubmit}
+      className={styles.signinGap}
+    >
       <Input
         type="text"
         name="herocode"
@@ -281,8 +290,11 @@ const MissionRegisterTemplate: ComponentStory<typeof Form> = (
   });
 
   return (
-    <Form handleSubmit={handleSubmit} className={styles.signinGap}>
-      <legend className="sr-only">히어로 카드 선택 폼</legend>
+    <Form
+      description={'히어로 카드 선택'}
+      handleSubmit={handleSubmit}
+      className={styles.signinGap}
+    >
       <Input
         type="text"
         name="missiontitle"

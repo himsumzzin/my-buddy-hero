@@ -37,3 +37,6 @@
   color: var(--color-main-orange-700);
   text-decoration-line: underline;
 }
+.serverErrorMsg {
+  margin-top: -28px;
+}
