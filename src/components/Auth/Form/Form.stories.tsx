@@ -7,7 +7,7 @@ import {
   ErrorMessage,
 } from '@/components/Auth';
 import { Button } from '@/components/common';
-import styles from '@/pages/login/login.module.css';
+import styles from '@/styles/Login.module.css';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useForm } from '@/hooks';
 import { useState } from 'react';

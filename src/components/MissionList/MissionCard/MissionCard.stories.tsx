@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { MissionCard, MissionCardProps } from './MissionCard';
 
 export default {
-  title: 'Components/Missions/MissionCard',
+  title: 'Components/missionlist/MissionCard',
   component: MissionCard,
   args: {
     onClose: () => alert('닫는다!'),

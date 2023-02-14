@@ -38,9 +38,9 @@ export const Nav = ({ onButtonClick, currentPage, buttonName }: NavProps) => {
   return (
     <div className={styles.linkContainer}>
       <Link
-        href={'/missions'}
+        href={'/missionlist'}
         size={'lg'}
-        selected={currentPage === '/missions'}
+        selected={currentPage === '/missionlist'}
       >
         임무목록
       </Link>

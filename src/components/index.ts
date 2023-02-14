@@ -1,4 +1,4 @@
 export * from './common';
-export * from './Missions';
+export * from './MissionList';
 export * from './Auth';
 export * from './Register';

@@ -14,7 +14,7 @@ export const Complete = ({ hero, reset }: CompleteProps) => {
         {hero.name}히어로가 된 걸 축하해! 멋진 임수를 완수하길 바랄게!
       </p>
       <div className={styles.linkContainer}>
-        <Link href="/missions" size="sm">
+        <Link href="/missionlist" size="sm">
           임무 수행하러 가기
         </Link>
         <Link href="/register" onClick={reset} size="sm">

@@ -33,5 +33,5 @@ HeroListSelectedNav.args = {
 export const MissionListSelectedNav = Template.bind({});
 MissionListSelectedNav.args = {
   buttonName: '임무 등록',
-  currentPage: '/missions',
+  currentPage: '/missionlist',
 };

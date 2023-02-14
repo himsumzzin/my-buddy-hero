@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { HeroItem, HeroItemProps } from './HeroItem';
 
 export default {
-  title: 'Components/Missions/HeroItem',
+  title: 'Components/missionlist/HeroItem',
   component: HeroItem,
   args: {
     id: '1',

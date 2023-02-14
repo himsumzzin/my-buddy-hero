@@ -1,2 +1,2 @@
 export * from './heroes';
-export * from './missions';
+export * from './missionList';

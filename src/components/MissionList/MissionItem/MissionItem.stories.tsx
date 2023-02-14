@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MissionItem, IMissionItemProps } from './MissionItem';
 
 export default {
-  title: 'Components/Missions/MissionItem',
+  title: 'Components/missionlist/MissionItem',
   component: MissionItem,
   args: {
     mission: {
