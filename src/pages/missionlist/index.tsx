@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
 import { filteredMissionListState } from '@/states';
-import { useDialog, useHeroes, useMissions } from '@/hooks';
-import { Dialog, Nav, Slide } from '@/components/common';
-import { MissionCard, MissionItem } from '@/components/MissionList';
+import { useHeroes, useMissions } from '@/hooks';
+import { Nav, Slide } from '@/components/common';
+import { MissionItem } from '@/components/MissionList';
 import styles from '@styles/MissionList.module.css';
 
 export default function MissionList() {
@@ -16,7 +16,6 @@ export default function MissionList() {
   const { initHeroeList, getHero } = useHeroes();
   const { initMissionList } = useMissions();
   const filteredMissionList = useRecoilValue(filteredMissionListState);
-  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
     initHeroeList();
@@ -29,7 +28,7 @@ export default function MissionList() {
         <title>임무를 수행해보세요!</title>
       </Head>
       <div className={styles.container}>
-        <Nav buttonName="임무 등록" currentPage={router?.asPath} />
+        <Nav linkTo="mission" currentPage={router?.asPath} />
         <Slide direction="left" className={styles.missionContainer}>
           {filteredMissionList.length > 0 ? (
             <ul className={styles.missionList}>

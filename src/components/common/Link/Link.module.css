@@ -12,7 +12,7 @@
   text-shadow: var(--shadow-default);
 
   color: var(--grayscale-snow);
-  background-color: var(--color-main-orange-500);
+  background-color: var(--color-btn-default);
   box-shadow: var(--shadow-default);
   border-radius: var(--border-radius-md);
 
@@ -32,9 +32,8 @@
   width: 314px;
   height: 80px;
   font-size: var(--text-size-title);
-  background-color: var(--color-main-orange-500);
 
   &.selected {
-    background-color: var(--color-main-orange-700);
+    background-color: var(--color-main-blue);
   }
 }

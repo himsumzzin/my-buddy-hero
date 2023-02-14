@@ -7,10 +7,9 @@
   margin: 0 auto;
   min-width: 984px;
   max-width: 95vw;
-  min-height: 72vh;
-  max-height: 72vh;
+  height: 72vh;
   padding: var(--spacing-lg);
-  background-color: snow;
+  background-color: var(--color-main-background);
   border-radius: var(--border-radius-md);
   overflow-y: scroll;
 }
@@ -30,7 +29,9 @@
 .missionList {
   display: flex;
   flex-flow: row wrap;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg) var(--spacing-sm);
+  justify-content: space-between;
+  padding: 0;
 }
 
 .buttonBox {

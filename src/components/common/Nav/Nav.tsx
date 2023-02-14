@@ -13,14 +13,14 @@ export type NavProps = {
   /**
    * 버튼의 이름을 설정합니다.
    */
-  buttonName: string;
+  linkTo: string;
   /**
    * 현재 위치를 문자열로 표시한다.
    */
   currentPage: string;
 };
 
-export const Nav = ({ onButtonClick, currentPage, buttonName }: NavProps) => {
+export const Nav = ({ onButtonClick, currentPage, linkTo }: NavProps) => {
   const router = useRouter();
   const { status } = useSession(); // 세션 유무 파악 가능
   const { resetHeroList } = useHeroes();
@@ -51,14 +51,13 @@ export const Nav = ({ onButtonClick, currentPage, buttonName }: NavProps) => {
       >
         히어로 명단
       </Link>
-      <Button
-        size="md"
-        disabled={false}
-        className={styles.buttonBox}
-        onClick={onButtonClick}
+      <Link
+        href={linkTo === 'mission' ? '/missionlist/newmission' : '/register'}
+        size="lg"
+        className={styles.link}
       >
-        {buttonName}
-      </Button>
+        {linkTo === 'mission' ? '임무 등록' : '히어로 추가'}
+      </Link>
       <Button
         size="md"
         disabled={false}
