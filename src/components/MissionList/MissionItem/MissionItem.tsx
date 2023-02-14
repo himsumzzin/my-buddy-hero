@@ -1,24 +1,36 @@
 import Image from 'next/image';
 import styles from './MissionItem.module.css';
-import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
+import Link from 'next/link';
 
 export interface IMissionItemProps {
   author: Hero;
   mission: Mission;
-  onClick: (mission: Mission) => void;
 }
 
-export const MissionItem = ({
-  mission,
-  author,
-  onClick,
-}: IMissionItemProps) => {
-  const { id, title, maxReceiver, receivers, isComplete } = mission;
+const StatusMessage = ({ mission }: { mission: Mission }) => {
+  const { isComplete, maxReceiver, receivers } = mission;
   const isFull = maxReceiver === receivers.length;
 
-  const handleClick = () => {
-    onClick(mission);
-  };
+  if (isComplete) {
+    return <p className={`${styles.status} ${styles.complete}`}>임무 완료!</p>;
+  }
+
+  if (isFull) {
+    return (
+      <p className={`${styles.status} ${styles.full}`}>임무가 진행중이에요</p>
+    );
+  }
+
+  return (
+    <p className={styles.status}>
+      <span>{maxReceiver - receivers.length}</span>명의 도움이 필요해요
+    </p>
+  );
+};
+
+export const MissionItem = ({ mission, author }: IMissionItemProps) => {
+  const { id, title, maxReceiver, receivers, isComplete } = mission;
+  const isFull = maxReceiver === receivers.length;
 
   return (
     <li
@@ -27,36 +39,23 @@ export const MissionItem = ({
       }`}
       data-mission-id={id}
     >
-      <button
-        className={styles.heroButton}
-        disabled={isComplete}
-        onClick={handleClick}
-      >
+      <Link href={`/missionlist/${id}`} className={styles.heroButton}>
+        <StatusMessage mission={mission} />
         <p className={styles.title}>{title}</p>
-        <div>
-          {author ? (
-            <div className={styles.authorBox}>
-              <p className={styles.author}>{author.title}</p>
-              <Image
-                className={`${styles.profileImage}`}
-                src={author.profileImage}
-                alt={`${author.name} 히어로`}
-                width={65}
-                height={65}
-              />
-            </div>
-          ) : null}
-          <p className={styles.checkMission}>
-            <span>임무 확인</span>
-            <ArrowLeftIcon
-              width={24}
-              height={24}
-              className={styles.arrowIcon}
-              aria-hidden="true"
-            />
-          </p>
+        <div className={styles.authorBox}>
+          <Image
+            className={`${styles.profileImage}`}
+            src={author?.profileImage}
+            alt={`${author?.name} 히어로`}
+            width={65}
+            height={65}
+          />
+          <div className={styles.authorInfo}>
+            <span>{author?.title}</span>
+            <span>히어로의 임무</span>
+          </div>
         </div>
-      </button>
+      </Link>
     </li>
   );
 };
