@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
   padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-base);
-  background-color: var(--color-main-orange-700);
 }
 
 .header {
@@ -53,7 +52,7 @@
   margin-top: var(--spacing-lg);
 }
 
-.closeButton {
+.backLink {
   position: absolute;
   top: var(--spacing-lg);
   left: var(--spacing-lg);

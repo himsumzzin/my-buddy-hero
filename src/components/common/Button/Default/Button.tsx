@@ -8,11 +8,11 @@ export type ButtonProps = {
   /**
    * children 에는 로그인, 가입 등 버튼 내부의 텍스트를 적어줄 수 있습니다.
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * 버튼의 onClick 이벤트를 줄 수 있습니다.
    */
-  onClick?: any;
+  onClick?: (props: any) => any;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */

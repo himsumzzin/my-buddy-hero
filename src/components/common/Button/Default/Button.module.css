@@ -24,33 +24,33 @@
   &:disabled {
     filter: grayscale(50%);
   }
+}
 
-  &.xs {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--border-radius-lg);
-  }
+.xs {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-lg);
+}
 
-  &.sm {
-    width: 105px;
-    height: 45px;
-  }
+.sm {
+  width: 105px;
+  height: 45px;
+}
 
-  &.md {
-    width: 180px;
-    height: 69px;
-    background: var(--grayscale-gray);
-  }
-  &.md:active {
-    background-color: var(--grayscale-darkgray);
-  }
+.md {
+  width: 180px;
+  height: 69px;
+  background: var(--grayscale-gray);
+}
+.md:active {
+  background-color: var(--grayscale-darkgray);
+}
 
-  &.md:hover {
-    background-color: var(--grayscale-darkgray);
-  }
+.md:hover {
+  background-color: var(--grayscale-darkgray);
+}
 
-  &.lg {
-    width: 522px;
-    height: 69px;
-  }
+.lg {
+  width: 522px;
+  height: 69px;
 }

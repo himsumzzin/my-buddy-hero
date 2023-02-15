@@ -46,7 +46,6 @@ export const MissionForm = ({
       if (typeof description !== 'string' || description.length < 10) {
         errors.description = '2글자 이상 입력해주세요.';
       }
-      console.log(errors);
 
       return errors;
     },
@@ -109,11 +108,7 @@ export const MissionForm = ({
           등록
         </Button>
       </Form>
-      <BackwardLink
-        href="/missionlist"
-        size="xs"
-        className={styles.closeButton}
-      />
+      <BackwardLink href="/missionlist" size="xs" className={styles.backLink} />
     </Slide>
   );
 };

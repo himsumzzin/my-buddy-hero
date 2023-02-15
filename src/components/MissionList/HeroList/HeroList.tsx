@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
-import { heroesState } from '@/states/heroes';
+import { heroesState } from '@/states/heroList';
 import { Input, Button, Title, Slide } from '@/components/common';
-import { HeroItem } from './HeroItem';
+import { HeroItem } from '../HeroItem';
 import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
 import styles from './HeroList.module.css';
 
