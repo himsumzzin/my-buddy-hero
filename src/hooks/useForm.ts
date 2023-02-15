@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-interface IinitialValues {
-  [key: string]: string;
+export interface IinitialValues {
+  [key: string]: any;
 }
 
 interface Ierror {

@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import { defaultMission, initialHero } from '@/states';
-import { useMissions, useDialog } from '@/hooks';
+import { useMissions, useDialog, IinitialValues } from '@/hooks';
 
 import { ErrorDialog } from '@/components/common';
 import { MissionForm } from '../MissionForm';
@@ -10,7 +10,7 @@ import { MissionInfo } from '../MissionInfo';
 import { HeroList } from '../HeroList';
 import { Result } from '../Result';
 
-export interface Summary {
+export interface Summary extends IinitialValues {
   title: string;
   description: string;
   maxReceiver: number;
@@ -28,14 +28,13 @@ export interface MissionCardProps {
    * 임무 목록을 통해 렌더링했다면 해당 임무에 대한 정보를 넣어줍니다.
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
-  initialMission: Mission | null;
+  initialMission?: Mission;
   /**
    * MissionCard를 담은 Dialog를 닫는 함수입니다
    */
-  onClose: () => void;
 }
 
-export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
+export const MissionCard = ({ initialMission }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
     initialMission ? 'MissionInfo' : 'MissionForm'
   );
@@ -98,17 +97,9 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
     <div>
       <AnimatePresence>
         {currentComponent === 'MissionForm' ? (
-          <MissionForm
-            mission={mission}
-            onSubmit={updateMissionInfo}
-            onClose={onClose}
-          />
+          <MissionForm mission={mission} onSubmit={updateMissionInfo} />
         ) : currentComponent === 'MissionInfo' ? (
-          <MissionInfo
-            mission={mission}
-            onSelect={setMissionStatus}
-            onClose={onClose}
-          />
+          <MissionInfo mission={mission} onSelect={setMissionStatus} />
         ) : currentComponent === 'HeroList' ? (
           <HeroList
             mission={mission}
@@ -124,7 +115,6 @@ export const MissionCard = ({ initialMission, onClose }: MissionCardProps) => {
           <Result
             missionStatus={missionStatus.current}
             heroInfo={heroInfo.current}
-            onClose={onClose}
           />
         )}
       </AnimatePresence>
