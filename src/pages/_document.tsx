@@ -6,10 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
+
         {/* Primary Meta Tags */}
         <meta
           name="keywords"
@@ -26,7 +23,6 @@ export default function Document() {
           content="/images/icons/favicon.ico"
         />
         <meta name="theme-color" content="#ffffff" />
-        <title>My Buddy Hero</title>
 
         {/* Open Graph / Facebook */}
         <meta property="og:title" content="My Buddy Hero" />

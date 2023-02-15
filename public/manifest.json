@@ -1,71 +1,71 @@
 {
-    "name": "My Buddy Hero",
-    "short_name": "MyBuddyHero",
-    "display": "standalone",
-    "theme_color": "#FFFFFF",
-    "background_color": "FFF4CC",
-    "categories": [
-        "web",
-        "hero",
-        "buddy",
-        "study",
-        "education",
-        "elementary student",
-        "elementary"
-    ],
-    "language": "ko-KR",
-    "description": "히어로 역할 놀이를 통한 교육 서비스",
-    "orientation": "landscape",
-    "scope": "/",
-    "start_url": "/",
-    "icons": [
-        {
-            "src": "/images/icons/logo-192x192.png",
-            "type": "image/png",
-            "sizes": "192x192",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/images/icons/logo-512x512.png",
-            "type": "image/png",
-            "sizes": "512x512",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/images/icons/android-icon-36x36.png",
-            "sizes": "36x36",
-            "type": "image/png",
-            "density": "0.75"
-        },
-        {
-            "src": "/images/icons/android-icon-48x48.png",
-            "sizes": "48x48",
-            "type": "image/png",
-            "density": "1.0"
-        },
-        {
-            "src": "/images/icons/android-icon-72x72.png",
-            "sizes": "72x72",
-            "type": "image/png",
-            "density": "1.5"
-        },
-        {
-            "src": "/images/icons/android-icon-96x96.png",
-            "sizes": "96x96",
-            "type": "image/png",
-            "density": "2.0"
-        },
-        {
-            "src": "/images/icons/android-icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png",
-            "density": "3.0"
-        },
-        {
-            "src": "/images/icons/android-icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "density": "4.0"
-        }
-    ]
+  "name": "My Buddy Hero",
+  "short_name": "MyBuddyHero",
+  "display": "standalone",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFF4CC",
+  "categories": [
+    "web",
+    "hero",
+    "buddy",
+    "study",
+    "education",
+    "elementary student",
+    "elementary"
+  ],
+  "language": "ko-KR",
+  "description": "히어로 역할 놀이를 통한 교육 서비스",
+  "orientation": "landscape",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/images/icons/logo-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/logo-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "density": "0.75"
+    },
+    {
+      "src": "/images/icons/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": "1.0"
+    },
+    {
+      "src": "/images/icons/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": "1.5"
+    },
+    {
+      "src": "/images/icons/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": "2.0"
+    },
+    {
+      "src": "/images/icons/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    },
+    {
+      "src": "/images/icons/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": "4.0"
+    }
+  ]
 }

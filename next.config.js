@@ -3,12 +3,15 @@ const { resolve } = require('path');
 /** @type {import('next').NextConfig} */
 const withPWA = require('next-pwa')({
   dest: 'public',
+  fallbacks: {
+    //fallback 이미지 하나 만들어서 넣을 것
+  },
+  disable: process.env.NODE_ENV === 'development',
+  // 기본 리다이렉션 주소
+  dynamicStartUrlRedirect: '/login',
 });
 
 module.exports = withPWA({
-  pwa: {
-    disable: process.env.NODE_ENV === 'development',
-  },
   reactStrictMode: false,
   images: {
     domains: ['storage.googleapis.com'],
@@ -51,6 +54,8 @@ module.exports = withPWA({
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': resolve('src'),
+      '@public': resolve('public'),
+      '@styles': resolve('src/styles'),
       '@images': resolve('public/images'),
       '@svgs': resolve('public/svgs'),
     };

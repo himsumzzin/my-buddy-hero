@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession, signIn } from 'next-auth/react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import {
   Form,
   Input,
@@ -11,9 +12,8 @@ import {
   ErrorMessage,
 } from '@/components/Auth';
 import { Title, Slide, PWAInstallButton, Button } from '@/components/common';
-import styles from './login.module.css';
 import { useForm } from '@/hooks';
-import { useRouter } from 'next/router';
+import styles from '@styles/Login.module.css';
 
 export default function Signin() {
   // const [isLoading, setIsLoading] = useState(true);

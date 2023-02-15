@@ -9,7 +9,7 @@ import { filteredMissionListState } from '@/states';
 import { useDialog, useHeroes, useMissions } from '@/hooks';
 import { Dialog, Nav, Slide } from '@/components/common';
 import { MissionCard, MissionItem } from '@/components/Missions';
-import styles from './Missions.module.css';
+import styles from '@styles/Missions.module.css';
 
 export default function Missions() {
   const router = useRouter();

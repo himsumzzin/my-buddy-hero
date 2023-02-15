@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { AxiosWithRetry } from '@/apis';
 import {
   Form,
@@ -12,9 +13,8 @@ import {
   ErrorMessage,
 } from '@/components/Auth';
 import { Title, Slide, Button } from '@/components/common';
-import styles from './signup.module.css';
 import { useForm } from '@/hooks';
-import { useRouter } from 'next/router';
+import styles from '@styles/Signup.module.css';
 
 export default function Signup() {
   // const [isLoading, setIsLoading] = useState(true);
