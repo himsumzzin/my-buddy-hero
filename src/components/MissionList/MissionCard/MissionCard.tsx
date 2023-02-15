@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { defaultMission, initialHero } from '@/states';
+import { initialHero } from '@/states';
 import { useMissions, useDialog, IinitialValues } from '@/hooks';
 
 import { ErrorDialog } from '@/components/common';
@@ -28,7 +28,7 @@ export interface MissionCardProps {
    * 임무 목록을 통해 렌더링했다면 해당 임무에 대한 정보를 넣어줍니다.
    * 임무 등록 버튼을 통해 렌더링했다면 기본값을 사용합니다.
    */
-  initialMission?: Mission;
+  initialMission: Mission;
   /**
    * MissionCard를 담은 Dialog를 닫는 함수입니다
    */
@@ -36,16 +36,14 @@ export interface MissionCardProps {
 
 export const MissionCard = ({ initialMission }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
-    initialMission ? 'MissionInfo' : 'MissionForm'
+    initialMission?.id ? 'MissionInfo' : 'MissionForm'
   );
-  const [mission, setMission] = useState<Mission>(
-    initialMission ?? defaultMission
-  );
+  const [mission, setMission] = useState<Mission>(initialMission);
   const { addMission, updateMission } = useMissions();
   const errorDialog = useDialog();
 
   const missionStatus = useRef<MissionStatus>(
-    initialMission ? 'update' : 'create'
+    initialMission?.id ? 'update' : 'create'
   );
 
   const heroInfo = useRef<Hero>(initialHero);
