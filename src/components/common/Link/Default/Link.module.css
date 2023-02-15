@@ -21,6 +21,12 @@
   }
 }
 
+.xs {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
 .sm {
   width: 314px;
   height: 69px;
