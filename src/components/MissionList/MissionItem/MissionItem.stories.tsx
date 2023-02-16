@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MissionItem, IMissionItemProps } from './MissionItem';
 
 export default {
-  title: 'Components/Missions/MissionItem',
+  title: 'Components/missionlist/MissionItem',
   component: MissionItem,
   args: {
     mission: {
@@ -16,9 +16,16 @@ export default {
         '현진이 엉덩이는 빨개 빨가면 사과 사과는 맛있어 맛있으면 바나나 바나나는 길어 길면 기차 기차는 빨라 빠르면 비행기 비행기는 높아 높으면 백두산!',
       maxReceiver: 3,
     },
-    onClick: (id) => {
-      console.log(id);
-      return id;
+    author: {
+      id: '123',
+      groupId: '1',
+      name: '코딩맨',
+      code: '1234',
+      title: '코딩맨',
+      profileImage:
+        'https://storage.googleapis.com/my-buddy-hero-23f442ea-c632-4e73-9459-1b0d73f7f704/01c78c73_1_%EB%AF%BC%EC%84%9D',
+      completeNumber: 0,
+      description: '코딩맨입니다',
     },
   },
   parameters: {

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Result, ResultProps } from './Result';
 
 export default {
-  title: 'Components/Missions/Result',
+  title: 'Components/missionlist/Result',
   component: Result,
   args: {
     heroInfo: {

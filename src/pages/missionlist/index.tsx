@@ -1,40 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
 import { filteredMissionListState } from '@/states';
-import { useDialog, useHeroes, useMissions } from '@/hooks';
-import { Dialog, Nav, Slide } from '@/components/common';
-import { MissionCard, MissionItem } from '@/components/Missions';
-import styles from '@styles/Missions.module.css';
+import { useHeroes, useMissions } from '@/hooks';
+import { Nav, Slide } from '@/components/common';
+import { MissionItem } from '@/components/MissionList';
+import styles from '@styles/MissionList.module.css';
 
-export default function Missions() {
+export default function MissionList() {
   const router = useRouter();
   const { initHeroeList, getHero } = useHeroes();
   const { initMissionList } = useMissions();
   const filteredMissionList = useRecoilValue(filteredMissionListState);
-  const missionDialog = useDialog();
-  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   useEffect(() => {
     initHeroeList();
     initMissionList();
   }, []);
-
-  const openMissionInfo = (mission: Mission) => {
-    setSelectedMission(mission);
-    missionDialog.open();
-  };
-  const openMissionForm = () => {
-    missionDialog.open();
-  };
-  const closeMissionCard = () => {
-    setSelectedMission(null);
-    missionDialog.close();
-  };
 
   return (
     <>
@@ -42,11 +28,7 @@ export default function Missions() {
         <title>임무를 수행해보세요!</title>
       </Head>
       <div className={styles.container}>
-        <Nav
-          buttonName="임무 등록"
-          onButtonClick={openMissionForm}
-          currentPage={router?.asPath}
-        />
+        <Nav linkTo="mission" currentPage={router?.asPath} />
         <Slide direction="left" className={styles.missionContainer}>
           {filteredMissionList.length > 0 ? (
             <ul className={styles.missionList}>
@@ -56,7 +38,6 @@ export default function Missions() {
                     key={mission.id}
                     author={getHero(mission.authorId) as Hero}
                     mission={mission}
-                    onClick={openMissionInfo}
                   />
                 );
               })}
@@ -65,14 +46,6 @@ export default function Missions() {
             <p>임무를 등록해주세요!</p>
           )}
         </Slide>
-        {missionDialog.isOpen ? (
-          <Dialog modal onClose={closeMissionCard}>
-            <MissionCard
-              initialMission={selectedMission}
-              onClose={closeMissionCard}
-            />
-          </Dialog>
-        ) : null}
       </div>
     </>
   );

@@ -24,7 +24,7 @@ export default function Herolist() {
       </Head>
       <div className={styles.container}>
         <Nav
-          buttonName="히어로 추가"
+          linkTo="hero"
           onButtonClick={() => {
             router.replace('/register');
           }}

@@ -9,9 +9,22 @@
   gap: var(--spacing-base);
   padding-top: 2%;
 }
-.buttonBox {
+.link:not(:disabled) {
   margin-left: auto;
+  width: 180px;
+  height: 69px;
+  font-family: var(--font-family-content);
+  font-size: var(--text-size-lg);
+  background: var(--color-main-blue);
+  border-radius: var(--border-radius-lg);
+
+  &:hover {
+    background: var(--color-btn-hover);
+  }
 }
 .logout {
-  background: red;
+  background-color: var(--grayscale-gray);
+  &:hover {
+    background-color: var(--grayscale-darkgray);
+  }
 }

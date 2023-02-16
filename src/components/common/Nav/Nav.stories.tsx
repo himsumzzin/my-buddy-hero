@@ -22,16 +22,16 @@ const Template: ComponentStory<typeof Nav> = (args: NavProps) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  buttonName: '기본 버튼',
+  linkTo: '기본 링크',
 };
 
 export const HeroListSelectedNav = Template.bind({});
 HeroListSelectedNav.args = {
-  buttonName: '히어로 등록',
+  linkTo: '히어로 등록',
   currentPage: '/herolist',
 };
 export const MissionListSelectedNav = Template.bind({});
 MissionListSelectedNav.args = {
-  buttonName: '임무 등록',
-  currentPage: '/missions',
+  linkTo: '임무 등록',
+  currentPage: '/missionlist',
 };
