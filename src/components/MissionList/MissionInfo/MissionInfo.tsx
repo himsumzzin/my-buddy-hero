@@ -11,18 +11,9 @@ export interface MissionInfoProps {
    * 사용자의 입력에 따라 미션 선택 | 미션 완료 중 하나의 값을 MissionCard 컴포넌트에 전달합니다.
    */
   onSelect: (status: MissionStatus) => void;
-  /**
-   * MissionCard 컴포넌트를 언마운트하는 로직을 담은 함수입니다.
-   * MissionCard를 감싸고 있는 Dialog 컴포넌트를 닫는 함수를 사용할 예정입니다.
-   */
-  onClose: () => void;
 }
 
-export const MissionInfo = ({
-  mission,
-  onSelect,
-  onClose,
-}: MissionInfoProps) => {
+export const MissionInfo = ({ mission, onSelect }: MissionInfoProps) => {
   const { title, description, maxReceiver, receivers } = mission;
   const isFull = receivers.length >= maxReceiver;
 
@@ -55,9 +46,6 @@ export const MissionInfo = ({
           임무 끝!
         </Button>
       </div>
-      <Button size="xs" className={styles.closeButton} onClick={onClose}>
-        <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" />
-      </Button>
     </Slide>
   );
 };
