@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import { initialHero } from '@/states';
@@ -36,28 +36,32 @@ export interface MissionCardProps {
 
 export const MissionCard = ({ initialMission }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
-    initialMission?.id ? 'MissionInfo' : 'MissionForm'
+    initialMission.id ? 'MissionInfo' : 'MissionForm'
   );
-  const [mission, setMission] = useState<Mission>(initialMission);
   const { addMission, updateMission } = useMissions();
   const errorDialog = useDialog();
-
   const missionStatus = useRef<MissionStatus>(
-    initialMission?.id ? 'update' : 'create'
+    initialMission.id ? 'update' : 'create'
   );
-
+  const mission = useRef<Mission>(initialMission);
   const heroInfo = useRef<Hero>(initialHero);
 
-  const renderMissionForm = () => setCurrentComponent('MissionForm');
-  const renderMissionInfo = () => setCurrentComponent('MissionInfo');
-  const renderHeroList = () => setCurrentComponent('HeroList');
-  const renderResult = () => setCurrentComponent('Result');
+  const renderMissionForm = useCallback(
+    () => setCurrentComponent('MissionForm'),
+    []
+  );
+  const renderMissionInfo = useCallback(
+    () => setCurrentComponent('MissionInfo'),
+    []
+  );
+  const renderHeroList = useCallback(() => setCurrentComponent('HeroList'), []);
+  const renderResult = useCallback(() => setCurrentComponent('Result'), []);
 
   const updateMissionInfo = (newMissionInfo: Summary) => {
-    setMission((prevMissionInfo) => ({
-      ...prevMissionInfo,
+    mission.current = {
+      ...mission.current,
       ...newMissionInfo,
-    }));
+    };
 
     renderHeroList();
   };
@@ -74,14 +78,19 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
     try {
       switch (status) {
         case 'create':
-          await addMission({ ...mission, authorId: heroInfo.current.id });
+          await addMission({
+            ...mission.current,
+            authorId: heroInfo.current.id,
+          });
           break;
         case 'update':
-          await updateMission(mission.id, { receiver: selectedHeroInfo.id });
+          await updateMission(mission.current.id, {
+            receiver: selectedHeroInfo.id,
+          });
           break;
         case 'complete':
-          await updateMission(mission.id, {
-            receivers: mission.receivers,
+          await updateMission(mission.current.id, {
+            receivers: mission.current.receivers,
           });
           break;
       }
@@ -95,14 +104,14 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
     <div>
       <AnimatePresence>
         {currentComponent === 'MissionForm' ? (
-          <MissionForm mission={mission} onSubmit={updateMissionInfo} />
+          <MissionForm mission={mission.current} onSubmit={updateMissionInfo} />
         ) : currentComponent === 'MissionInfo' ? (
-          <MissionInfo mission={mission} onSelect={setMissionStatus} />
+          <MissionInfo mission={mission.current} onSelect={setMissionStatus} />
         ) : currentComponent === 'HeroList' ? (
           <HeroList
-            mission={mission}
+            mission={mission.current}
             missionStatus={missionStatus.current}
-            onSubmit={onHeroSelect}
+            onHeroSelect={onHeroSelect}
             onGoBack={
               missionStatus.current === 'create'
                 ? renderMissionForm

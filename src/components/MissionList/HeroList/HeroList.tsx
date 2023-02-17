@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { heroesState } from '@/states/heroList';
-import { Input, Button, Title, Slide } from '@/components/common';
+import { Title, Slide, BackwardButton, Button } from '@/components/common';
 import { HeroItem } from '../HeroItem';
-import { ReactComponent as ArrowLeftIcon } from '@svgs/arrow-left.svg';
 import styles from './HeroList.module.css';
+import { Form, Input, ErrorMessage } from '@/components/Auth';
+import { useForm } from '@/hooks';
 
 export interface HeroListProps {
   /**
@@ -20,7 +20,7 @@ export interface HeroListProps {
   /**
    * 미션을 추가하거나 업데이트하는 함수입니다. 선택한 히어로와 히어로 코드가 일치할 때 호출합니다.
    */
-  onSubmit: (heroInfo: Hero) => void;
+  onHeroSelect: (heroInfo: Hero) => void;
   /**
    * missionStatus에 따라 missionForm 또는 missionInfo로 돌아가는 버튼입니다.
    */
@@ -38,109 +38,120 @@ export interface HeroListForm extends HTMLFormElement {
 export const HeroList = ({
   mission,
   missionStatus,
-  onSubmit,
+  onHeroSelect,
   onGoBack,
 }: HeroListProps) => {
   const heroList = useRecoilValue(heroesState);
-  const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
-  const [isValid, setIsValid] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
+  const { errors, handleSubmit, getFieldProps, isValid } = useForm({
+    initialValues: { id: '', code: '' },
+    validate: (values) => {
+      const { id, code } = values;
+      const errors = {
+        submit: '',
+      };
+
+      if (!/^\d{4}$/.test(code)) {
+        errors.submit = '히어로 코드는 4자리 숫자를 입력해주세요';
+        return errors;
+      }
+
+      if (!id) {
+        errors.submit = '히어로를 선택해주세요';
+        return errors;
+      }
+
+      const matchedHero = heroList.find(
+        (hero) => hero.id === id && hero.code === code
+      );
+      if (!matchedHero) {
+        errors.submit = '히어로 코드가 올바르지 않습니다. 다시 입력해주세요';
+        return errors;
+      }
+
+      return errors;
+    },
+    onSubmit: async (values) => {
+      const { id, code } = values;
+      const matchedHero = heroList.find(
+        (hero) => hero.id === id && hero.code === code
+      ) as Hero;
+
+      onHeroSelect(matchedHero);
+    },
+  });
+  const { onChange: onRadioInputChange, onBlur: onRadioInputBlur } =
+    getFieldProps('id');
 
   const { receivers, authorId } = mission;
-
-  const getErrorMessage = () => {
-    if (!selectedHeroId) {
-      return '히어로를 선택해주세요!';
-    }
+  const filteredHeroList = heroList.filter((hero) => {
     switch (missionStatus) {
-      case 'create':
-        return '히어로 코드가 올바르지 않습니다. 다시 입력해주세요';
       case 'update':
-        return '임무를 수락할 수 없는 히어로입니다.';
+        return hero.id !== authorId && !receivers.includes(hero.id);
       case 'complete':
-        return '임무를 종료할 수 없는 히어로입니다.';
+        return hero.id === authorId;
+      default:
+        return true;
     }
-  };
-
-  const selectHero = useCallback(
-    (e: React.MouseEvent<HTMLUListElement>) => {
-      const heroId = e.target.closest('li')?.dataset?.heroId;
-      if (!heroId || receivers.includes(heroId)) return;
-
-      setIsValid(true);
-      setSelectedHeroId(heroId);
-    },
-    [receivers]
-  );
-
-  const handleSubmit = (e: React.FormEvent<HeroListForm>) => {
-    e.preventDefault();
-
-    if (!selectedHeroId) {
-      setIsValid(false);
-      return;
-    }
-
-    const submittedCode = e.currentTarget.herocode.value;
-    const matchedHero = heroList.find(
-      (hero) => hero.id === selectedHeroId && hero.code === submittedCode
-    );
-
-    if (
-      (missionStatus === 'create' && matchedHero) ||
-      (missionStatus === 'update' &&
-        matchedHero &&
-        matchedHero.id !== authorId) ||
-      (missionStatus === 'complete' &&
-        matchedHero &&
-        matchedHero.id === authorId)
-    ) {
-      setIsFetching(true);
-      onSubmit(matchedHero);
-    } else {
-      setIsValid(false);
-    }
-  };
+  });
 
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3}>당신은 누구인가요?</Title>
+        <Title lv={3} className={styles.title}>
+          나의 히어로 카드 선택
+        </Title>
       </header>
-      <div className={styles.heroesBox}>
-        <ul className={styles.ul} onClick={selectHero}>
-          {heroList.map((hero) => {
-            const { id } = hero;
-            return (
-              <HeroItem
-                key={id}
-                hero={hero}
-                isReceiver={receivers.includes(id)}
-                isSelected={id === selectedHeroId}
-              />
-            );
-          })}
-        </ul>
-      </div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <Form description={'임무 등록'} handleSubmit={handleSubmit}>
+        <div className={styles.heroesBox}>
+          <ul className={styles.ul}>
+            {filteredHeroList.map((hero) => {
+              const { id } = hero;
+              return (
+                <li key={id}>
+                  <label htmlFor={id}>
+                    <input
+                      id={id}
+                      type="radio"
+                      name="id"
+                      value={id}
+                      className="srOnly"
+                      onChange={onRadioInputChange}
+                      onBlur={onRadioInputBlur}
+                    />
+                    <HeroItem
+                      className={styles.heroItem}
+                      hero={hero}
+                      size="sm"
+                    />
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
         <Input
-          name="herocode"
+          type="text"
+          name="code"
           size="sm"
-          initialValue=""
+          labelText="나의 히어로 코드"
+          maxLength={4}
+          placeholder=" "
+          border="rec"
           className={styles.heroCode}
-          labelText="히어로 코드"
-          placeholder="히어로 코드:"
-        />
-        {!isValid ? (
-          <span className={styles.errorMessage}>{getErrorMessage()}</span>
-        ) : null}
-        <Button size="sm" disabled={isFetching}>
+          getFieldProps={getFieldProps}
+        >
+          <span>나의 히어로 코드</span>
+        </Input>
+        <ErrorMessage error={errors.submit} />
+        <Button size="lg" disabled={!isValid()} className={styles.submitButton}>
           완료
         </Button>
-      </form>
-      <Button size="xs" className={styles.goBackButton} onClick={onGoBack}>
-        <ArrowLeftIcon width="32px" height="32px" viewBox="0 0 24 24" />
-      </Button>
+      </Form>
+      <BackwardButton
+        size="xs"
+        className={styles.backwardButton}
+        onClick={onGoBack}
+      />
     </Slide>
   );
 };

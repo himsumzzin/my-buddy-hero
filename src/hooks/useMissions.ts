@@ -14,7 +14,7 @@ export const useMissions = () => {
 
   const initMissionList = async () => {
     const { data } = await AxiosWithRetry.get(
-      `api/groups/${groupId}/missionlist`
+      `/api/groups/${groupId}/missionlist`
     );
     setMissionList(data.body.missions);
   };
@@ -26,7 +26,7 @@ export const useMissions = () => {
   const addMission = async (mission: Mission) => {
     try {
       const { data } = await AxiosWithRetry.post(
-        `api/groups/${groupId}/missionlist`,
+        `/api/groups/${groupId}/missionlist`,
         mission
       );
       const newMission = data.body.mission;
@@ -47,7 +47,7 @@ export const useMissions = () => {
   ) => {
     try {
       await AxiosWithRetry.patch(
-        `api/groups/${groupId}/missionlist/${missionId}`,
+        `/api/groups/${groupId}/missionlist/${missionId}`,
         missionInfo
       );
 
