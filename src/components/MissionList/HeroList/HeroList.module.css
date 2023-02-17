@@ -15,6 +15,7 @@
 
 .title {
   font-family: var(--font-family-title);
+  font-size: var(--text-size-title);
   color: var(--grayscale-black);
 }
 
@@ -27,7 +28,7 @@
 }
 
 .heroesBox {
-  margin: var(--spacing-lg) auto;
+  margin: var(--spacing-base) auto 0;
   width: 768px;
   height: 360px;
   padding: var(--spacing-sm);
@@ -60,6 +61,7 @@ input:checked ~ .heroItem {
 }
 
 .heroCode {
+  margin-top: var(--spacing-base);
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

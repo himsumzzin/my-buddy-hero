@@ -20,7 +20,7 @@ export interface HeroListProps {
   /**
    * 미션을 추가하거나 업데이트하는 함수입니다. 선택한 히어로와 히어로 코드가 일치할 때 호출합니다.
    */
-  onHeroSelect: (heroInfo: Hero) => void;
+  onHeroSelect: (hero: Hero) => void;
   /**
    * missionStatus에 따라 missionForm 또는 missionInfo로 돌아가는 버튼입니다.
    */
@@ -97,7 +97,7 @@ export const HeroList = ({
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3} className={styles.title}>
+        <Title lv={1} className={styles.title}>
           나의 히어로 카드 선택
         </Title>
       </header>

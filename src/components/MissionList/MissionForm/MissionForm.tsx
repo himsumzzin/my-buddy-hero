@@ -57,7 +57,7 @@ export const MissionForm = ({
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3} className={styles.title}>
+        <Title lv={1} className={styles.title}>
           임무 등록
         </Title>
       </header>
