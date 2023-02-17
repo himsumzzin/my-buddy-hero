@@ -44,7 +44,7 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
     initialMission.id ? 'update' : 'create'
   );
   const mission = useRef<Mission>(initialMission);
-  const heroInfo = useRef<Hero>(initialHero);
+  const hero = useRef<Hero>(initialHero);
 
   const renderMissionForm = useCallback(
     () => setCurrentComponent('MissionForm'),
@@ -72,7 +72,7 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
   };
 
   const onHeroSelect = async (selectedHeroInfo: Hero) => {
-    heroInfo.current = selectedHeroInfo;
+    hero.current = selectedHeroInfo;
 
     const status = missionStatus.current;
     try {
@@ -80,7 +80,7 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
         case 'create':
           await addMission({
             ...mission.current,
-            authorId: heroInfo.current.id,
+            authorId: hero.current.id,
           });
           break;
         case 'update':
@@ -121,7 +121,8 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
         ) : (
           <Result
             missionStatus={missionStatus.current}
-            heroInfo={heroInfo.current}
+            hero={hero.current}
+            mission={mission.current}
           />
         )}
       </AnimatePresence>

@@ -1,36 +1,43 @@
 .container {
   position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-lg) var(--spacing-base) var(--spacing-base);
+}
+
+.header {
+  margin-top: var(--spacing-xl);
+  position: relative;
   display: flex;
-  flex-flow: column nowrap;
+  justify-content: center;
   align-items: center;
-  width: 400px;
-  min-height: 580px;
-  padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-base);
-  background-color: var(--color-main-orange-700);
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-default);
-  font-family: var(--font-family-content);
+}
+
+.title {
+  font-family: var(--font-family-title);
+  font-size: var(--text-size-title);
+  color: var(--grayscale-black);
 }
 
 .imageBox {
+  margin-top: var(--spacing-lg);
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
+  justify-content: center;
   align-items: center;
-  min-width: 300px;
-  background-color: var(--color-main-orange-400);
-  border: 8px solid var(--color-main-orange-600);
-  border-radius: var(--border-radius-md);
-}
-.image {
-  object-fit: contain;
+  gap: var(--spacing-base);
 }
 
 .message {
-  color: var(--grayscale-white);
+  margin-top: var(--spacing-lg);
+  color: var(--grayscale-black);
   text-align: center;
   font-size: var(--text-size-subTitle);
   font-weight: var(--text-weight-bold);
   text-shadow: var(--shadow-default);
+  & span {
+    display: block;
+  }
 }
 
 .heroName {
@@ -38,6 +45,12 @@
   font-size: var(--text-size-title);
 }
 
-.closeButton {
-  margin-top: var(--spacing-sm);
+.closeLink {
+  margin: var(--spacing-lg) auto 0;
+  width: 520px;
+  height: 70px;
+
+  &:hover {
+    background-color: var(--color-btn-hover);
+  }
 }

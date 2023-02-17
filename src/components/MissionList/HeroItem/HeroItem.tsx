@@ -14,15 +14,15 @@ export const HeroItem = ({ hero, size, className }: HeroItemProps) => {
   const { id, profileImage, title, name } = hero;
   return (
     <div
-      className={`${styles.li} ${styles[size]} ${className ?? ''}`}
+      className={`${styles.container} ${styles[size]} ${className ?? ''}`}
       data-hero-id={id}
     >
       <Image
         className={`${styles.profileImage}`}
         src={profileImage}
         alt={`${name} 히어로`}
-        width={190}
-        height={350}
+        width={size === 'sm' ? 160 : 300}
+        height={size === 'sm' ? 160 : 300}
       />
       <span className={`${styles.heroName} ${styles[size]}`}>{`${title}`}</span>
     </div>

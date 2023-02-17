@@ -1,6 +1,43 @@
-import { Button, Title, Slide } from '@/components/common';
-import Image from 'next/image';
+import { Button, Title, Slide, Link } from '@/components/common';
+import { HeroItem } from '../HeroItem';
+import { useHeroes } from '@/hooks';
 import styles from './Result.module.css';
+
+interface MessageProps {
+  missionStatus: MissionStatus;
+  hero: Hero;
+  author: Hero;
+  className?: string;
+}
+
+const Message = ({ missionStatus, hero, author, className }: MessageProps) => {
+  switch (missionStatus) {
+    case 'create':
+      return (
+        <div className={className ?? ''}>
+          <span>{hero.name} 히어로님</span>
+          <span>임무가 성공적으로 등록되었습니다</span>
+        </div>
+      );
+    case 'update':
+      return (
+        <div className={className ?? ''}>
+          <span>
+            {hero.name} 히어로님이 {author.name} 히어로님의 임무를
+            선택하셨습니다
+          </span>
+          <span>임무를 성공적으로 수행해주길 바래요</span>
+        </div>
+      );
+    case 'complete':
+      return (
+        <div className={className ?? ''}>
+          <span>{hero.name} 히어로님</span>
+          <span>임무가 종료되었습니다</span>
+        </div>
+      );
+  }
+};
 
 export interface ResultProps {
   /**
@@ -8,48 +45,46 @@ export interface ResultProps {
    */
   missionStatus: MissionStatus;
   /**
-   * 히어로 정볼를 나타냅니ㅏㄷ
+   * 임무를 등록 / 선택 / 종료한 히어로 정보를 나타냅니다
    */
-  heroInfo: Hero;
+  hero: Hero;
   /**
-   * MissionCard 컴포넌트를 언마운트하는 로직을 담은 함수입니다.
-   * MissionCard를 감싸고 있는 Dialog 컴포넌트를 닫는 함수를 사용할 예정입니다.
+   * 임무 정보입니다. missionStatus가 update인 경우 사용됩니다.
    */
-  onClose: () => void;
+  mission: Mission;
 }
 
-export const Result = ({ missionStatus, heroInfo, onClose }: ResultProps) => {
-  const { profileImage, title, name } = heroInfo;
-  const message = {
-    create: '등록',
-    update: '수락',
-    complete: '완료',
+export const Result = ({ missionStatus, hero, mission }: ResultProps) => {
+  const { getHero } = useHeroes();
+
+  const author = getHero(mission.authorId) as Hero;
+
+  const title = {
+    create: '임무 등록',
+    update: '임무 선택',
+    complete: '임무 종료',
   };
+
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={2} className="srOnly">
-          {`임무 목록`}
+        <Title lv={1} className={styles.title}>
+          {title[missionStatus]}
         </Title>
       </header>
       <div className={styles.imageBox}>
-        <Image
-          className={`${styles.image}`}
-          src={profileImage}
-          alt={`${name} 히어로`}
-          width={190}
-          height={320}
-        />
+        <HeroItem hero={hero} size="lg" />
+        {missionStatus === 'update' && <HeroItem hero={author} size="lg" />}
       </div>
-      <p className={`${styles.message} ${styles.heroName}`}>
-        {title} {name}님
-      </p>
-      <p className={styles.message}>
-        임무가 {message[missionStatus]}되었습니다!
-      </p>
-      <Button className={styles.closeButton} size="sm" onClick={onClose}>
+      <Message
+        className={styles.message}
+        missionStatus={missionStatus}
+        hero={hero}
+        author={author}
+      />
+      <Link href="/missionlist" size="lg" className={styles.closeLink}>
         확인
-      </Button>
+      </Link>
     </Slide>
   );
 };
