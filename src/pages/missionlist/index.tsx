@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
+import { BeatLoader } from 'react-spinners';
 import { useRecoilValue } from 'recoil';
 import { filteredMissionListState } from '@/states';
 import { useHeroes, useMissions } from '@/hooks';
@@ -33,10 +34,15 @@ export default function MissionList() {
           {filteredMissionList.length > 0 ? (
             <ul className={styles.missionList}>
               {filteredMissionList.map((mission) => {
+                const author = getHero(mission.authorId);
+                if (!author) {
+                  return <BeatLoader key={mission.id} />;
+                }
+
                 return (
                   <MissionItem
                     key={mission.id}
-                    author={getHero(mission.authorId) as Hero}
+                    author={author}
                     mission={mission}
                   />
                 );

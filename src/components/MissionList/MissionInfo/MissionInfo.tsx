@@ -1,5 +1,4 @@
-import { Button, Title, Slide } from '@/components/common';
-import { ReactComponent as CloseIcon } from '@svgs/close.svg';
+import { Button, Title, Slide, BackwardLink } from '@/components/common';
 import styles from './MissionInfo.module.css';
 
 export interface MissionInfoProps {
@@ -20,18 +19,17 @@ export const MissionInfo = ({ mission, onSelect }: MissionInfoProps) => {
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3}>임무 확인</Title>
+        <Title lv={1} className={styles.title}>
+          임무 확인
+        </Title>
       </header>
       <div className={styles.textBox}>
         <p className={styles.missionTitle}>{title}</p>
         <p className={styles.description}>{description}</p>
-        <p className={styles.maxReceiver}>
-          {maxReceiver - receivers.length}명이 더 필요해요!
-        </p>
       </div>
       <div className={styles.buttonBox}>
         <Button
-          size="sm"
+          size="md"
           className={styles.missionButton}
           disabled={isFull}
           onClick={() => onSelect('update')}
@@ -39,13 +37,14 @@ export const MissionInfo = ({ mission, onSelect }: MissionInfoProps) => {
           저 할래요!
         </Button>
         <Button
-          size="sm"
+          size="md"
           className={styles.missionButton}
           onClick={() => onSelect('complete')}
         >
           임무 끝!
         </Button>
       </div>
+      <BackwardLink href="/missionlist" size="xs" className={styles.backLink} />
     </Slide>
   );
 };
