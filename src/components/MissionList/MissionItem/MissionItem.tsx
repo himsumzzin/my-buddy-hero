@@ -30,6 +30,7 @@ const StatusMessage = ({ mission }: { mission: Mission }) => {
 
 export const MissionItem = ({ mission, author }: IMissionItemProps) => {
   const { id, title, maxReceiver, receivers, isComplete } = mission;
+  const { name, title: authorTitle, profileImage } = author;
   const isFull = maxReceiver === receivers.length;
 
   return (
@@ -45,13 +46,13 @@ export const MissionItem = ({ mission, author }: IMissionItemProps) => {
         <div className={styles.authorBox}>
           <Image
             className={`${styles.profileImage}`}
-            src={author?.profileImage}
-            alt={`${author?.name} 히어로`}
+            src={profileImage}
+            alt={`${name} 히어로`}
             width={65}
             height={65}
           />
           <div className={styles.authorInfo}>
-            <span>{author?.title}</span>
+            <span>{authorTitle}</span>
             <span>히어로의 임무</span>
           </div>
         </div>
