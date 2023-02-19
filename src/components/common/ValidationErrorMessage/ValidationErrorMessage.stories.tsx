@@ -1,11 +1,11 @@
 import {
   ValidationErrorMessage,
   ValidationErrorMessageProps,
-} from '@/components/Auth';
+} from '@/components/common';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Auth/ValidationErrorMessage',
+  title: 'Components/common/ValidationErrorMessage',
   component: ValidationErrorMessage,
   parameters: {
     docs: {

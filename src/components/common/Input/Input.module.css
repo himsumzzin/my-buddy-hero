@@ -1,86 +1,83 @@
 .container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   position: relative;
   width: fit-content;
+  max-width: 522px;
   margin: 0 auto;
 }
 
-.lgInput {
+.input {
   display: block;
-  padding: 20px 29px 20px 32px;
-  width: 522px;
   height: 69px;
+  padding: 20px 29px 20px 32px;
   font-family: var(--font-family-content);
-  font-size: var(--text-size-lg);
-  font-weight: var(--text-weight-bold);
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
   border: none;
   background: var(--grayscale-white);
   box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.25);
-  border-radius: var(--border-radius-lg);
 }
 
-.lgLabel {
+.label {
   color: var(--grayscale-gray);
-  position: absolute;
-  left: 32px;
-  top: 15px;
   font-family: var(--font-family-content);
-  font-size: var(--text-size-lg);
-  font-weight: var(--text-weight-bold);
   transition: var(--transition-fast) ease all;
-}
-
-.lgInput:focus ~ .lgLabel,
-.top {
-  position: absolute;
-  left: 32px;
-  top: 0;
-  font-family: var(--font-family-content);
-  font-size: var(--text-size-md);
-  font-weight: var(--text-weight-bold);
-  transition: var(--transition-fast) ease all;
+  order: -1;
 }
 
 /**** size ****/
-.sm {
-  height: 39px;
-  width: 250px;
-  font-size: var(--text-size-md);
-  border-radius: var(--border-radius-md);
+.lg {
+  width: 522px;
+  font-size: var(--text-size-lg);
+  font-weight: var(--text-weight-bold);
+  & + .label {
+    position: absolute;
+    left: 32px;
+    top: 15px;
+    font-size: var(--text-size-lg);
+    font-weight: var(--text-weight-bold);
+  }
 }
 
-.smLabel {
-  position: absolute;
-  left: 40px;
-  top: 10px;
-  font-size: var(--text-size-sm);
+.sm {
+  width: 200px;
+  font-size: var(--text-size-lg);
+  font-weight: var(--text-weight-light);
+  & + .label {
+    align-self: center;
+    font-size: var(--text-size-lg);
+    font-weight: var(--text-weight-light);
+    margin-right: 51px;
+  }
 }
 
 .md {
-  height: 41px;
-  width: 343px;
+  width: 271px;
+  font-size: var(--text-size-subTitle);
+  font-weight: var(--text-weight-bold);
+  & + .label {
+    color: var(--grayscale-black);
+    align-self: center;
+    font-size: var(--text-size-subTitle);
+    font-weight: var(--text-weight-bold);
+    margin-right: 35px;
+  }
+}
+
+.lg:focus ~ .label,
+.top.label {
+  top: 0;
+  font-size: var(--text-size-md);
+  transition: var(--transition-fast) ease all;
+}
+
+.rec {
   border-radius: var(--border-radius-sm);
 }
 
-.mdLabel {
-  position: absolute;
-  left: 45px;
-  top: 8px;
-  font-size: var(--text-size-base);
-}
-
-/**** Error message ****/
-.noError {
-  display: none;
-}
-
-.error {
-  color: red;
-  font-family: var(--font-family-content);
-  font-size: var(--text-size-md);
-  margin-top: 5px;
-  text-align: center;
-  height: 0;
+.round {
+  border-radius: var(--border-radius-lg);
 }
