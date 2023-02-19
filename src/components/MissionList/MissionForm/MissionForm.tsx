@@ -1,17 +1,13 @@
-import { Input, Textarea, Button, Title, Slide } from '@/components/common';
-import { ReactComponent as CloseIcon } from '@svgs/close.svg';
+import { Button, Title, Slide, BackwardLink } from '@/components/common';
+import {
+  Form,
+  Input,
+  ValidationErrorMessage,
+  Textarea,
+} from '@/components/Auth';
+import { useForm } from '@/hooks';
 import { Summary } from '../MissionCard';
 import styles from './MissionForm.module.css';
-
-interface CustomElements extends HTMLFormControlsCollection {
-  title: HTMLInputElement;
-  maxReceiver: HTMLInputElement;
-  description: HTMLTextAreaElement;
-}
-
-interface SummaryForm extends HTMLFormElement {
-  readonly elements: CustomElements;
-}
 
 export interface MissionFormProps {
   /**
@@ -22,66 +18,97 @@ export interface MissionFormProps {
    * summary 정보를 MissionCard 컴포넌트에 전달합니다.
    */
   onSubmit: (newMissionInfo: Summary) => void;
-  /**
-   * MissionCard 컴포넌트를 언마운트하는 로직을 담은 함수입니다.
-   * MissionCard를 감싸고 있는 Dialog 컴포넌트를 닫는 함수를 사용할 예정입니다.
-   */
-  onClose: () => void;
 }
 
 export const MissionForm = ({
   mission,
-  onSubmit,
-  onClose,
+  onSubmit: onSubmitCallback,
 }: MissionFormProps) => {
-  const { id, title, maxReceiver, description } = mission;
+  const { title, maxReceiver, description } = mission;
 
-  const handleSubmit = (e: React.FormEvent<SummaryForm>) => {
-    e.preventDefault();
-    const elements = e.currentTarget.elements;
+  const { errors, touched, handleSubmit, getFieldProps, isValid } = useForm({
+    initialValues: { title, maxReceiver, description },
+    validate: (values) => {
+      const { title, description, maxReceiver } = values;
+      const errors = {
+        title: '',
+        maxReceiver: '',
+        description: '',
+      };
 
-    onSubmit({
-      title: elements.title.value,
-      maxReceiver: +elements.maxReceiver.value,
-      description: elements.description.value,
-    });
-  };
+      if (typeof title !== 'string' || title.length < 2) {
+        errors.title = '2글자 이상 입력해주세요.';
+      }
+
+      if (+maxReceiver < 1) {
+        errors.maxReceiver = '1명 이상으로 입력해주세요';
+      }
+      if (typeof description !== 'string' || description.length < 10) {
+        errors.description = '2글자 이상 입력해주세요.';
+      }
+
+      return errors;
+    },
+    onSubmit: async (values) => {
+      onSubmitCallback(values as Summary);
+    },
+  });
 
   return (
     <Slide direction="left" className={styles.container}>
       <header className={styles.header}>
-        <Title lv={3}>임무 등록</Title>
+        <Title lv={1} className={styles.title}>
+          임무 등록
+        </Title>
       </header>
-      <form onSubmit={handleSubmit}>
-        <fieldset className={styles.fieldset}>
-          <legend>임무 등록 폼</legend>
-          <Input
-            name="title"
-            initialValue={title}
-            size="md"
-            labelText="어떤 임무인가요?"
-            placeholder="어떤 임무인가요?"
-          />
-          <Input
-            name="maxReceiver"
-            initialValue={id ? maxReceiver : undefined}
-            size="md"
-            labelText="몇 명의 히어로가 필요한가요?"
-            placeholder="몇 명의 히어로가 필요한가요?"
-          />
-          <Textarea
-            name="description"
-            initialValue={description}
-            placeholder="더 자세하게 설명해주세요!"
-            labelValue="임무 상세 설명"
-            hiddenLabel={true}
-          />
-          <Button size="sm">등록</Button>
-        </fieldset>
-      </form>
-      <Button size="xs" className={styles.closeButton} onClick={onClose}>
-        <CloseIcon width="32px" height="32px" viewBox="0 0 24 24" />
-      </Button>
+      <Form description={'임무 등록'} handleSubmit={handleSubmit}>
+        <Input
+          type="text"
+          name="title"
+          size="lg"
+          labelText="어떤 임무인가요?"
+          placeholder="어떤 임무인가요?"
+          border="rec"
+          className={styles.missionTitle}
+          getFieldProps={getFieldProps}
+        >
+          <ValidationErrorMessage touched={touched} errors={errors} />
+        </Input>
+        <Input
+          type="number"
+          name="maxReceiver"
+          size="sm"
+          labelText="몇 명이 필요한가요?"
+          placeholder=" "
+          border="rec"
+          className={styles.maxReceiver}
+          getFieldProps={getFieldProps}
+        >
+          <>
+            <span>몇 명이 필요한가요?</span>
+            <span>명</span>
+            <ValidationErrorMessage
+              name="maxReceiver"
+              touched={touched}
+              errors={errors}
+            />
+          </>
+        </Input>
+        <Textarea
+          name="description"
+          labelText="좀 더 자세히 설명해주세요!"
+          hiddenLabel={true}
+          placeholder="좀 더 자세히 설명해주세요!"
+          getFieldProps={getFieldProps}
+          className={styles.description}
+        >
+          <ValidationErrorMessage touched={touched} errors={errors} />
+        </Textarea>
+        <Button size="lg" className={styles.submitButton} disabled={!isValid()}>
+          등록
+        </Button>
+      </Form>
+      <BackwardLink href="/missionlist" size="xs" className={styles.backLink} />
     </Slide>
   );
 };

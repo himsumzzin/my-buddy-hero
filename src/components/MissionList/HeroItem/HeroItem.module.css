@@ -1,0 +1,42 @@
+.container {
+  list-style: none;
+  position: relative;
+  background: #fff linear-gradient(180deg, #6885eb 1.86%, #fff 98.23%);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-default);
+  text-align: center;
+
+  &.sm {
+    width: 160px;
+    height: 160px;
+    padding: var(--spacing-xs);
+  }
+
+  &.lg {
+    width: 300px;
+    height: 300px;
+    padding: var(--spacing-base);
+  }
+}
+
+.profileImage {
+  object-fit: contain;
+  width: 100%;
+  height: 80%;
+}
+
+.heroName {
+  display: block;
+  font-family: var(--font-family-content);
+  font-weight: var(--text-weight-bold);
+  text-shadow: var(--shadow-default);
+  color: var(--grayscale-black);
+
+  &.sm {
+    font-size: var(--text-size-base);
+  }
+  &.lg {
+    margin-top: var(--spacing-sm);
+    font-size: var(--text-size-subTitle);
+  }
+}

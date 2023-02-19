@@ -16,9 +16,20 @@
   box-shadow: var(--shadow-default);
   border-radius: var(--border-radius-md);
 
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background-color: var(--color-main-active);
+  }
   &:active {
     background-color: var(--color-main-active);
   }
+}
+
+.xs {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
 }
 
 .sm {

@@ -10,14 +10,12 @@
 
   padding: var(--spacing-sm) var(--spacing-base);
 
-  color: var(--grayscale-darkgray);
-
   font-family: var(--font-family-content);
-  font-size: var(--text-size-base);
-  font-weight: 600;
+  font-size: var(--text-size-lg);
+  font-weight: var(--text-weight-bold);
 
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-default);
 }
 .label {

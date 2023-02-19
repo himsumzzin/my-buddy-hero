@@ -2,9 +2,9 @@ import { cloneElement, ReactElement } from 'react';
 import styles from './Input.module.css';
 import { useId } from 'react';
 
-interface IFieldProps {
+interface IFieldProps extends PropsWithHTMLAttr<HTMLInputElement> {
   name: string;
-  value: string;
+  value: string | number;
   onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -81,6 +81,7 @@ export type InputProps = {
 export function Input({
   name,
   size,
+  type,
   labelText,
   getFieldProps,
   className,
@@ -98,11 +99,11 @@ export function Input({
     <div className={`${styles.container} ${className}`}>
       <input
         id={inputId}
-        className={`${styles.input} ${styles[size]} ${styles[border]} ${className}`}
+        type={type}
+        className={`${styles.input} ${styles[size]} ${styles[border]}`}
         autoComplete="off"
         maxLength={maxLength}
         placeholder={placeholder}
-        min="1"
         {...props}
         {...getFieldProps(name)}
       />

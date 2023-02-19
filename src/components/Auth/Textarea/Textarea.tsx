@@ -20,6 +20,9 @@ export type TextareaProps = {
    * ex) initialValues가 { title: '', description: '' } 이면 현재 사용하는 Textarea컴포넌트가 어떤 Textarea인지에 따라 title 혹은 description를 넣어주세요.<br>
    */
   name: string;
+
+  className?: string;
+
   placeholder?: string;
   /**
    * label의 value로 사용될 값입니다. 접근성을 준수하기 위해 필수 속성으로 지정하였습니다.
@@ -44,6 +47,7 @@ export type TextareaProps = {
 
 export const Textarea = ({
   name,
+  className,
   labelText,
   hiddenLabel,
   getFieldProps,
@@ -53,7 +57,7 @@ export const Textarea = ({
   const textareaId = useId();
   if (!getFieldProps) return null;
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className ?? ''}`}>
       <label
         className={`${styles.label} ${hiddenLabel ? 'srOnly' : ''}`}
         htmlFor={textareaId}
