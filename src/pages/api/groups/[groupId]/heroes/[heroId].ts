@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbConnect } from '@/utils/server';
-import { Hero } from '@/models/index';
+import { Hero, Mission } from '@/models/index';
 
 type Data = {
   statusCode: number;
@@ -18,8 +18,12 @@ export default async function handler(
   await dbConnect();
 
   try {
-    if (method === 'DELETE') {
-      Hero.findOneAndDelete({ _id: req.query.heroId }).exec();
+    if (method === 'PATCH') {
+      Hero.findOneAndUpdate(
+        { _id: req.query.heroId },
+        { $set: { ...req.body } }
+      ).exec();
+
       return res.status(200).json({
         statusCode: 200,
         body: {
