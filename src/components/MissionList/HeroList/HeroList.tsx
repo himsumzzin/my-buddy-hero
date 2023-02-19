@@ -2,10 +2,17 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useRecoilValue } from 'recoil';
 import { heroesState } from '@/states/heroList';
-import { Title, Slide, BackwardButton, Button } from '@/components/common';
+import {
+  Form,
+  Input,
+  ErrorMessage,
+  Title,
+  Slide,
+  BackwardButton,
+  Button,
+} from '@/components/common';
 import { HeroItem } from '../HeroItem';
 import styles from './HeroList.module.css';
-import { Form, Input, ErrorMessage } from '@/components/Auth';
 import { useForm } from '@/hooks';
 
 export interface HeroListProps {

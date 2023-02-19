@@ -1,8 +1,8 @@
-import { ErrorMessage, ErrorMessageProps } from '@/components/Auth';
+import { ErrorMessage, ErrorMessageProps } from '@/components/common';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
-  title: 'Components/Auth/ErrorMessage',
+  title: 'Components/common/ErrorMessage',
   component: ErrorMessage,
   parameters: {
     docs: {

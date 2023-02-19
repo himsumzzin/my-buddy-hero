@@ -1,101 +1,122 @@
+import { cloneElement, ReactElement } from 'react';
 import styles from './Input.module.css';
 import { useId } from 'react';
-import { useInput } from '@/hooks/useInput';
-import { inputValidationRegex } from '@/utils/client';
+
+interface IFieldProps extends PropsWithHTMLAttr<HTMLInputElement> {
+  name: string;
+  value: string | number;
+  onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export type InputProps = {
   /**
-   * 어떤 인풋으로 사용할건지 양식을 선택하세요.<br>
-   * 'id', 'password', 'mission', 'herocode', 'confirm', 'register' 종류가 있습니다<br>
-   * 위의 종류에 해당하지 않는다면 name 에 주고싶은 값을 자유롭게 문자열로 입력하세요<br>
-   * 자유롭게 입력한 문자열은 자동으로 인풋의 타입이 'text'로 지정됩니다.
+   * 어떤 인풋으로 사용할 건지 양식을 선택하세요.<br>
+   * useForm 훅의 매개변수로 넣은 initialValues의 key와 짝을 맞춰 넣어주세요.<br>
+   * ex) initialValues가 { id: '', password: '' } 이면 현재 사용하는 Input컴포넌트가 어떤 input인지에 따라 id 혹은 password를 넣어주세요.<br>
    */
   name: string;
   /**
+   * input의 type을 설정해주세요.<br>
+   * ex) text, password
+   */
+  type: string;
+  /**
    * 사용할 인풋의 크기를 선택해주세요 <br>
-   * 기본 크기는 lg 사이즈이고 sm, md 사이즈 인풋을 선택할 수 있습니다.
+   * lg <br>
+   * - 가장 큰 input <br>
+   * - placeholder 대용으로 label 사용 <br>
+   * - lg일 때만 input이 focus되거나 value가 있을 경우 label 좌상단으로 이동 <br>
+   * <br>
+   *
+   * md <br>
+   * - 중간 사이즈 input (271px) <br>
+   * - label 사용으로 placeholer 사용 안함 <br>
+   * <br>
+   *
+   * sm <br>
+   * - 작은 사이즈 input (200px) <br>
+   * - label 사용으로 placeholer 사용 안함 <br>
    */
   size: 'sm' | 'md' | 'lg';
   /**
-   * 인풋에 미리 보여질 텍스트를 입력해주세요 <br>
-   * ex) placeholder에 적을 단어를 적으면 됨
+   * 인풋에 미리 보여질 텍스트를 입력해 주세요. <br>
+   * placeholder가 존재할 경우 sr-only 처리됩니다. <br>
+   * ex) placeholder에 적을 단어를 적으면 됩니다.
    */
   labelText: string;
   /**
-   * 인풋의 유효성 검사 후 띄울 에러메세지를 입력해주세요.
+   * Input 컴포넌트의 border-radius를 결정한다. <br>
+   * rec : 8px <br>
+   * round : 100px
    */
-  validText?: string;
+  border: 'rec' | 'round';
   /**
-   * 초기값으로 사용될 value를 넣어주세요
+   * getFieldProps 함수를 통해서 Input 컴포넌트에 기본적으로 필요한 요소들을 설정합니다. <br>
+   * useForm 사용시 return 값인 getFieldProps을 props로 내려줍니다. <br>
+   * getFieldProps(name)의 return은 값은 name, value, onBlur, onChange입니다. <br>
+   * name : input의 name <br>
+   * value : input의 value <br>
+   * onBlur : onBlur 이벤트 발생시 호출되는 함수 <br>
+   * onChange : onChange 이벤트 발생시 호출되는 함수
    */
-  initialValue: any;
+  getFieldProps?: (name: string) => IFieldProps;
   /**
    * 페이지 내에서 컴포넌트를 선택해 특정 스타일링을 주고 싶을 때 클래스 이름으로 사용
    */
   className?: string;
+  /**
+   * input의 maxLength를 설정 <br>
+   * props를 지정해주지 않으면 default 값은 40입니다.
+   */
+  maxLength?: number;
+  /**
+   * input의 placeholder를 설정 <br>
+   * placeholder가 있다면 label은 sr-only처리 됩니다.
+   */
   placeholder?: string;
-  restProps?: unknown[];
+  children?: ReactElement<any>;
 };
 
-export const Input = ({
+export function Input({
   name,
   size,
+  type,
   labelText,
-  validText,
-  initialValue,
+  getFieldProps,
   className,
+  children,
+  maxLength,
   placeholder,
-  ...restProps
-}: InputProps) => {
+  border,
+  ...props
+}: InputProps) {
   const inputId = useId();
-  const {
-    state: { value, isValid },
-    onChange,
-  } = useInput(initialValue);
-
-  const type = (name: string) => {
-    if (name === 'maxReceiver') {
-      return 'number';
-    } else if (name === 'password' || name === 'confirm') {
-      return 'password';
-    } else {
-      return 'text';
-    }
-  };
+  if (!getFieldProps) return null;
+  const { value } = getFieldProps(name);
 
   return (
     <div className={`${styles.container} ${className}`}>
       <input
         id={inputId}
-        name={name}
-        type={type(name)}
-        className={`${styles.lgInput} ${styles[size]} ${className}`}
-        required
-        autoComplete="false"
-        onChange={onChange}
-        value={value}
-        pattern={
-          inputValidationRegex[name]
-            ? `${inputValidationRegex[name]}`.replace(/\//g, '')
-            : '.*'
-        }
-        placeholder={placeholder ?? ''}
-        maxLength={name === 'herocode' ? 4 : 40}
-        {...restProps}
+        type={type}
+        className={`${styles.input} ${styles[size]} ${styles[border]}`}
+        autoComplete="off"
+        maxLength={maxLength}
+        placeholder={placeholder}
+        {...props}
+        {...getFieldProps(name)}
       />
       <label
         htmlFor={inputId}
-        className={`${styles.lgLabel} ${size !== 'lg' ? 'srOnly' : ''} ${
-          value ? styles.top : ''
+        className={`${styles.label} ${placeholder ? 'srOnly' : ''} ${
+          size === 'lg' && value ? styles.top : ''
         }`}
       >
         {labelText}
       </label>
-      {validText ? (
-        <p className={`${isValid ? styles.noError : styles.error}`}>
-          {validText}
-        </p>
-      ) : null}
+      {children ? cloneElement(children, { name }) : null}
     </div>
   );
-};
+}
+Input.defaultProps = { maxLength: 40 };

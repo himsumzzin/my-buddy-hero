@@ -5,7 +5,7 @@ import {
   Textarea,
   ValidationErrorMessage,
   ErrorMessage,
-} from '@/components/Auth';
+} from '@/components/common';
 import { Button } from '@/components/common';
 import styles from '@/styles/Login.module.css';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -13,7 +13,7 @@ import { useForm } from '@/hooks';
 import { useState } from 'react';
 
 export default {
-  title: 'Components/Auth/Form',
+  title: 'Components/common/Form',
   component: Form,
   parameters: {
     docs: {
