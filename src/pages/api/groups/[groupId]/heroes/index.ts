@@ -2,7 +2,7 @@ import { format } from 'util';
 import crypto from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbConnect, cloudBucket } from '@/utils/server';
-import { Hero } from '@/models/index';
+import { Hero, Mission } from '@/models/index';
 
 type Data = {
   statusCode: number;
@@ -23,8 +23,14 @@ export default async function handler(
 
   try {
     if (method === 'GET') {
-      const result = await Hero.find({ groupId: req.query.groupId }).exec();
-
+      const { groupId, page, limit } = req.query;
+      let result = await Hero.find({ groupId: groupId }).exec();
+      if (page && limit) {
+        const offset = +limit * +page;
+        result = result.filter(
+          (_, index) => index >= +page - 1 && index < offset
+        );
+      }
       const data = result.map((result) => ({
         id: result._id,
         name: result.name,
@@ -99,6 +105,21 @@ export default async function handler(
             },
           },
         });
+      });
+    } else if (method === 'DELETE') {
+      const { deletedHeroes } = req.body;
+
+      deletedHeroes.forEach(async (heroId: string) => {
+        Hero.findOneAndDelete({ _id: heroId }).exec();
+        Mission.findOneAndDelete({ authorId: heroId }).exec();
+        Mission.updateMany({}, { $pull: { receivers: heroId } }).exec();
+      });
+
+      return res.status(200).json({
+        statusCode: 200,
+        body: {
+          success: true,
+        },
       });
     }
   } catch (err) {
