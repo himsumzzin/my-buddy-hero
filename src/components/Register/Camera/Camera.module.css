@@ -45,7 +45,7 @@
   font-size: var(--text-size-title);
   font-weight: var(--text-weight-bold);
   color: var(--grayscale-white);
-  background: #d6d2c6;
+  background: var(--color-main-skyblue);
 }
 
 .blindBoardTitle {
@@ -64,7 +64,7 @@
 .countdownInnerContainer {
   width: 480px;
   height: 400px;
-  border: 8px solid var(--color-green);
+  border: 8px solid var(--color-main-blue);
   border-radius: var(--border-radius-md);
   margin-left: 20px;
   margin-top: 15px;
@@ -76,7 +76,7 @@
   left: 25%;
   font-size: var(--text-size-lg);
   font-weight: var(--text-weight-bold);
-  color: var(--color-green);
+  color: var(--color-main-blue);
 }
 
 .countdownNumber {
@@ -94,7 +94,7 @@
   width: 522px;
   height: 430px;
   border-radius: var(--border-radius-md);
-  background-color: var(--color-main-orange-700);
+  background-color: var(--color-main-skyblue);
   text-align: center;
   padding-top: 35%;
 }
@@ -130,11 +130,11 @@
 }
 
 .button {
-  background-color: var(--color-main-orange-600);
+  background-color: var(--color-btn-default);
 }
 
 .button:active,
 .button:focus,
 .button:hover {
-  background-color: var(--color-main-orange-700);
+  background-color: var(--color-btn-hover);
 }
