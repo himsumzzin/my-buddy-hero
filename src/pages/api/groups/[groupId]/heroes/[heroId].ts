@@ -7,6 +7,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
+    hero?: Hero;
   };
 };
 
@@ -18,7 +19,29 @@ export default async function handler(
   await dbConnect();
 
   try {
-    if (method === 'PATCH') {
+    if (method === 'GET') {
+      const { heroId } = req.query;
+      const result = await Hero.findById(heroId);
+
+      const hero = {
+        id: result._id,
+        name: result.name,
+        title: result.title,
+        profileImage: result.profileImage,
+        completeNumber: result.completeNumber,
+        groupId: result.groupId,
+        description: result.description,
+        code: result.code,
+      };
+
+      return res.status(200).json({
+        statusCode: 200,
+        body: {
+          success: true,
+          hero,
+        },
+      });
+    } else if (method === 'PATCH') {
       Hero.findOneAndUpdate(
         { _id: req.query.heroId },
         { $set: { ...req.body } }
