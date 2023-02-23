@@ -1,7 +1,7 @@
-import { Button, Title, Slide, Link } from '@/components/common';
+import { Title, Slide, Link } from '@/components/common';
 import { HeroItem } from '../HeroItem';
-import { useHeroes } from '@/hooks';
 import styles from './Result.module.css';
+import { useGetHero } from '../../../apis/heroList';
 
 interface MessageProps {
   missionStatus: MissionStatus;
@@ -55,9 +55,8 @@ export interface ResultProps {
 }
 
 export const Result = ({ missionStatus, hero, mission }: ResultProps) => {
-  const { getHero } = useHeroes();
-
-  const author = getHero(mission.authorId) as Hero;
+  const groupId = '1';
+  const { data: author } = useGetHero(groupId, mission.authorId);
 
   const title = {
     create: '임무 등록',

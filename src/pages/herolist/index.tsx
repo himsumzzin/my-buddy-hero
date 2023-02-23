@@ -1,21 +1,20 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import { Nav, HeroCard, Slide } from '@/components/common';
-import { useHeroes, useMissions } from '@/hooks';
 import styles from '@styles/Herolist.module.css';
+import { useGetHeroList } from '@/apis/heroList';
+import { BeatLoader } from 'react-spinners';
 
 export default function Herolist() {
   const router = useRouter();
-  const { heroList, initHeroeList } = useHeroes();
-  const { initMissionList } = useMissions();
+  const groupId = '1';
+  const { data: heroList } = useGetHeroList(groupId);
 
-  useEffect(() => {
-    initHeroeList();
-    initMissionList();
-  }, []);
+  if (heroList === undefined) {
+    return <BeatLoader />;
+  }
 
   return (
     <>
@@ -23,21 +22,14 @@ export default function Herolist() {
         <title>멋진 히어로들을 확인하세요!</title>
       </Head>
       <div className={styles.container}>
-        <Nav
-          linkTo="hero"
-          onButtonClick={() => {
-            router.replace('/register');
-          }}
-          currentPage={router?.asPath}
-        />
+        <Nav linkTo="hero" currentPage={router?.asPath} />
         <Slide direction="right">
           <ul className={styles.listContainer}>
-            {heroList &&
-              heroList.map((hero) => (
-                <li key={hero.id}>
-                  <HeroCard hero={hero}></HeroCard>
-                </li>
-              ))}
+            {heroList.map((hero) => (
+              <li key={hero.id}>
+                <HeroCard hero={hero}></HeroCard>
+              </li>
+            ))}
           </ul>
         </Slide>
       </div>

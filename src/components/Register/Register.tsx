@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useDialog, useHeroes } from '@/hooks';
+import { useDialog } from '@/hooks';
 import { initialHero } from '@/states';
 import { ErrorDialog } from '../common';
 import { HeroRegister } from './HeroRegister';
 import { Camera } from './Camera';
 import { Complete } from './Complete';
+import { useAddHero } from '../../apis/heroList';
 
 type Stage = 'HeroRegister' | 'Camera' | 'Complete';
 
@@ -13,8 +14,11 @@ export const Register = () => {
   // 현재 렌더링 된 페이지 상태로 관리
   const [page, setPage] = useState<Stage>('HeroRegister');
   const [heroInfo, setHeroInfo] = useState<Hero>(initialHero);
-  const { createHero } = useHeroes();
   const errorDialog = useDialog();
+  const addHero = useAddHero();
+
+  //임시로 사용할 값
+  const groupId = '1';
 
   const getHeroInfo = (newHeroInfo: Hero) => {
     setHeroInfo({ ...heroInfo, ...newHeroInfo });
@@ -23,12 +27,12 @@ export const Register = () => {
 
   const saveHeroInfo = async (imgURL: string) => {
     try {
-      const newHeroInfo = { ...heroInfo, profileImage: imgURL };
-      const newHero = await createHero(newHeroInfo);
+      const hero = { ...heroInfo, profileImage: imgURL };
+      addHero.mutate({ groupId, hero });
 
       setHeroInfo((prev) => ({
         ...prev,
-        profileImage: newHero.profileImage,
+        profileImage: hero.profileImage,
       }));
       setPage('Complete');
     } catch (err) {
