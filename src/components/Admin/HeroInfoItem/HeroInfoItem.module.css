@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 745px;
+  text-align: center;
+}
+
+.checkboxContainer {
+  width: 22px;
+  height: 90px;
+  margin-right: 16px;
+  padding-top: 34px;
+}
+
+.checkbox {
+  appearance: none;
+  display: block;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--grayscale-darkgray);
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='decoration-gray-500' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 140% 140%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: var(--grayscale-lightgray);
+  }
+}
+
+.heroInfoItemContainer {
+  display: flex;
+  flex-direction: row;
+  width: 706px;
+  height: 90px;
+  border-radius: var(--border-radius-sm);
+  background: var(--color-btn-default);
+  font-size: 20px;
+  line-height: 90px;
+  text-align: center;
+  color: var(--grayscale-black);
+}
+
+.heroBlockContainer:hover {
+  background: var(--color-main-skyblue);
+}
+
+.sequence {
+  width: 32px;
+}
+
+.name {
+  width: 100px;
+}
+
+.profileImageContainer {
+  width: 68px;
+  height: 68px;
+  background: #fff linear-gradient(180deg, #6885eb 1.86%, #fff 98.23%);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-default);
+  margin-top: 11px;
+}
+
+.profileImage {
+  object-fit: cover;
+  margin-top: -22px;
+}
+
+.title {
+  width: 100px;
+}
+
+.code {
+  width: 64px;
+}
+
+.completeNumber {
+  width: 64px;
+}
+
+.flexItem {
+  flex-grow: 1;
+}
