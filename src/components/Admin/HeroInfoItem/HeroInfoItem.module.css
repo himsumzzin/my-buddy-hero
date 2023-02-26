@@ -45,7 +45,7 @@
   color: var(--grayscale-black);
 }
 
-.heroBlockContainer:hover {
+.heroInfoItemContainer:hover {
   background: var(--color-main-skyblue);
 }
 
