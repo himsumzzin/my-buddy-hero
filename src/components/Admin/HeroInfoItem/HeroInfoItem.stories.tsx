@@ -7,7 +7,7 @@ export default {
   args: {
     hero: {
       ...initialHero,
-      groupId: '1',
+      id: '1',
       profileImage: '/images/hero2.png',
       name: '김현진',
       title: '나는야휴지맨',

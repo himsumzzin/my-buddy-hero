@@ -21,7 +21,7 @@ export const HeroInfoItem = ({
   sequence,
   className,
 }: HeroInfoItemProps) => {
-  const { groupId, profileImage, name, title, code, completeNumber } = hero;
+  const { id, profileImage, name, title, code, completeNumber } = hero;
   return (
     <>
       <div className={`${styles.container} ${className ?? ''}`}>
@@ -29,7 +29,7 @@ export const HeroInfoItem = ({
           <input type="checkbox" className={`${styles.checkbox}`}></input>
         </div>
         <Link
-          href={`/HeroInfoList/${groupId}`}
+          href={`/admin/${id}`}
           className={`${styles.heroInfoItemContainer}`}
         >
           <p
