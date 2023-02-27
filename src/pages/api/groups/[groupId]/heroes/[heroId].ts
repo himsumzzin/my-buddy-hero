@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbConnect } from '@/utils/server';
-import { Hero, Mission } from '@/models/index';
+import { dbConnect, cloudBucket, deleteProfile } from '@/utils/server';
+import { Hero } from '@/models/index';
+import { format } from 'util';
 
 type Data = {
   statusCode: number;
@@ -23,16 +24,7 @@ export default async function handler(
       const { heroId } = req.query;
       const result = await Hero.findById(heroId);
 
-      const hero = {
-        id: result._id,
-        name: result.name,
-        title: result.title,
-        profileImage: result.profileImage,
-        completeNumber: result.completeNumber,
-        groupId: result.groupId,
-        description: result.description,
-        code: result.code,
-      };
+      const hero = { ...result, id: result._id };
 
       return res.status(200).json({
         statusCode: 200,
@@ -42,16 +34,47 @@ export default async function handler(
         },
       });
     } else if (method === 'PATCH') {
-      Hero.findOneAndUpdate(
-        { _id: req.query.heroId },
-        { $set: { ...req.body } }
-      ).exec();
+      const { id, name, profileImage: base64Image } = req.body;
 
-      return res.status(200).json({
-        statusCode: 200,
-        body: {
-          success: true,
+      const prevHero = await Hero.findById<Hero>(id);
+      prevHero && deleteProfile(prevHero.profileImage);
+
+      const imageBuffer = Buffer.from(base64Image, 'base64');
+
+      const fileName = `${crypto.randomUUID().slice(0, 8)}_${
+        req.query.groupId
+      }_${name}`;
+
+      const blob = cloudBucket.file(fileName);
+      const blobStream = blob.createWriteStream({
+        metadata: {
+          contentType: 'image/webp',
         },
+      });
+
+      blobStream.write(imageBuffer, () => {
+        blobStream.end();
+      });
+
+      blobStream.on('error', (err: any) => {
+        throw new Error(err);
+      });
+
+      blobStream.on('finish', async () => {
+        const profileImage = format(
+          `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
+        );
+
+        const hero = { ...req.body, profileImage };
+
+        Hero.findOneAndUpdate({ _id: req.query.heroId }, { $set: hero }).exec();
+
+        return res.status(200).json({
+          statusCode: 200,
+          body: {
+            success: true,
+          },
+        });
       });
     }
   } catch (err) {

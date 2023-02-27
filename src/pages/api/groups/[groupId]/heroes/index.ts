@@ -2,8 +2,8 @@ import { format } from 'util';
 import crypto from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbConnect, cloudBucket } from '@/utils/server';
-import { Hero, Mission } from '@/models/index';
-import { deleteHero } from '@/utils/server/hero';
+import { Hero } from '@/models/index';
+import { deleteHero } from '@/utils/server/heroList';
 
 type Data = {
   statusCode: number;
@@ -33,14 +33,8 @@ export default async function handler(
         );
       }
       const data = result.map((result) => ({
+        ...result,
         id: result._id,
-        name: result.name,
-        title: result.title,
-        profileImage: result.profileImage,
-        completeNumber: result.completeNumber,
-        groupId: result.groupId,
-        description: result.description,
-        code: result.code,
       }));
 
       return res.status(200).json({
@@ -76,7 +70,7 @@ export default async function handler(
         throw new Error(err);
       });
 
-      blobStream.on('finish', () => {
+      blobStream.on('finish', async () => {
         const profileImage = format(
           `https://storage.googleapis.com/${cloudBucket.name}/${blob.name}`
         );
@@ -86,7 +80,7 @@ export default async function handler(
           profileImage,
           groupId: req.query.groupId,
         });
-        hero.save();
+        await hero.save();
         const { _id, name, title, groupId, code, description, completeNumber } =
           hero._doc;
 
@@ -111,12 +105,14 @@ export default async function handler(
       const { deletedHeroes } = req.body;
 
       Promise.allSettled(deletedHeroes.map(deleteHero)).then((resolved) => {
-        console.log(resolved.map((res) => res.status));
         return res.status(200).json({
           statusCode: 200,
           body: {
             success: true,
-            data: resolved.map((res) => res.status),
+            data: resolved.map((res, idx) => ({
+              id: deletedHeroes[idx],
+              deleted: res.status === 'fulfilled',
+            })),
           },
         });
       });
