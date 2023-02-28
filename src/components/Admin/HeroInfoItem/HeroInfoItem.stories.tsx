@@ -14,7 +14,7 @@ export default {
       code: '1234',
       completeNumber: 25,
     },
-    sequence: 1,
+    order: 1,
   },
   parameters: {
     docs: {

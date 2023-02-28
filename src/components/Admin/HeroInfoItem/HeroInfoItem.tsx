@@ -10,49 +10,38 @@ export interface HeroInfoItemProps {
   /**
    * 관리자 페이지 렌더링 시 sequence를 통해 히어로들의 순서를 나타냅니다.
    */
-  sequence: number;
+  order: number;
   /**
    * 스타일을 입히고 싶은 경우 클래스명을 추가해 스타일 적용할 수 있습니다.
    */
   className?: string;
 }
-export const HeroInfoItem = ({
-  hero,
-  sequence,
-  className,
-}: HeroInfoItemProps) => {
+export const HeroInfoItem = ({ hero, order, className }: HeroInfoItemProps) => {
   const { id, profileImage, name, title, code, completeNumber } = hero;
   return (
-    <>
-      <div className={`${styles.container} ${className ?? ''}`}>
-        <div className={`${styles.checkboxContainer}`}>
-          <input type="checkbox" className={`${styles.checkbox}`}></input>
-        </div>
-        <Link
-          href={`/admin/${id}`}
-          className={`${styles.heroInfoItemContainer}`}
-        >
-          <p
-            className={`${styles.flexItem} ${styles.sequence}`}
-          >{`${sequence}`}</p>
-          <div className={`${styles.profileImageContainer}`}>
-            <Image
-              className={`${styles.profileImage}`}
-              src={profileImage}
-              alt={`${name} 히어로`}
-              width={58}
-              height={58}
-            />
-          </div>
-          <p className={`${styles.name} ${styles.flexItem}`}>{`${name}`}</p>
-          <p className={`${styles.title} ${styles.flexItem}`}>{`${title}`}</p>
-          <p className={`${styles.code} ${styles.flexItem}`}>{`${code}`}</p>
-          <p
-            className={`${styles.completeNumber} ${styles.flexItem}`}
-          >{`${completeNumber}회`}</p>
-        </Link>
+    <div className={`${styles.container} ${className ?? ''}`}>
+      <div className={`${styles.checkboxContainer}`}>
+        <input type="checkbox" className={`${styles.checkbox}`}></input>
       </div>
-    </>
+      <Link href={`/admin/${id}`} className={`${styles.heroInfoItemContainer}`}>
+        <p className={`${styles.flexItem} ${styles.order}`}>{`${order}`}</p>
+        <div className={`${styles.profileImageContainer}`}>
+          <Image
+            className={`${styles.profileImage}`}
+            src={profileImage}
+            alt={`${name} 히어로`}
+            width={58}
+            height={58}
+          />
+        </div>
+        <p className={`${styles.name} ${styles.flexItem}`}>{`${name}`}</p>
+        <p className={`${styles.title} ${styles.flexItem}`}>{`${title}`}</p>
+        <p className={`${styles.code} ${styles.flexItem}`}>{`${code}`}</p>
+        <p
+          className={`${styles.completeNumber} ${styles.flexItem}`}
+        >{`${completeNumber}회`}</p>
+      </Link>
+    </div>
   );
 };
 
