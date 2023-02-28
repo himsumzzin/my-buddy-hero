@@ -7,6 +7,7 @@ type Data = {
   err?: unknown;
   body: {
     success: boolean;
+    mission?: Mission;
   };
 };
 
@@ -18,7 +19,28 @@ export default async function handler(
   await dbConnect();
 
   try {
-    if (method === 'PATCH') {
+    if (method === 'GET') {
+      const { missionId } = req.query;
+      const result = await Mission.findById(missionId);
+      const mission = {
+        id: result._id,
+        authorId: result.authorId,
+        receivers: result.receivers,
+        title: result.title,
+        description: result.description,
+        maxReceiver: result.maxReceiver,
+        isComplete: result.isComplete,
+        groupId: result.groupId,
+      };
+
+      return res.status(200).json({
+        statusCode: 200,
+        body: {
+          success: true,
+          mission,
+        },
+      });
+    } else if (method === 'PATCH') {
       const { receiver, receivers } = req.body;
 
       const result = await Mission.findById(req.query.missionId).exec();

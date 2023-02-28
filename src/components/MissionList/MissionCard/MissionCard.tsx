@@ -2,7 +2,8 @@ import { useState, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import { initialHero } from '@/states';
-import { useMissions, useDialog, IinitialValues } from '@/hooks';
+import { useDialog, IinitialValues } from '@/hooks';
+import { useAddMission, useCompleteMission, useUpdateMission } from '@/apis';
 
 import { ErrorDialog } from '@/components/common';
 import { MissionForm } from '../MissionForm';
@@ -38,7 +39,12 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
   const [currentComponent, setCurrentComponent] = useState<MissionComponent>(
     initialMission.id ? 'MissionInfo' : 'MissionForm'
   );
-  const { addMission, updateMission } = useMissions();
+
+  const groupId = 1;
+  const { mutate: mutationAdd } = useAddMission();
+  const { mutate: mutationUpdate } = useUpdateMission();
+  const { mutate: mutationComplete } = useCompleteMission();
+
   const errorDialog = useDialog();
   const missionStatus = useRef<MissionStatus>(
     initialMission.id ? 'update' : 'create'
@@ -78,18 +84,25 @@ export const MissionCard = ({ initialMission }: MissionCardProps) => {
     try {
       switch (status) {
         case 'create':
-          await addMission({
-            ...mission.current,
-            authorId: hero.current.id,
+          mutationAdd({
+            groupId,
+            mission: {
+              ...mission.current,
+              authorId: hero.current.id,
+            },
           });
           break;
         case 'update':
-          await updateMission(mission.current.id, {
+          mutationUpdate({
+            groupId,
+            missionId: mission.current.id,
             receiver: selectedHeroInfo.id,
           });
           break;
         case 'complete':
-          await updateMission(mission.current.id, {
+          mutationComplete({
+            groupId,
+            missionId: mission.current.id,
             receivers: mission.current.receivers,
           });
           break;

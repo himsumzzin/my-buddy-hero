@@ -1,27 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { BeatLoader } from 'react-spinners';
-import { useRecoilValue } from 'recoil';
-import { filteredMissionListState } from '@/states';
-import { useHeroes, useMissions } from '@/hooks';
 import { Nav, Slide } from '@/components/common';
 import { MissionItem } from '@/components/MissionList';
+import { useGetMissionList } from '@/apis';
 import styles from '@styles/MissionList.module.css';
 
 export default function MissionList() {
   const router = useRouter();
-  const { initHeroeList, getHero } = useHeroes();
-  const { initMissionList } = useMissions();
-  const filteredMissionList = useRecoilValue(filteredMissionListState);
 
-  useEffect(() => {
-    initHeroeList();
-    initMissionList();
-  }, []);
+  const groupId = '1';
+  const { data: missionList } = useGetMissionList(groupId);
+
+  if (!missionList) {
+    return <BeatLoader />;
+  }
+
+  const filteredMissoinList = missionList.sort((misssion) =>
+    misssion.isComplete ? 1 : -1
+  );
 
   return (
     <>
@@ -31,26 +31,11 @@ export default function MissionList() {
       <div className={styles.container}>
         <Nav linkTo="mission" currentPage={router?.asPath} />
         <Slide direction="left" className={styles.missionContainer}>
-          {filteredMissionList.length > 0 ? (
-            <ul className={styles.missionList}>
-              {filteredMissionList.map((mission) => {
-                const author = getHero(mission.authorId);
-                if (!author) {
-                  return <BeatLoader key={mission.id} />;
-                }
-
-                return (
-                  <MissionItem
-                    key={mission.id}
-                    author={author}
-                    mission={mission}
-                  />
-                );
-              })}
-            </ul>
-          ) : (
-            <p>임무를 등록해주세요!</p>
-          )}
+          <ul className={styles.missionList}>
+            {filteredMissoinList.map((mission) => (
+              <MissionItem key={mission.id} mission={mission} />
+            ))}
+          </ul>
         </Slide>
       </div>
     </>

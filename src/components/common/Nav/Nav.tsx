@@ -1,15 +1,12 @@
-import { Link, Button } from '@/components/common';
-import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
-import styles from './Nav.module.css';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useHeroes, useMissions } from '@/hooks';
+import { useQueryClient } from 'react-query';
+import { Link, Button } from '@/components/common';
+import { HERO_KEYS, MISSION_KEYS } from '@/apis';
+import styles from './Nav.module.css';
 
 export type NavProps = {
-  /**
-   * 임무 등록 버튼의 onClick 이벤트를 줄 수 있습니다.
-   */
-  onButtonClick?: any;
   /**
    * 버튼의 이름을 설정합니다.
    */
@@ -20,18 +17,18 @@ export type NavProps = {
   currentPage: string;
 };
 
-export const Nav = ({ onButtonClick, currentPage, linkTo }: NavProps) => {
+export const Nav = ({ currentPage, linkTo }: NavProps) => {
   const router = useRouter();
   const { status } = useSession(); // 세션 유무 파악 가능
-  const { resetHeroList } = useHeroes();
-  const { resetMissionList } = useMissions();
+  const queryClient = useQueryClient();
 
   async function logoutHandler() {
     await signOut({ redirect: false });
     if (status === 'authenticated') {
+      queryClient.removeQueries(MISSION_KEYS.list);
+      queryClient.removeQueries(HERO_KEYS.list);
+
       router.replace('/login');
-      resetHeroList();
-      resetMissionList();
     }
   }
 

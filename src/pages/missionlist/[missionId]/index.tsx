@@ -1,18 +1,18 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { MissionCard } from '@/components/MissionList';
 import { BeatLoader } from 'react-spinners';
-import { missionListState } from '@/states';
-import { useRecoilValue } from 'recoil';
+import { MissionCard } from '@/components/MissionList';
+import { useGetMission } from '@/apis';
 
-export default function MissionDetail() {
-  const router = useRouter();
-  const missionList = useRecoilValue(missionListState);
+interface MissiondetailProps {
+  missionId: string;
+}
 
-  const { missionId } = router.query;
-  const mission = missionList.find((mission) => mission.id === missionId);
+export default function MissionDetail({ missionId }: MissiondetailProps) {
+  const groupId = '1';
+  const { data: mission } = useGetMission(groupId, missionId);
 
-  if (!mission) {
+  if (mission === undefined) {
     return <BeatLoader />;
   }
 
@@ -27,3 +27,15 @@ export default function MissionDetail() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const {
+    query: { missionId },
+  } = context;
+
+  return {
+    props: {
+      missionId,
+    },
+  };
+};
