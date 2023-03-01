@@ -36,20 +36,7 @@ export default function Herolist() {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
+Herolist.auth = {
+  entrance: 'loggedIn',
+  redirection: '/login', // redirect to this url
 };
