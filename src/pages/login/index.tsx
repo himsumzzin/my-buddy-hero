@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { getSession, signIn } from 'next-auth/react';
+import { GetStaticProps } from 'next';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,13 +10,15 @@ import {
   Input,
   ValidationErrorMessage,
   ErrorMessage,
-} from '@/components/Auth';
-import { Title, Slide, PWAInstallButton, Button } from '@/components/common';
+  Title,
+  Slide,
+  PWAInstallButton,
+  Button,
+} from '@/components/common';
 import { useForm } from '@/hooks';
 import styles from '@styles/Login.module.css';
 
 export default function Signin() {
-  // const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const [serverError, setServerError] = useState({ id: '', message: '' });
   const { errors, touched, handleSubmit, getFieldProps, isValid } = useForm({
@@ -45,9 +47,7 @@ export default function Signin() {
         id: values.id,
         password: values.password,
       });
-      if (!response?.error) {
-        router.replace('/herolist');
-      } else {
+      if (response?.error) {
         switch (response.error) {
           case 'no-id':
             setServerError(() => ({
@@ -66,19 +66,6 @@ export default function Signin() {
     },
   });
 
-  // useEffect(() => {
-  //   getSession().then((session) => {
-  //     if (session) {
-  //       // 로그인했으면 홈으로
-  //       router.replace('/herolist');
-  //     } else {
-  //       // 로그인 안했으면 authform 보여줌
-  //       setIsLoading(false);
-  //     }
-  //   });
-  // }, [router]);
-
-  // if (isLoading) return <p>Loading...</p>;
   return (
     <>
       <Head>
@@ -98,12 +85,13 @@ export default function Signin() {
             labelText="아이디 :"
             border="round"
             getFieldProps={getFieldProps}
-          >
-            <ValidationErrorMessage
-              touched={touched}
-              errors={errors}
-            ></ValidationErrorMessage>
-          </Input>
+          />
+          <ValidationErrorMessage
+            name="id"
+            touched={touched}
+            errors={errors}
+            className={styles.serverErrorMsg}
+          ></ValidationErrorMessage>
           <ErrorMessage
             error={serverError.id === 'no-id' ? serverError.message : ''}
             className={styles.serverErrorMsg}
@@ -115,12 +103,13 @@ export default function Signin() {
             labelText="비밀번호 :"
             border="round"
             getFieldProps={getFieldProps}
-          >
-            <ValidationErrorMessage
-              touched={touched}
-              errors={errors}
-            ></ValidationErrorMessage>
-          </Input>
+          />
+          <ValidationErrorMessage
+            name="password"
+            touched={touched}
+            errors={errors}
+            className={styles.serverErrorMsg}
+          ></ValidationErrorMessage>
           <ErrorMessage
             error={serverError.id === 'wrong-id' ? serverError.message : ''}
             className={styles.serverErrorMsg}
@@ -130,28 +119,30 @@ export default function Signin() {
           </Button>
         </Form>
         <PWAInstallButton />
-        <p className={styles.signinNav}>
-          <span className={styles.signinGuide}>아직 회원이 아니시라면?</span>
-          <Link href="/signup" legacyBehavior>
-            <a className={styles.signinLink}>{'회원가입'}</a>
-          </Link>
-        </p>
+        <ul className={styles.signinGuideList}>
+          <li className={styles.signinNav}>
+            <span className={styles.signinGuide}>아직 회원이 아니시라면?</span>
+            <Link href="/signup" legacyBehavior>
+              <a className={styles.signinLink}>{'회원가입'}</a>
+            </Link>
+          </li>
+          <li className={styles.adminLink}>
+            <Link href="/adminlogin" legacyBehavior>
+              <a className={styles.signinLink}>{'관리자 페이지'}</a>
+            </Link>
+          </li>
+        </ul>
       </Slide>
     </>
   );
 }
+Signin.auth = {
+  entrance: 'notLoggedIn',
+  redirection: '/herolist', // redirect to this url
+};
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/herolist',
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: { session } };
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };

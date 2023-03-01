@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -11,13 +10,14 @@ import {
   Input,
   ValidationErrorMessage,
   ErrorMessage,
-} from '@/components/Auth';
-import { Title, Slide, Button } from '@/components/common';
+  Title,
+  Slide,
+  Button,
+} from '@/components/common';
 import { useForm } from '@/hooks';
 import styles from '@styles/Signup.module.css';
 
 export default function Signup() {
-  // const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const [serverError, setServerError] = useState({ id: '', message: '' });
   const { errors, touched, handleSubmit, getFieldProps, isValid } = useForm({
@@ -69,20 +69,6 @@ export default function Signup() {
       }
     },
   });
-
-  // useEffect(() => {
-  //   getSession().then((session) => {
-  //     if (session) {
-  //       // 로그인했으면 홈으로
-  //       router.replace('/herolist');
-  //     } else {
-  //       // 로그인 안했으면 authform 보여줌
-  //       setIsLoading(false);
-  //     }
-  //   });
-  // }, [router]);
-
-  // if (isLoading) return <p>Loading...</p>;
 
   return (
     <>
@@ -159,18 +145,13 @@ export default function Signup() {
     </>
   );
 }
+Signup.auth = {
+  entrance: 'notLoggedIn',
+  redirection: '/herolist', // redirect to this url
+};
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/herolist',
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: { session } };
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
