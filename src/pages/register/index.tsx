@@ -1,5 +1,4 @@
-import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { AnimatePresence } from 'framer-motion';
 import { Register } from '@/components/Register';
@@ -16,20 +15,12 @@ export default function HeroRegister() {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
+HeroRegister.auth = {
+  entrance: 'loggedIn',
+  redirection: '/login', // redirect to this url
+};
+export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: { session },
+    props: {},
   };
 };
