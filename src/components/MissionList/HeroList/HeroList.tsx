@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useRecoilValue } from 'recoil';
-import { heroesState } from '@/states/heroList';
 import {
   Form,
   Input,
@@ -12,8 +10,9 @@ import {
   Button,
 } from '@/components/common';
 import { HeroItem } from '../HeroItem';
-import styles from './HeroList.module.css';
 import { useForm } from '@/hooks';
+import { useGetHeroList } from '@/apis/heroList';
+import styles from './HeroList.module.css';
 
 export interface HeroListProps {
   /**
@@ -48,7 +47,9 @@ export const HeroList = ({
   onHeroSelect,
   onGoBack,
 }: HeroListProps) => {
-  const heroList = useRecoilValue(heroesState);
+  const groupId = '1';
+  const { data: heroList } = useGetHeroList(groupId);
+
   const { errors, handleSubmit, getFieldProps, isValid } = useForm({
     initialValues: { id: '', code: '' },
     validate: (values) => {
@@ -67,7 +68,7 @@ export const HeroList = ({
         return errors;
       }
 
-      const matchedHero = heroList.find(
+      const matchedHero = heroList?.find(
         (hero) => hero.id === id && hero.code === code
       );
       if (!matchedHero) {
@@ -79,7 +80,7 @@ export const HeroList = ({
     },
     onSubmit: async (values) => {
       const { id, code } = values;
-      const matchedHero = heroList.find(
+      const matchedHero = heroList?.find(
         (hero) => hero.id === id && hero.code === code
       ) as Hero;
 
@@ -90,7 +91,7 @@ export const HeroList = ({
     getFieldProps('id');
 
   const { receivers, authorId } = mission;
-  const filteredHeroList = heroList.filter((hero) => {
+  const filteredHeroList = heroList?.filter((hero) => {
     switch (missionStatus) {
       case 'update':
         return hero.id !== authorId && !receivers.includes(hero.id);
@@ -111,7 +112,7 @@ export const HeroList = ({
       <Form description={'임무 등록'} handleSubmit={handleSubmit}>
         <div className={styles.heroesBox}>
           <ul className={styles.ul}>
-            {filteredHeroList.map((hero) => {
+            {filteredHeroList?.map((hero) => {
               const { id } = hero;
               return (
                 <li key={id}>

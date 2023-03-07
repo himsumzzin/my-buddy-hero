@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import styles from './MissionItem.module.css';
 import Link from 'next/link';
+import { useGetHero } from '../../../apis/heroList';
+import { BeatLoader } from 'react-spinners';
 
-export interface IMissionItemProps {
-  author: Hero;
+export interface MissionItemProps {
   mission: Mission;
 }
 
@@ -28,7 +29,21 @@ const StatusMessage = ({ mission }: { mission: Mission }) => {
   );
 };
 
-export const MissionItem = ({ mission, author }: IMissionItemProps) => {
+export const MissionItem = ({ mission }: MissionItemProps) => {
+  const groupId = '1';
+  const {
+    data: author,
+    isLoading,
+    isError,
+  } = useGetHero(groupId, mission.authorId);
+
+  if (isLoading) {
+    return <BeatLoader />;
+  }
+  if (isError) {
+    return null;
+  }
+
   const { id, title, maxReceiver, receivers, isComplete } = mission;
   const { name, title: authorTitle, profileImage } = author;
   const isFull = maxReceiver === receivers.length;
