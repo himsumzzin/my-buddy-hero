@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { MissionCard } from '@/components/MissionList';
 import { defaultMission } from '@/states';
+import { GetStaticProps } from 'next';
 
 export default function NewMission() {
   return (
@@ -14,3 +15,13 @@ export default function NewMission() {
     </>
   );
 }
+NewMission.auth = {
+  entrance: 'loggedIn',
+  redirection: '/login', // redirect to this url
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};
